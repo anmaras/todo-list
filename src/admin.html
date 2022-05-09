@@ -6,5 +6,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo App</title>
   </head>
-  <body></body>
+  <body>
+    <header>
+      <h1>Todo List</h1>
+    </header>
+    <main></main>
+    <aside>
+      <section id="aside-section__tasks">
+        <h2 class="tasks-title">Home</h2>
+        <div class="all-tasks">
+          <img src="./icons/home-outline.svg" />
+          <p>All Tasks <span>0</span></p>
+        </div>
+        <div class="today">
+          <img src="./icons/calendar-today.svg" />
+          <p>Today <span>0</span></p>
+        </div>
+        <div class="week">
+          <img src="./icons/calendar-range.svg" />
+          <p>Next 7 Days <span>0</span></p>
+        </div>
+        <div class="important">
+          <img src="./icons/star.svg" />
+          <p>Important <span>0</span></p>
+        </div>
+      </section>
+      <section id="aside-section__projects">
+        <h2 class="title">Projects</h2>
+
+        <div class="project-container">
+          <div class="project"></div>
+        </div>
+
+        <!--    <div class="projects-form">
+          <label for="project-title"></label>
+          <input type="text" id="project-title" />
+          <button>Add</button>
+          <button>Cancel</button>
+        </div> -->
+        <!-- <img src="./icons/format-list-group.svg" alt="group icon" />
+        <img src="./icons/format-list-checkbox.svg" alt="list icon" /> -->
+
+        <button class="projects-btn__add-project">
+          <img src="./icons/plus-circle.svg" />Add Project
+        </button>
+        <!-- <button class="projects-btn add">Add List</button> -->
+      </section>
+    </aside>
+  </body>
 </html>
