@@ -14,7 +14,36 @@
       <div class="main-section__project-container">
         <h2>Project Title</h2>
 
+        <!-- Task List Task Edit Start-->
+        <div class="main-section__task-list__container edit">
+          <ul class="main-section__task-list edit">
+            <li class="main-section__task-list__task edit">
+              <h3 class="main-section__task-list__task-title edit">
+                Task Title edit
+              </h3>
+              <label for="main-section__task-list__task-checkbox edit"></label>
+              <input
+                type="checkbox"
+                id="main-section__task-list__task-checkbox edit"
+              />
+              <p class="main-section__task-list__task-description edit">
+                Item Description Text edit
+              </p>
+              <p class="main-section__task-list__task-date edit">
+                Item Due Date edit
+              </p>
+
+              <div class="main-section__task-list__task-priority edit">
+                Priority icon edit
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Task List Task Edit End-->
+
         <!-- Task List Container Start -->
+
         <div class="main-section__task-list__container">
           <ul class="main-section__task-list">
             <li class="main-section__task-list__task">
@@ -44,6 +73,9 @@
                 alt="star filled icon"
                 class="main-section__task-list__task-important enable"
               />
+              <div class="main-section__task-list__task-priority">
+                Priority icon
+              </div>
             </li>
           </ul>
         </div>
@@ -68,24 +100,20 @@
           </select>
           <button class="main-section__submit-form__task-add">Add Task</button>
           <button class="main-section__submit-form__task-cancel">Cancel</button>
-
-          <img
-            src="/src/icons/star-outline.svg"
-            alt="star outline icon"
-            class="main-section__submit-form__task-important disable"
-          />
-          <img
-            src="/src/icons/star.svg"
-            alt="star filled icon"
-            class="main-section__submit-form__task-important enable"
-          />
         </div>
 
         <!-- add form end-->
 
+        <!-- Add Task button  -->
+
         <button class="projects-btn__add-project main-section">
           <img src="./icons/plus-circle.svg" alt="plus circle icon" />Add Task
         </button>
+      </div>
+
+      <div class="main-section__user-actions__container">
+        <button>Edit</button>
+        <button>Delete</button>
       </div>
     </main>
 
