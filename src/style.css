@@ -31,10 +31,12 @@ img {
   filter: invert(80%);
 }
 
-.main-section__submit-form__task-edit,
+.main-section__task-list__task-edit,
 .projects-btn__add-project img,
 .main-section__submit-form__task-important.disable,
-.main-section__submit-form__task-important.enable {
+.main-section__submit-form__task-important.enable,
+.main-section__task-list__task-important.disable,
+.main-section__task-list__task-important.enable {
   filter: invert(0%);
 }
 
@@ -99,9 +101,13 @@ main {
   font-size: 2.2rem;
 }
 
-.main-section__project-container {
+.main-section__project-container h2,
+.main-section__task-list__container,
+.main-section__submit-form,
+.projects-btn__add-project.main-section {
   padding: 2rem 2rem;
   background-color: var(--white);
   color: var(--rich-black);
   border-radius: 4px;
+  margin-bottom: 4rem;
 }
