@@ -13,9 +13,45 @@
     <main>
       <div class="main-section__project-container">
         <h2>Project Title</h2>
+
+        <!-- Task List Container Start -->
+        <div class="main-section__task-list__container">
+          <ul class="main-section__task-list">
+            <li class="main-section__task-list__task">
+              <h3 class="main-section__task-list__task-title">Task Title</h3>
+              <label for="main-section__task-list__task-checkbox"></label>
+              <input
+                type="checkbox"
+                id="main-section__task-list__task-checkbox"
+              />
+              <p class="main-section__task-list__task-description">
+                Item Description Text
+              </p>
+              <p class="main-section__task-list__task-date">Item Due Date</p>
+              <img
+                src="/src/icons/dots-vertical.svg"
+                alt="dots icon"
+                class="main-section__task-list__task-edit"
+              />
+
+              <img
+                src="/src/icons/star-outline.svg"
+                alt="star outline icon"
+                class="main-section__task-list__task-important disable"
+              />
+              <img
+                src="/src/icons/star.svg"
+                alt="star filled icon"
+                class="main-section__task-list__task-important enable"
+              />
+            </li>
+          </ul>
+        </div>
+        <!-- Task List Container End -->
+
+        <!-- add form start -->
+
         <div class="main-section__submit-form">
-          <label for="main-section__submit-form__task-check"></label>
-          <input type="checkbox" id="main-section__submit-form__task-check" />
           <label for="main-section__submit-form__task-title">Task Title</label>
           <input type="text" id="main-section__submit-form__task-title" />
           <label for="main-section__submit-form__task-description"
@@ -32,11 +68,7 @@
           </select>
           <button class="main-section__submit-form__task-add">Add Task</button>
           <button class="main-section__submit-form__task-cancel">Cancel</button>
-          <img
-            src="/src/icons/dots-vertical.svg"
-            alt="dots icon"
-            class="main-section__submit-form__task-edit"
-          />
+
           <img
             src="/src/icons/star-outline.svg"
             alt="star outline icon"
@@ -48,12 +80,15 @@
             class="main-section__submit-form__task-important enable"
           />
         </div>
+
+        <!-- add form end-->
+
         <button class="projects-btn__add-project main-section">
-          <img src="./icons/plus-circle.svg" alt="plus circle icon" />Add
-          Project
+          <img src="./icons/plus-circle.svg" alt="plus circle icon" />Add Task
         </button>
       </div>
     </main>
+
     <aside>
       <section id="aside-section__tasks">
         <h2 class="tasks-title">Home</h2>
@@ -80,20 +115,9 @@
         <div class="project-container">
           <div class="project"></div>
         </div>
-
-        <!--    <div class="projects-form">
-          <label for="project-title"></label>
-          <input type="text" id="project-title" />
-          <button>Add</button>
-          <button>Cancel</button>
-        </div> -->
-        <!-- <img src="./icons/format-list-group.svg" alt="group icon" />
-        <img src="./icons/format-list-checkbox.svg" alt="list icon" /> -->
-
         <button class="projects-btn__add-project">
           <img src="./icons/plus-circle.svg" />Add Project
         </button>
-        <!-- <button class="projects-btn add">Add List</button> -->
       </section>
     </aside>
   </body>
