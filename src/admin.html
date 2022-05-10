@@ -115,62 +115,76 @@
 
     <aside>
       <!-- Aside Section Home -->
-      <section id="aside-section__tasks">
-        <h2 class="tasks-title">Home</h2>
-        <div class="all-tasks">
-          <img src="./icons/home-outline.svg" />
-          <p>All Tasks <span>0</span></p>
+      <section id="aside-section__home">
+        <h2 class="aside-section__home-tasks__title">Home</h2>
+        <div class="aside-section__home-tasks__all-tasks">
+          <img
+            src="./icons/home-outline.svg"
+            class="aside-section__home-tasks__all-tasks__icon"
+          />
+          <p class="aside-section__home-tasks__all-tasks__title">
+            All Tasks <span>0</span>
+          </p>
         </div>
-        <div class="today">
-          <img src="./icons/calendar-today.svg" />
-          <p>Today <span>0</span></p>
+        <div class="aside-section__home-tasks__today">
+          <img
+            src="./icons/calendar-today.svg"
+            class="aside-section__home-tasks__today-icon"
+          />
+          <p class="aside-section__home-tasks__today-title">
+            Today <span>0</span>
+          </p>
         </div>
-        <div class="week">
-          <img src="./icons/calendar-range.svg" />
-          <p>Next 7 Days <span>0</span></p>
+        <div class="aside-section__home-tasks__week">
+          <img
+            src="./icons/calendar-range.svg"
+            class="aside-section__home-tasks__week-icon"
+          />
+          <p class="aside-section__home-tasks__week-title">
+            Next Week <span>0</span>
+          </p>
         </div>
-        <div class="important">
-          <img src="./icons/star.svg" />
-          <p>Important <span>0</span></p>
+        <div class="aside-section__home-tasks__important">
+          <img
+            src="./icons/star.svg"
+            class="aside-section__home-tasks__important-icon"
+          />
+          <p class="aside-section__home-tasks__important-title">
+            Important <span>0</span>
+          </p>
         </div>
       </section>
       <!-- Aside Section Project Section -->
 
       <section id="aside-section__projects">
-        <h2 class="title">Projects</h2>
+        <h2 class="aside-section__projects__title">Projects</h2>
 
         <!-- Projects Container start-->
         <div class="aside-section__project-container">
-          <ul class="aside-section__project-container__list">
-            <li class="aside-section__project-container__list-item">
-              <h3 class="aside-section__project-container__list-item__title">
-                Project Dummy 1
-              </h3>
+          <ul>
+            <li>
+              <div class="aside-section__user-actions__container">
+                <button>Rename</button>
+                <button>Delete</button>
+                <div></div>
+              </div>
               <img
                 src="/src/icons/format-list-group.svg"
                 alt="project icon"
                 class="aside-section__project-container__list-item__group-icon"
               />
-              <img
-                src="/src/icons/dots-vertical.svg"
-                alt="project edit icon"
-                class="aside-section__project-container__list-item__edit-icon"
-              />
+              <div>New Project</div>
+              <img src="/src/icons/dots-vertical.svg" alt="project edit icon" />
             </li>
-            <li class="project-container__list-item">
-              <h3 class="aside-section__project-container__list-item__title">
-                Project Dummy 1
-              </h3>
-              <img
-                src="/src/icons/format-list-group.svg"
-                alt="project icon"
-                class="aside-section__project-container__list-item__group-icon"
-              />
-              <img
-                src="/src/icons/dots-vertical.svg"
-                alt="project edit icon"
-                class="aside-section__project-container__list-item__edit-icon"
-              />
+            <li>
+              <img src="/src/icons/format-list-group.svg" alt="project icon" />
+              <div>Another new Project</div>
+              <img src="/src/icons/dots-vertical.svg" alt="project edit icon" />
+            </li>
+            <li>
+              <img src="/src/icons/format-list-group.svg" alt="project icon" />
+              <div>Another Project</div>
+              <img src="/src/icons/dots-vertical.svg" alt="project edit icon" />
             </li>
           </ul>
         </div>
@@ -208,18 +222,24 @@
             Cancel
           </button>
         </div>
+        <!--Aside Rename Project form end-->
 
         <!--Aside Rename Project form end-->
-        <button class="aside-section__projects-btn__add">
+        <button class="aside-section__projects-btn__main-add">
           <img src="./icons/plus-circle.svg" />Add Project
         </button>
 
         <!-- Aside User Actions container -->
-        <div class="aside-section__user-actions__container">
-          <button>Rename</button>
-          <button>Delete</button>
-        </div>
       </section>
     </aside>
+    <footer class="footer-container">
+      <div class="footer-container__text">Antonis Maras</div>
+      <div class="footer-container__date">2022</div>
+      <img
+        src="/src/icons/github.svg"
+        class="footer-container__icon"
+        alt=" github icon"
+      />
+    </footer>
   </body>
 </html>
