@@ -1,0 +1,44 @@
+#aside-section__home {
+  margin-bottom: 10rem;
+  width: 100%;
+}
+
+.aside-section__home-tasks__title {
+  padding-bottom: 0.8rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid var(--battleship-gray);
+}
+
+/* Select the divs in home container  */
+#aside-section__home > div {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 0.25rem;
+}
+
+#aside-section__home > div:hover {
+  background-color: var(--battleship-gray);
+  border-radius: 5px;
+  color: var(--rich-black);
+  transform: scale(1.02);
+  transition: 0.25s;
+  cursor: pointer;
+}
+
+/* Select the spans in the home divs  */
+#aside-section__home > div p > span {
+  position: absolute;
+  right: calc(0% + 1rem);
+}
+
+/* Select the imgs in the home divs  */
+#aside-section__home > div > img {
+  filter: invert(100%);
+}
+
+#aside-section__home > div > img:hover {
+  transition: 0.5s ease-in-out;
+  transform: rotate(360deg);
+}

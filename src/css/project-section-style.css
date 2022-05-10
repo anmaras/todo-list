@@ -1,0 +1,152 @@
+/* Aside section  */
+.aside-section__projects__title {
+  padding-bottom: 0.8rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid var(--battleship-gray);
+}
+
+.aside-section__project-container ul {
+  margin-bottom: 2.4rem;
+}
+
+/* Aside section  project list selector */
+.aside-section__project-container ul > li {
+  width: 100%;
+  padding: 1rem 0.25rem;
+  /* Relative for user actions */
+  position: relative;
+
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1rem;
+}
+
+.aside-section__project-container ul > li:hover {
+  background-color: var(--battleship-gray);
+
+  border-radius: 5px;
+  color: var(--rich-black);
+  transform: scale(1.02);
+  transition: 0.25s;
+  cursor: pointer;
+}
+
+/* List item icons style */
+.aside-section__project-container img,
+.aside-section__project-container div + img {
+  filter: invert(100%);
+}
+
+/* Project submit form style  hidden until user action*/
+.aside-section__project-submit__form,
+.aside-section__project-rename__form {
+  width: 70%;
+  min-width: min-content;
+  margin: auto;
+  padding: 0rem 1rem 1rem;
+
+  display: grid;
+  grid-template-columns: repeat(2, minmax(min-content, 1fr));
+  justify-content: center;
+  gap: 1rem;
+
+  border-radius: 5px;
+}
+
+/* Project form btn styles */
+.aside-section__project-submit__add-btn {
+  background-color: var(--Celeste);
+}
+
+.aside-section__project-submit__cancel-btn {
+  background-color: var(--Ultra-Red);
+}
+
+.aside-section__project-submit__add-btn,
+.aside-section__project-submit__cancel-btn,
+#aside-section__project-submit__title,
+#aside-section__project-rename__title {
+  display: none;
+  border: none;
+  border-radius: 2px;
+  font-size: 1.8rem;
+  padding: 0.5rem;
+}
+
+#aside-section__project-submit__title,
+#aside-section__project-rename__title {
+  grid-column: 1/-1;
+  padding: 1rem;
+  text-align: center;
+}
+
+/* Project main btn style */
+.aside-section__projects-btn__main-add {
+  width: 100%;
+  border: none;
+  padding: 1rem 0.4rem;
+
+  border-radius: 3px;
+
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: start;
+  align-items: center;
+  gap: 1rem;
+
+  font-size: 1.8rem;
+  background-color: var(--eerie-black);
+  color: var(--gainboro);
+}
+
+.aside-section__projects-btn__main-add:hover {
+  background-color: var(--battleship-gray);
+  color: var(--rich-black);
+}
+
+.aside-section__projects-btn__main-add > img {
+  filter: invert(80%);
+}
+.aside-section__projects-btn__main-add > img:hover {
+  filter: invert(0%);
+}
+
+/* User Action Rename and Delete style */
+.aside-section__user-actions__container {
+  position: absolute;
+  background-color: var(--gainsboro);
+  width: fit-content;
+
+  /* Pixels working with page zoom */
+  right: 1px;
+  top: -63px;
+  z-index: 2;
+}
+
+.aside-section__user-actions__container button {
+  border: none;
+
+  display: flex;
+  padding: 0.8rem 1rem;
+  width: 100%;
+  font-size: 1.6rem;
+  background-color: var(--gainsboro);
+}
+
+.aside-section__user-actions__container button:hover {
+  background-color: var(--battleship-gray);
+}
+
+/* Small box for user action main container */
+.aside-section__user-actions__container > div {
+  width: 10px;
+  height: 10px;
+  background-color: var(--gainsboro);
+  position: absolute;
+  right: 10%;
+  bottom: -5%;
+  transform: rotate(45deg);
+  z-index: -1;
+}

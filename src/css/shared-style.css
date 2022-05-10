@@ -1,0 +1,79 @@
+:root {
+  --rich-black: #0e0e0f;
+  --eerie-black: #212121;
+  --gainsboro: #dbd6dd;
+  --battleship-gray: #898989;
+  --desert-sand: #ebbca1;
+  --white: #ffff;
+  --canary: #fff689;
+  --Verdigris: #28afb0;
+  --Orange-Yellow-Crayola: #f4d35e;
+  --Paradise-Pink: #ef476f;
+  --Caribian-Green: #06cfd6;
+  --Ultra-Red: #ff6978;
+  --Baby-Powder: #fffcf9;
+  --Celeste: #b1ede8;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+
+  display: grid;
+  grid-template-columns: minmax(215px, 1fr) 5fr;
+  grid-template-rows: auto 5fr auto;
+  gap: 0.1rem;
+
+  font-size: 1.8rem;
+  letter-spacing: 2px;
+}
+
+ul,
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+header,
+aside,
+main,
+footer {
+  background-color: var(--eerie-black);
+  color: var(--gainsboro);
+  padding: 2rem;
+}
+
+header {
+  grid-column: 1/-1;
+  grid-row: 1/1;
+}
+
+aside {
+  grid-column: 1/2;
+  grid-row: 2/3;
+}
+
+main {
+  grid-column: 2/-1;
+}
+
+footer {
+  grid-column: 1/-1;
+  grid-row: 3/-1;
+
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+}
