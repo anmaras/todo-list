@@ -4,6 +4,7 @@
   --gainsboro: #dbd6dd;
   --battleship-gray: #898989;
   --desert-sand: #ebbca1;
+  --white: #ffff;
 }
 
 * {
@@ -26,8 +27,15 @@ body {
   font-size: 1.8rem;
 }
 
-img:not(.projects-btn__add-project img) {
+img {
   filter: invert(80%);
+}
+
+.main-section__submit-form__task-edit,
+.projects-btn__add-project img,
+.main-section__submit-form__task-important.disable,
+.main-section__submit-form__task-important.enable {
+  filter: invert(0%);
 }
 
 header,
@@ -89,4 +97,11 @@ main {
   padding: 1rem;
   width: 100%;
   font-size: 2.2rem;
+}
+
+.main-section__project-container {
+  padding: 2rem 2rem;
+  background-color: var(--white);
+  color: var(--rich-black);
+  border-radius: 4px;
 }
