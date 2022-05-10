@@ -104,7 +104,9 @@ main {
 .main-section__project-container h2,
 .main-section__task-list__container,
 .main-section__submit-form,
-.projects-btn__add-project.main-section {
+.projects-btn__add-project.main-section,
+.main-section__task-list__edit,
+.main-section__user-actions__container {
   padding: 2rem 2rem;
   background-color: var(--white);
   color: var(--rich-black);
