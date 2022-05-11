@@ -11,8 +11,93 @@
       <h1>Todo List</h1>
     </header>
     <main>
-          <!-- Header-->
-
+      <!-- Left Section Start -->
+      <section id="left-section">
+        <div id="aside-section__home">
+          <h2 class="aside-section__home-tasks__title">Home</h2>
+          <div class="aside-section__home-tasks__all-tasks">
+            <img
+              src="./icons/home-outline.svg"
+              class="aside-section__home-tasks__all-tasks__icon"
+            />
+            <p class="aside-section__home-tasks__all-tasks__title">
+              All Tasks <span>0</span>
+            </p>
+          </div>
+          <div class="aside-section__home-tasks__today">
+            <img
+              src="./icons/calendar-today.svg"
+              class="aside-section__home-tasks__today-icon"
+            />
+            <p class="aside-section__home-tasks__today-title">
+              Today <span>0</span>
+            </p>
+          </div>
+          <div class="aside-section__home-tasks__week">
+            <img
+              src="./icons/calendar-range.svg"
+              class="aside-section__home-tasks__week-icon"
+            />
+            <p class="aside-section__home-tasks__week-title">
+              Next Week <span>0</span>
+            </p>
+          </div>
+          <div class="aside-section__home-tasks__important">
+            <img
+              src="./icons/star.svg"
+              class="aside-section__home-tasks__important-icon"
+            />
+            <p class="aside-section__home-tasks__important-title">
+              Important <span>0</span>
+            </p>
+          </div>
+        </div>
+        <!-- Projects Container start-->
+        <div id="aside-section__projects">
+          <h2 class="aside-section__projects__title">Projects</h2>
+          <div class="aside-section__project-container">
+            <ul>
+              <li>
+                <img
+                  src="/src/icons/format-list-group.svg"
+                  alt="project icon"
+                  class="aside-section__project-container__list-item__group-icon"
+                />
+                <div>New Project</div>
+                <img
+                  src="/src/icons/dots-vertical.svg"
+                  alt="project edit icon"
+                />
+              </li>
+              <li>
+                <img
+                  src="/src/icons/format-list-group.svg"
+                  alt="project icon"
+                />
+                <div>Another new Project</div>
+                <img
+                  src="/src/icons/dots-vertical.svg"
+                  alt="project edit icon"
+                />
+              </li>
+              <li>
+                <img
+                  src="/src/icons/format-list-group.svg"
+                  alt="project icon"
+                />
+                <div>Another Project</div>
+                <img
+                  src="/src/icons/dots-vertical.svg"
+                  alt="project edit icon"
+                />
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <!-- Middle Section -->
+       <section id="middle-section">
+       <!-- Todo Header-->
       <div class="main__container">
         <div class="main__header ">
           <h2 class="main__header__task-title">
@@ -22,8 +107,7 @@
             <img src="/src/icons/sort.svg" alt="sorting list icon" />
             <p>Sort</p>
           </div>
-
-          <!-- Sorting options  start-->
+          <!-- Todo Sorting options  start-->
           <div class="main__header__sort-container__options">
             <p>Sort By</p>
             <div >
@@ -42,37 +126,6 @@
           <p>Sorting Order</p>
           <img src="/src/icons/close.svg" alt="">
         </div>
-        
-          <!-- Sorting options  end-->
-
-
-        <!-- Task List Task Edit Start-->
-        <!--     <div class="main-section__task-list__container edit">
-          <ul class="main-section__task-list edit">
-            <li class="main-section__task-list__task edit">
-              <h3 class="main-section__task-list__task-title edit">
-                Task Title edit
-              </h3>
-              <label for="main-section__task-list__task-checkbox edit"></label>
-              <input
-                type="checkbox"
-                id="main-section__task-list__task-checkbox edit"
-              />
-              <p class="main-section__task-list__task-description edit">
-                Item Description Text edit
-              </p>
-              <p class="main-section__task-list__task-date edit">
-                Item Due Date edit
-              </p>
-
-              <div class="main-section__task-list__task-priority edit">
-                Priority icon edit
-              </div>
-            </li>
-          </ul>
-        </div> -->
-        <!-- Task List Task Edit End-->
-
         <!-- Task List Container Start -->
                 <div class="main__task-list__container">
           <ul class="main__task-list__list">
@@ -99,7 +152,33 @@
               <div class="main__task-list__list-item__priority"></div>
             </li>
         </div> 
-        <!-- Task List Container End -->
+               <!-- Task List Task Edit Start-->
+        <!--     <div class="main-section__task-list__container edit">
+          <ul class="main-section__task-list edit">
+            <li class="main-section__task-list__task edit">
+              <h3 class="main-section__task-list__task-title edit">
+                Task Title edit
+              </h3>
+              <label for="main-section__task-list__task-checkbox edit"></label>
+              <input
+                type="checkbox"
+                id="main-section__task-list__task-checkbox edit"
+              />
+              <p class="main-section__task-list__task-description edit">
+                Item Description Text edit
+              </p>
+              <p class="main-section__task-list__task-date edit">
+                Item Due Date edit
+              </p>
+
+              <div class="main-section__task-list__task-priority edit">
+                Priority icon edit
+              </div>
+            </li>
+          </ul>
+        </div> -->
+        <!-- Task List Task Edit End-->
+
 
         <!-- add form start -->
         <!--   <div class="main-section__submit-form">
@@ -123,137 +202,27 @@
         <!-- add form end-->
 
         <!-- Add Task button  -->
- <!--        <button class="projects-btn__add-project main-section">
+        <button class="projects-btn__add-project main-section">
           <img
             src="./icons/plus-circle-outline.svg"
             alt="plus circle icon"
           />Add Task
-        </button> -->
-      </div>
-
-      <!-- User actions section -->
-      <!--   <div class="main-section__user-actions__container">
-        <button>Edit</button>
-        <button>Delete</button>
-      </div> -->
-    </main>
-
-    <!-- Aside section Start -->
-
-    <aside>
-      <!-- Aside Section Home -->
-      <section id="aside-section__home">
-        <h2 class="aside-section__home-tasks__title">Home</h2>
-        <div class="aside-section__home-tasks__all-tasks">
-          <img
-            src="./icons/home-outline.svg"
-            class="aside-section__home-tasks__all-tasks__icon"
-          />
-          <p class="aside-section__home-tasks__all-tasks__title">
-            All Tasks <span>0</span>
-          </p>
-        </div>
-        <div class="aside-section__home-tasks__today">
-          <img
-            src="./icons/calendar-today.svg"
-            class="aside-section__home-tasks__today-icon"
-          />
-          <p class="aside-section__home-tasks__today-title">
-            Today <span>0</span>
-          </p>
-        </div>
-        <div class="aside-section__home-tasks__week">
-          <img
-            src="./icons/calendar-range.svg"
-            class="aside-section__home-tasks__week-icon"
-          />
-          <p class="aside-section__home-tasks__week-title">
-            Next Week <span>0</span>
-          </p>
-        </div>
-        <div class="aside-section__home-tasks__important">
-          <img
-            src="./icons/star.svg"
-            class="aside-section__home-tasks__important-icon"
-          />
-          <p class="aside-section__home-tasks__important-title">
-            Important <span>0</span>
-          </p>
-        </div>
-      </section>
-      <!-- Aside Section Project Section -->
-
-      <section id="aside-section__projects">
-        <h2 class="aside-section__projects__title">Projects</h2>
-
-        <!-- Projects Container start-->
-        <div class="aside-section__project-container">
-          <ul>
-            <li>
-              <img
-                src="/src/icons/format-list-group.svg"
-                alt="project icon"
-                class="aside-section__project-container__list-item__group-icon"
-              />
-              <div>New Project</div>
-              <img src="/src/icons/dots-vertical.svg" alt="project edit icon" />
-            </li>
-            <li>
-              <img src="/src/icons/format-list-group.svg" alt="project icon" />
-              <div>Another new Project</div>
-              <img src="/src/icons/dots-vertical.svg" alt="project edit icon" />
-            </li>
-            <li>
-              <img src="/src/icons/format-list-group.svg" alt="project icon" />
-              <div>Another Project</div>
-              <img src="/src/icons/dots-vertical.svg" alt="project edit icon" />
-            </li>
-          </ul>
-        </div>
-        <!-- Projects Container end-->
-
-        <!-- Aside Create Project Form Start -->
-        <div class="aside-section__project-submit__form">
-          <label for="aside-section__project-submit__title"></label>
-          <input
-            type="text"
-            id="aside-section__project-submit__title"
-            placeholder="Project Title"
-          />
-          <button class="aside-section__project-submit__add-btn">
-            Add Project
-          </button>
-          <button class="aside-section__project-submit__cancel-btn">
-            Cancel
-          </button>
-        </div>
-        <!-- Aside Create Project Form End -->
-
-        <!--Aside Rename Project form start-->
-        <div class="aside-section__project-rename__form">
-          <label for="aside-section__project-rename__title"></label>
-          <input
-            type="text"
-            id="aside-section__project-rename__title"
-            placeholder="Rename Title"
-          />
-          <button class="aside-section__project-submit__add-btn">
-            Rename Project
-          </button>
-          <button class="aside-section__project-submit__cancel-btn">
-            Cancel
-          </button>
-        </div>
-        <!--Aside Rename Project form end-->
-
-        <!--Aside Rename Project form end-->
-        <button class="aside-section__projects-btn__main-add">
-          <img src="./icons/plus-circle-outline.svg" />Add Project
         </button>
-
-        <!-- Aside User Actions container -->
-      </section>
-    </aside>
+      </div>
+      </section> 
+      <!-- Right Section -->
+<section id="right-section">
+  <div id="properties__container">
+    <p>Edit Task Title</p>
+    <p>Edit Description</p>
+    <p>Edit Priority</p>
+    <p>Edit Due Date</p>
+    <p>Add Notes</p>
+    <p>Move to antother project</p>
+  </div>
+</section>
+    </main>
+    <!-- Footer  -->
     <footer class="footer-container">
       <div class="footer-container__text">Antonis Maras</div>
       <div class="footer-container__date">2022</div>
