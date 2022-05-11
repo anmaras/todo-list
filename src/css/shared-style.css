@@ -35,7 +35,7 @@ body {
   gap: 0.1rem;
 
   font-size: 1.8rem;
-  letter-spacing: 2px;
+  letter-spacing: 1.2px;
 }
 
 ul,
@@ -51,7 +51,7 @@ main,
 footer {
   background-color: var(--eerie-black);
   color: var(--gainsboro);
-  padding: 2rem;
+  padding: 1.2rem 1.6rem;
 }
 
 header {
