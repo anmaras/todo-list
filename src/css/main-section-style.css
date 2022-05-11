@@ -1,0 +1,36 @@
+/* Project Title */
+.main-section__project-container > h2 {
+  color: var(--gainsboro);
+  margin-bottom: 1.6rem;
+}
+
+/* Add Task Button Style */
+.projects-btn__add-project.main-section {
+  width: 100%;
+  border: none;
+  padding: 1rem 0.4rem;
+
+  border-radius: 3px;
+
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: start;
+  align-items: center;
+  gap: 1rem;
+
+  font-size: 1.8rem;
+  background-color: var(--eerie-black);
+  color: var(--gainboro);
+}
+
+.projects-btn__add-project.main-section:hover {
+  background-color: var(--battleship-gray);
+  color: var(--rich-black);
+}
+/* Add Task Button ICON */
+.projects-btn__add-project.main-section > img {
+  filter: invert(80%);
+}
+.projects-btn__add-project.main-section > img:hover {
+  filter: invert(0%);
+}
