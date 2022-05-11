@@ -63,7 +63,7 @@
 .main__sorting-order {
   display: flex;
   justify-content: flex-end;
-  gap: 0.4rem;
+  gap: 0.8rem;
   padding: 0.5rem 0.8rem;
   font-size: 1.4rem;
   align-items: center;
@@ -71,12 +71,12 @@
 
 .main__sorting-order > img {
   filter: invert(100%);
-  height: auto;
-  width: 18px;
+  padding: 0.1rem;
+  width: 20px;
 }
-.main__sorting-order > img:nth-child(1) {
-  height: auto;
-  width: 24px;
+
+.main__sorting-order > img:hover {
+  background-color: var(--battleship-gray);
 }
 
 /* Project Title */
