@@ -1,3 +1,8 @@
+#left-section {
+  flex: 1;
+  max-width: 400px;
+}
+
 #aside-section__home {
   width: 100%;
 }
