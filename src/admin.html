@@ -11,8 +11,40 @@
       <h1>Todo List</h1>
     </header>
     <main>
-      <div class="main-section__project-container">
-        <h2>Project Title</h2>
+          <!-- Header-->
+
+      <div class="main__container">
+        <div class="main__header ">
+          <h2 class="main__header__task-title">
+            New Project Title
+          </h2>
+          <div class="main__header__sort-container">
+            <img src="/src/icons/sort.svg" alt="sorting list icon" />
+            <p>Sort</p>
+          </div>
+
+          <!-- Sorting options  start-->
+          <div class="main__header__sort-container__options">
+            <p>Sort By</p>
+            <div >
+              <img src="/src/icons/sort-alphabetical-variant.svg" alt="star outline">
+              <p>Alphabetically</p>
+            </div>
+            <div >
+              <img src="/src/icons/calendar-month.svg" alt="star outline">
+              <p>Due Date</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="main__sorting-order">
+          <img src="/src/icons/chevron-up.svg" alt="chevron icon">
+          <p>Sorting Order</p>
+          <img src="/src/icons/close.svg" alt="">
+        </div>
+        
+          <!-- Sorting options  end-->
+
 
         <!-- Task List Task Edit Start-->
         <!--     <div class="main-section__task-list__container edit">
@@ -42,7 +74,7 @@
         <!-- Task List Task Edit End-->
 
         <!-- Task List Container Start -->
-        <div class="main-section__task-list__container">
+                <div class="main-section__task-list__container">
           <ul class="main-section__task-list">
             <li class="main-section__task-list__task">
               <h3 class="main-section__task-list__task-title">Task Title</h3>
@@ -61,7 +93,7 @@
                 class="main-section__task-list__task-edit"
               />
 
-              <img
+        <!--  <img
                 src="/src/icons/star-outline.svg"
                 alt="star outline icon"
                 class="main-section__task-list__task-important disable"
@@ -70,13 +102,11 @@
                 src="/src/icons/star.svg"
                 alt="star filled icon"
                 class="main-section__task-list__task-important enable"
-              />
-              <div class="main-section__task-list__task-priority">
-                Priority icon
-              </div>
+              /> -->
+        <!--          <div class="main-section__task-list__task-priority"></div>
             </li>
           </ul>
-        </div>
+        </div> -->
         <!-- Task List Container End -->
 
         <!-- add form start -->
@@ -101,13 +131,13 @@
         <!-- add form end-->
 
         <!-- Add Task button  -->
-        <button class="projects-btn__add-project main-section">
+<!--         <button class="projects-btn__add-project main-section">
           <img
             src="./icons/plus-circle-outline.svg"
             alt="plus circle icon"
           />Add Task
         </button>
-      </div>
+      </div> -->
 
       <!-- User actions section -->
       <!--   <div class="main-section__user-actions__container">
