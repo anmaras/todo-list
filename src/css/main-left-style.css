@@ -1,0 +1,156 @@
+#left-section {
+  flex: 1;
+  max-width: 400px;
+}
+
+.left-section__home-container > h2 {
+  border-bottom: 2px solid var(--battleship-gray);
+}
+
+/* Select the divs in home container  */
+.left-section__home-container > div {
+  position: relative;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: max-content 1fr auto;
+  gap: 1rem;
+}
+
+.left-section__home-container > div:hover {
+  background-color: var(--battleship-gray);
+  border-radius: 5px;
+  color: var(--rich-black);
+  transition: 0.25s;
+  cursor: pointer;
+}
+
+/* Select the child p in the home divs  */
+
+.left-section__home-container > div p:nth-child(3) {
+  padding: 0 0.5rem;
+}
+
+.left-section__home-container > div > img:hover {
+  transition: 0.5s ease-in-out;
+  transform: rotate(360deg);
+}
+
+/* Project Title */
+.left-section__projects h2 {
+  border-bottom: 2px solid var(--battleship-gray);
+}
+
+.left-section__projects__container ul > li {
+  width: 100%;
+  /* Relative for user actions */
+  position: relative;
+
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1rem;
+}
+
+.left-section__projects__container ul > li:hover {
+  background-color: var(--battleship-gray);
+
+  border-radius: 5px;
+  color: var(--rich-black);
+  transition: 0.25s;
+  cursor: pointer;
+}
+
+.left-section__projects__add-btn {
+  width: 100%;
+  border: none;
+
+  border-radius: 3px;
+
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: start;
+  align-items: center;
+  gap: 1rem;
+
+  background-color: var(--eerie-black);
+  color: var(--gainboro);
+}
+
+.left-section__projects__add-btn:hover {
+  background-color: var(--battleship-gray);
+  color: var(--rich-black);
+}
+
+/* User Action Rename and Delete style */
+.left-section__projects__user-actions {
+  display: none;
+  position: absolute;
+  background-color: var(--gainsboro);
+
+  /* Pixels working with page zoom */
+  right: 1px;
+  top: -40px;
+  z-index: 2;
+}
+
+.left-section__projects__user-actions button {
+  display: flex;
+  border: none;
+  background-color: var(--gainsboro);
+}
+
+.left-section__projects__user-actions button:hover {
+  background-color: var(--battleship-gray);
+}
+
+/* Small box for user action main container */
+.left-section__projects__user-actions > div {
+  width: 10px;
+  height: 10px;
+  background-color: var(--gainsboro);
+  position: absolute;
+  right: 10%;
+  bottom: -5%;
+  transform: rotate(45deg);
+  z-index: -1;
+}
+
+/* Project submit form style  hidden until user action*/
+.aside-section__project-submit__form,
+.aside-section__project-rename__form {
+  width: 70%;
+  min-width: min-content;
+  margin: auto;
+
+  display: grid;
+  grid-template-columns: repeat(2, minmax(min-content, 1fr));
+  justify-content: center;
+  gap: 1rem;
+
+  border-radius: 5px;
+}
+
+/* Project form btn styles */
+.aside-section__project-submit__add-btn {
+  background-color: var(--Celeste);
+}
+
+.aside-section__project-submit__cancel-btn {
+  background-color: var(--Ultra-Red);
+}
+
+.aside-section__project-submit__add-btn,
+.aside-section__project-submit__cancel-btn,
+#aside-section__project-submit__title,
+#aside-section__project-rename__title {
+  display: none;
+  border: none;
+  border-radius: 2px;
+}
+
+#aside-section__project-submit__title,
+#aside-section__project-rename__title {
+  grid-column: 1/-1;
+  text-align: center;
+}

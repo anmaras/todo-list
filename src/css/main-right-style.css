@@ -1,5 +1,5 @@
 #right-section {
-  flex: 1;
+  width: 350px;
 }
 
 #properties__container {
@@ -10,6 +10,5 @@
 
 #properties__container p {
   padding: 2rem 1rem;
-  background-color: var(--battleship-gray);
   border-radius: 2px;
 }

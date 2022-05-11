@@ -30,12 +30,11 @@ body {
   min-height: 100vh;
 
   display: grid;
-  grid-template-columns: minmax(215px, 1fr) 5fr;
   grid-template-rows: auto 5fr auto;
   gap: 0.1rem;
 
-  font-size: 1.8rem;
-  letter-spacing: 1.2px;
+  font-size: 1.6rem;
+  letter-spacing: 1px;
 }
 
 ul,
@@ -62,9 +61,6 @@ header {
 main {
   grid-column: 1/-1;
   grid-row: 2/3;
-  /*   display: grid;
-  grid-auto-flow: column; */
-  /* grid-template-columns: minmax(max-content, 400px) auto max-content; */
   display: flex;
 }
 

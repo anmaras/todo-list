@@ -27,10 +27,6 @@
   background-color: var(--battleship-gray);
 }
 
-.main__header__sort-container > img {
-  filter: invert(100%);
-}
-
 /* Sorting option tab style start*/
 
 .main__header__sort-container__options {
@@ -80,7 +76,6 @@
 }
 
 .main__sorting-order > img {
-  filter: invert(100%);
   padding: 0.1rem;
   width: 20px;
 }
@@ -102,7 +97,6 @@
   align-items: center;
   gap: 1rem;
 
-  font-size: 1.8rem;
   background-color: var(--eerie-black);
   color: var(--gainboro);
 }
@@ -110,14 +104,6 @@
 .projects-btn__add-project.main-section:hover {
   background-color: var(--battleship-gray);
   color: var(--rich-black);
-}
-
-/* Add Task Button ICON */
-.projects-btn__add-project.main-section > img {
-  filter: invert(80%);
-}
-.projects-btn__add-project.main-section > img:hover {
-  filter: invert(0%);
 }
 
 /* Main Task Container Style */
@@ -156,7 +142,6 @@
 .main__task-list__list-item__description {
   grid-column: 2/3;
   grid-row: 2/3;
-  font-size: 1.4rem;
 }
 
 .main__task-list__list-item__date {
@@ -168,7 +153,6 @@
 .main__task-list__list-item__edit {
   grid-column: 4/5;
   grid-row: 1/3;
-  filter: invert(80%);
   justify-self: end;
   min-height: 40px;
 }
