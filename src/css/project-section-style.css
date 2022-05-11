@@ -115,6 +115,7 @@
 
 /* User Action Rename and Delete style */
 .aside-section__user-actions__container {
+  display: none;
   position: absolute;
   background-color: var(--gainsboro);
   width: fit-content;
