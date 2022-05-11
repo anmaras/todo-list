@@ -1,14 +1,93 @@
+/* Main Header style */
+.main__header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main__header__sort-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 0.8rem;
+}
+
+.main__header__sort-container:hover {
+  background-color: var(--battleship-gray);
+}
+
+.main__header__sort-container > img {
+  filter: invert(100%);
+}
+
+/* Sorting option tab style start*/
+
+.main__header__sort-container__options {
+  width: 200px;
+  padding: 2rem 0rem 1rem;
+  position: absolute;
+  right: 0;
+  top: 30px;
+
+  color: var(--rich-black);
+  background-color: var(--gainsboro);
+  font-size: 1.4rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  border-radius: 2px;
+  display: none;
+}
+
+.main__header__sort-container__options > p {
+  padding-bottom: 2rem;
+  font-weight: 800;
+  text-align: center;
+  border-bottom: 1px solid var(--battleship-gray);
+}
+
+.main__header__sort-container__options > div {
+  padding: 0.8rem 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.main__header__sort-container__options > div:hover {
+  background-color: var(--battleship-gray);
+}
+
+/* Sorting order style */
+.main__sorting-order {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.4rem;
+  padding: 0.5rem 0.8rem;
+  font-size: 1.4rem;
+  align-items: center;
+}
+
+.main__sorting-order > img {
+  filter: invert(100%);
+  height: auto;
+  width: 18px;
+}
+.main__sorting-order > img:nth-child(1) {
+  height: auto;
+  width: 24px;
+}
+
 /* Project Title */
-.main-section__project-container > h2 {
+.main-section__container__header-title {
   color: var(--gainsboro);
-  margin-bottom: 1.6rem;
 }
 
 /* Add Task Button Style */
 .projects-btn__add-project.main-section {
   width: 100%;
   border: none;
-  padding: 1rem 0.4rem;
 
   border-radius: 3px;
 
@@ -27,10 +106,64 @@
   background-color: var(--battleship-gray);
   color: var(--rich-black);
 }
+
 /* Add Task Button ICON */
 .projects-btn__add-project.main-section > img {
   filter: invert(80%);
 }
 .projects-btn__add-project.main-section > img:hover {
   filter: invert(0%);
+}
+
+/* Main Task Container Style */
+.main-section__task-list__container {
+  border: 2px solid var(--battleship-gray);
+  width: 100%;
+}
+.main-section__task-list__task {
+  display: grid;
+  grid-auto-flow: column;
+
+  grid-template-columns: auto 1fr 1fr auto 10px;
+  grid-template-rows: repeat(2, auto);
+
+  align-items: center;
+}
+
+#main-section__task-list__task-checkbox {
+  grid-column: 1/2;
+  grid-row: 1/3;
+  justify-self: start;
+}
+
+.main-section__task-list__task-title {
+  grid-column: 2/3;
+}
+
+.main-section__task-list__task-description {
+  grid-column: 2/3;
+  grid-row: 2/3;
+}
+
+.main-section__task-list__task-date {
+  grid-column: 3/4;
+  grid-row: 1/3;
+  justify-self: center;
+}
+
+.main-section__task-list__task-edit {
+  grid-column: 4/5;
+  grid-row: 1/3;
+  filter: invert(80%);
+  justify-self: end;
+  min-height: 40px;
+}
+
+.main-section__task-list__task-priority {
+  grid-column: 5/6;
+  grid-row: 1/3;
+  background-color: var(--Orange-Yellow-Crayola);
+  width: 100%;
+  height: 100%;
+  justify-self: end;
 }
