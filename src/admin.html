@@ -8,7 +8,7 @@
   </head>
   <body>
     <header>
-      <h1>Todo List</h1>
+      <h1>App</h1>
     </header>
     <main>
       <!-- Left Section Start -->
@@ -16,29 +16,73 @@
         <div class="left-section__home-container">
           <h2>Home</h2>
           <div class="left-section__home-container__all-tasks">
-            <img src="./icons/home-outline.svg" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              version="1.1"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M12 5.69L17 10.19V18H15V12H9V18H7V10.19L12 5.69M12 3L2 12H5V20H11V14H13V20H19V12H22"
+              />
+            </svg>
             <p>All Tasks</p>
             <p>0</p>
           </div>
           <div class="left-section__home-container__today">
-            <img src="./icons/calendar-today.svg" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              version="1.1"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M7,10H12V15H7M19,19H5V8H19M19,3H18V1H16V3H8V1H6V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3Z"
+              />
+            </svg>
             <p>Today</p>
             <p>0</p>
           </div>
           <div class="left-section__home-container__week">
-            <img src="./icons/calendar-range.svg" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              version="1.1"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M9,10H7V12H9V10M13,10H11V12H13V10M17,10H15V12H17V10M19,3H18V1H16V3H8V1H6V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M19,19H5V8H19V19Z"
+              />
+            </svg>
             <p>Next Week</p>
             <p>0</p>
           </div>
           <div class="left-section__home-container__important">
-            <img src="./icons/star.svg" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              version="1.1"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"
+              />
+            </svg>
             <p>Important</p>
             <p>0</p>
           </div>
         </div>
 
         <!-- Projects Container -->
-        <div id="left-section__projects">
+        <div class="left-section__projects">
           <h2>Projects</h2>
           <div class="left-section__projects__container">
             <ul>
@@ -46,26 +90,29 @@
                 <div class="left-section__projects__user-actions">
                   <button>Rename</button>
                   <button>Delete</button>
-                  <div></div>
                 </div>
-                <img
-                  src="/src/icons/format-list-group.svg"
-                  alt="project icon"
-                />
-                <div>New Project</div>
-                <img
-                  src="/src/icons/dots-vertical.svg"
-                  alt="project edit icon"
-                />
+                <h3>New Project</h3>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  version="1.1"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12,16A2,2 0 0,1 14,18A2,2 0 0,1 12,20A2,2 0 0,1 10,18A2,2 0 0,1 12,16M12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12A2,2 0 0,1 12,10M12,4A2,2 0 0,1 14,6A2,2 0 0,1 12,8A2,2 0 0,1 10,6A2,2 0 0,1 12,4Z"
+                  />
+                </svg>
               </li>
             </ul>
           </div>
         </div>
         <button class="left-section__projects__add-btn">
-          <img
+          <!--    <img
             src="./icons/plus-circle-outline.svg"
             alt="plus circle icon"
-          />Add Task
+          /> -->Add Project
         </button>
       </section>
 
@@ -199,7 +246,7 @@
       </section>
     </main>
     <!-- Footer  -->
-    <footer class="footer-container">
+    <!-- <footer class="footer-container">
       <div class="footer-container__text">Antonis Maras</div>
       <div class="footer-container__date">2022</div>
       <img
@@ -207,6 +254,6 @@
         class="footer-container__icon"
         alt=" github icon"
       />
-    </footer>
+    </footer> -->
   </body>
 </html>
