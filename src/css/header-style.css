@@ -1,0 +1,9 @@
+header > h1 {
+  padding-left: 6rem;
+  font-weight: 100;
+}
+header > h1::after {
+  font-weight: 900;
+  content: "Todo";
+  color: var(--eerie-black);
+}
