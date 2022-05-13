@@ -1,0 +1,15 @@
+.projects-btn__add-project.main-section {
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 15px;
+  background-color: var(--Ultramarine-blue);
+  box-shadow: 0px 0px 5px 1px var(--gainsboro);
+  color: var(--Ghost-white);
+
+  font-weight: 600;
+  font-size: 1.8rem;
+}
+
+.projects-btn__add-project.main-section:hover {
+  background-color: var(--Ultra-Red);
+}

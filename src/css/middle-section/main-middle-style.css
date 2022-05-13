@@ -1,0 +1,6 @@
+#middle-section {
+  flex: 5;
+  background-color: var(--Ghost-white);
+  border-top-left-radius: 35px;
+  padding: 3rem;
+}
