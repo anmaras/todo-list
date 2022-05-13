@@ -1,14 +1,41 @@
 #right-section {
+  flex: 1;
   width: 350px;
+  background-color: var(--Ghost-white);
+  border-bottom-right-radius: inherit;
 }
 
-#properties__container {
+.properties__container {
+  background-color: var(--White);
+  padding: 3rem;
+
   display: flex;
   flex-direction: column;
   gap: 1rem;
+
+  border-bottom-left-radius: 35px;
 }
 
-#properties__container p {
-  padding: 2rem 1rem;
-  border-radius: 2px;
+.properties__container > h2 {
+  border-bottom: 2px solid var(--Ghost-white);
+  padding-bottom: 1rem;
+}
+
+.properties__container input {
+  width: 80%;
+  border: none;
+  padding: 1rem;
+  background-color: var(--Ultramarine-blue);
+  border-radius: 10px;
+  color: var(--White);
+  font-size: 1.6rem;
+}
+.properties__container input::placeholder {
+  font-size: 2rem;
+}
+
+.properties__container p:hover {
+  color: var(--Ultramarine-blue);
+  background-color: var(--Ghost-white);
+  box-shadow: 0px 0px 5px 1px var(--gainsboro);
 }
