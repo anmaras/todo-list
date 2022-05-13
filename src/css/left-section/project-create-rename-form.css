@@ -1,0 +1,62 @@
+.project-rename__container,
+.project-creation__container {
+  padding: 0 2rem;
+  /* Because gap creates gap on top of input i added bottom padding on container */
+  padding-bottom: 1.6rem;
+  text-align: center;
+  background-color: var(--Ghost-white);
+  border-radius: 10px;
+  box-shadow: 1px 1px 2px 1px rgb(237, 237, 237);
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  /* gap create a top gap at input */
+  gap: 1.6rem;
+}
+
+#rename-action,
+#creation-action {
+  /* Keep the input on top row  */
+  grid-column: 1/-1;
+  border: none;
+  padding: 1rem;
+  border-radius: 10px;
+  font-size: 1.3rem;
+}
+
+#rename-action:focus-visible,
+#creation-action:focus-visible {
+  outline: 2px solid var(--Ghost-white3);
+}
+
+#rename-action::placeholder,
+#creation-action::placeholder {
+  font-size: 1.3rem;
+}
+
+.project-rename__container > button,
+.project-creation__container > button {
+  cursor: pointer;
+  border: none;
+
+  border-radius: 15px;
+  padding: 1rem 0;
+  background-color: var(--Ultramarine-blue);
+  color: var(--Ghost-white);
+
+  font-weight: 500;
+  font-size: 1.6rem;
+}
+
+.project-rename__container > button:hover,
+.project-creation__container > button:hover {
+  background-color: var(--Ultra-Red);
+  transform: scale(1.02);
+}
+
+.project-rename__container > button:active,
+.project-creation__container > button:active {
+  transform: translateY(2px);
+  transition: 0.1s;
+  background-color: var(--Paradise-Pink);
+}
