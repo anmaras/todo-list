@@ -1,0 +1,33 @@
+.left-section__projects__user-actions {
+  border-radius: 5px;
+  position: absolute;
+  box-shadow: 1px 1px 2px 1px rgb(237, 237, 237);
+  right: -40px;
+  top: -70px;
+  /* display: none; */
+}
+
+.left-section__projects__user-actions .visible {
+  display: block;
+}
+
+.left-section__projects__user-actions > button {
+  display: block;
+  width: 100%;
+  border: none;
+  padding: 1rem;
+  background-color: var(--White);
+  color: var(--Dark-liver);
+}
+
+.left-section__projects__user-actions > button:nth-child(1) {
+  border-radius: 5px 5px 0px 0px;
+}
+.left-section__projects__user-actions > button:nth-child(2) {
+  border-radius: 0px 0px 5px 5px;
+}
+
+.left-section__projects__user-actions > button:hover {
+  color: var(--White);
+  background-color: var(--Ultramarine-blue);
+}

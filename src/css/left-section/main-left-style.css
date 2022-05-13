@@ -1,0 +1,11 @@
+#left-section {
+  flex: 1;
+  max-width: 400px;
+  background-color: var(--White);
+  padding: 2rem;
+  border-radius: var(--bottom-radius-section);
+
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
