@@ -1,24 +1,25 @@
 .project-rename__container {
-  width: 100%;
-  padding: 1.6rem 2rem;
+  padding: 0 2rem;
+  /* Because gap creates gap on top of input i added bottom padding on container */
+  padding-bottom: 1.6rem;
   text-align: center;
   background-color: var(--Ghost-white);
   border-radius: 10px;
   box-shadow: 1px 1px 2px 1px rgb(237, 237, 237);
 
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(101px, 1fr));
-  column-gap: 1.6rem;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  /* gap create a top gap at input */
+  gap: 1.6rem;
 }
 
 #rename-action {
+  /* Keep the input on top row  */
   grid-column: 1/-1;
-  width: 100%;
   border: none;
   padding: 1rem;
   border-radius: 10px;
   font-size: 1.6rem;
-  margin-bottom: 1rem;
 }
 
 #rename-action:focus-visible {
@@ -32,6 +33,7 @@
 .project-rename__container > button {
   cursor: pointer;
   border: none;
+
   border-radius: 15px;
   padding: 1rem 2rem;
   background-color: var(--Ultramarine-blue);
@@ -42,7 +44,6 @@
 }
 
 .project-rename__container > button:nth-child(3) {
-  /* margin-right: 2rem; */
 }
 
 .project-rename__container > button:hover {
