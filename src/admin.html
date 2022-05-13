@@ -7,91 +7,143 @@
     <title>Todo App</title>
   </head>
   <body>
-    <header>
-      <h1>App</h1>
-    </header>
-    <main>
-      <!-- Left Section Start -->
-      <section id="left-section">
-        <div class="left-section__home-container">
-          <h2>Home</h2>
-          <div class="left-section__home-container__all-tasks">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-              version="1.1"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M12 5.69L17 10.19V18H15V12H9V18H7V10.19L12 5.69M12 3L2 12H5V20H11V14H13V20H19V12H22"
-              />
-            </svg>
-            <p>All Tasks</p>
-            <p>0</p>
+    <div id="bg">
+      <header>
+        <h1>App</h1>
+      </header>
+      <main>
+        <!-- Left Section Start -->
+        <section id="left-section">
+          <div class="left-section__home-container">
+            <h2>Home</h2>
+            <div class="left-section__home-container__all-tasks">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                version="1.1"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 5.69L17 10.19V18H15V12H9V18H7V10.19L12 5.69M12 3L2 12H5V20H11V14H13V20H19V12H22"
+                />
+              </svg>
+              <p>All Tasks</p>
+              <p>0</p>
+            </div>
+            <div class="left-section__home-container__today">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                version="1.1"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M7,10H12V15H7M19,19H5V8H19M19,3H18V1H16V3H8V1H6V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3Z"
+                />
+              </svg>
+              <p>Today</p>
+              <p>0</p>
+            </div>
+            <div class="left-section__home-container__week">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                version="1.1"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M9,10H7V12H9V10M13,10H11V12H13V10M17,10H15V12H17V10M19,3H18V1H16V3H8V1H6V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M19,19H5V8H19V19Z"
+                />
+              </svg>
+              <p>Next Week</p>
+              <p>0</p>
+            </div>
+            <div class="left-section__home-container__important">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                version="1.1"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"
+                />
+              </svg>
+              <p>Important</p>
+              <p>0</p>
+            </div>
           </div>
-          <div class="left-section__home-container__today">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-              version="1.1"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M7,10H12V15H7M19,19H5V8H19M19,3H18V1H16V3H8V1H6V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3Z"
-              />
-            </svg>
-            <p>Today</p>
-            <p>0</p>
-          </div>
-          <div class="left-section__home-container__week">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-              version="1.1"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M9,10H7V12H9V10M13,10H11V12H13V10M17,10H15V12H17V10M19,3H18V1H16V3H8V1H6V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M19,19H5V8H19V19Z"
-              />
-            </svg>
-            <p>Next Week</p>
-            <p>0</p>
-          </div>
-          <div class="left-section__home-container__important">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-              version="1.1"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"
-              />
-            </svg>
-            <p>Important</p>
-            <p>0</p>
-          </div>
-        </div>
 
-        <!-- Projects Container -->
-        <div class="left-section__projects">
-          <h2>Projects</h2>
-          <div class="left-section__projects__container">
-            <ul>
-              <li>
-                <div class="left-section__projects__user-actions">
-                  <button>Rename</button>
-                  <button>Delete</button>
+          <!-- Projects Container -->
+          <div class="left-section__projects">
+            <h2>Projects</h2>
+            <div class="left-section__projects__container">
+              <ul>
+                <li>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    version="1.1"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M20,18H4V8H20M20,6H12L10,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V8C22,6.89 21.1,6 20,6Z"
+                    />
+                  </svg>
+                  <div class="left-section__projects__user-actions">
+                    <button>Rename</button>
+                    <button>Delete</button>
+                  </div>
+                  <p>New Project</p>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    version="1.1"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M12,16A2,2 0 0,1 14,18A2,2 0 0,1 12,20A2,2 0 0,1 10,18A2,2 0 0,1 12,16M12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12A2,2 0 0,1 12,10M12,4A2,2 0 0,1 14,6A2,2 0 0,1 12,8A2,2 0 0,1 10,6A2,2 0 0,1 12,4Z"
+                    />
+                  </svg>
+                </li>
+
+                <div class="project-rename__container">
+                  <label for="rename-action"></label>
+                  <input
+                    type="text"
+                    id="rename-action"
+                    placeholder="Project Rename.."
+                  />
+                  <button class="test">Rename</button>
+                  <button>Cancel</button>
                 </div>
-                <h3>New Project</h3>
+              </ul>
+            </div>
+          </div>
+          <button class="left-section__projects__add-btn">
+            <span>Add Project</span>
+          </button>
+        </section>
+
+        <!-- Middle Section -->
+        <section id="middle-section">
+          <!-- Todo Header-->
+          <div class="main__container">
+            <div class="main__header">
+              <h2>New Project Title</h2>
+              <div class="main__header__sort-container">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -101,85 +153,85 @@
                   viewBox="0 0 24 24"
                 >
                   <path
-                    d="M12,16A2,2 0 0,1 14,18A2,2 0 0,1 12,20A2,2 0 0,1 10,18A2,2 0 0,1 12,16M12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12A2,2 0 0,1 12,10M12,4A2,2 0 0,1 14,6A2,2 0 0,1 12,8A2,2 0 0,1 10,6A2,2 0 0,1 12,4Z"
+                    d="M18 21L14 17H17V7H14L18 3L22 7H19V17H22M2 19V17H12V19M2 13V11H9V13M2 7V5H6V7H2Z"
                   />
                 </svg>
+                <p>Sort</p>
+              </div>
+              <!-- Todo Sorting options  start-->
+              <div class="main__header__sort-container__options">
+                <p>Sort By</p>
+                <div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    version="1.1"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M9.25,5L12.5,1.75L15.75,5H9.25M15.75,19L12.5,22.25L9.25,19H15.75M8.89,14.3H6L5.28,17H2.91L6,7H9L12.13,17H9.67L8.89,14.3M6.33,12.68H8.56L7.93,10.56L7.67,9.59L7.42,8.63H7.39L7.17,9.6L6.93,10.58L6.33,12.68M13.05,17V15.74L17.8,8.97V8.91H13.5V7H20.73V8.34L16.09,15V15.08H20.8V17H13.05Z"
+                    />
+                  </svg>
+                  <p>Alphabetically</p>
+                </div>
+                <div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    version="1.1"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M9,10V12H7V10H9M13,10V12H11V10H13M17,10V12H15V10H17M19,3A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5C3.89,21 3,20.1 3,19V5A2,2 0 0,1 5,3H6V1H8V3H16V1H18V3H19M19,19V8H5V19H19M9,14V16H7V14H9M13,14V16H11V14H13M17,14V16H15V14H17Z"
+                    />
+                  </svg>
+
+                  <p>Due Date</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sorting order tab -->
+          <div class="main__sorting-order">
+            <img src="/src/icons/chevron-up.svg" alt="chevron icon" />
+            <p>Sorting Order</p>
+            <img src="/src/icons/close.svg" alt="" />
+          </div>
+
+          <!-- Task List Container Start -->
+          <div class="main__task-list__container">
+            <ul class="main__task-list__list">
+              <li class="main__task-list__list-item">
+                <!-- Title -->
+                <h3 class="main__task-list__list-item__title">Task Title</h3>
+                <!-- CheckBox -->
+                <label for="main__task-list__list-item__checkbox"></label>
+                <input
+                  type="checkbox"
+                  id="main__task-list__list-item__checkbox"
+                />
+                <!-- Description -->
+                <p class="main__task-list__list-item__description">
+                  Task Description
+                </p>
+                <!-- Due Date -->
+                <p class="main__task-list__list-item__date">Task Due Date</p>
+                <img
+                  src="/src/icons/dots-vertical.svg"
+                  alt="dots icon"
+                  class="main__task-list__list-item__edit"
+                />
+                <div class="main__task-list__list-item__priority"></div>
               </li>
             </ul>
           </div>
-        </div>
-        <button class="left-section__projects__add-btn">
-          <!--    <img
-            src="./icons/plus-circle-outline.svg"
-            alt="plus circle icon"
-          /> -->Add Project
-        </button>
-      </section>
-
-      <!-- Middle Section -->
-      <section id="middle-section">
-        <!-- Todo Header-->
-        <div class="main__container">
-          <div class="main__header">
-            <h2>New Project Title</h2>
-            <div class="main__header__sort-container">
-              <img src="/src/icons/sort.svg" alt="sorting list icon" />
-              <p>Sort</p>
-            </div>
-            <!-- Todo Sorting options  start-->
-            <div class="main__header__sort-container__options">
-              <p>Sort By</p>
-              <div>
-                <img
-                  src="/src/icons/sort-alphabetical-variant.svg"
-                  alt="star outline"
-                />
-                <p>Alphabetically</p>
-              </div>
-              <div>
-                <img src="/src/icons/calendar-month.svg" alt="star outline" />
-                <p>Due Date</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Sorting order tab -->
-        <div class="main__sorting-order">
-          <img src="/src/icons/chevron-up.svg" alt="chevron icon" />
-          <p>Sorting Order</p>
-          <img src="/src/icons/close.svg" alt="" />
-        </div>
-
-        <!-- Task List Container Start -->
-        <div class="main__task-list__container">
-          <ul class="main__task-list__list">
-            <li class="main__task-list__list-item">
-              <!-- Title -->
-              <h3 class="main__task-list__list-item__title">Task Title</h3>
-              <!-- CheckBox -->
-              <label for="main__task-list__list-item__checkbox"></label>
-              <input
-                type="checkbox"
-                id="main__task-list__list-item__checkbox"
-              />
-              <!-- Description -->
-              <p class="main__task-list__list-item__description">
-                Task Description
-              </p>
-              <!-- Due Date -->
-              <p class="main__task-list__list-item__date">Task Due Date</p>
-              <img
-                src="/src/icons/dots-vertical.svg"
-                alt="dots icon"
-                class="main__task-list__list-item__edit"
-              />
-              <div class="main__task-list__list-item__priority"></div>
-            </li>
-          </ul>
-        </div>
-        <!-- Task List Task Edit Start-->
-        <!--     <div class="main-section__task-list__container edit">
+          <!-- Task List Task Edit Start-->
+          <!--     <div class="main-section__task-list__container edit">
           <ul class="main-section__task-list edit">
             <li class="main-section__task-list__task edit">
               <h3 class="main-section__task-list__task-title edit">
@@ -203,10 +255,10 @@
             </li>
           </ul>
         </div> -->
-        <!-- Task List Task Edit End-->
+          <!-- Task List Task Edit End-->
 
-        <!-- add form start -->
-        <!--   <div class="main-section__submit-form">
+          <!-- add form start -->
+          <!--   <div class="main-section__submit-form">
           <label for="main-section__submit-form__task-title">Task Title</label>
           <input type="text" id="main-section__submit-form__task-title" />
           <label for="main-section__submit-form__task-description"
@@ -225,28 +277,40 @@
           <button class="main-section__submit-form__task-cancel">Cancel</button>
         </div> -->
 
-        <button class="projects-btn__add-project main-section">
-          <img
-            src="./icons/plus-circle-outline.svg"
-            alt="plus circle icon"
-          />Add Task
-        </button>
-      </section>
+          <button class="projects-btn__add-project main-section">
+            Add Todo
+          </button>
+        </section>
 
-      <!-- Right Section -->
-      <section id="right-section">
-        <div id="properties__container">
-          <p>Edit Task Title</p>
-          <p>Edit Description</p>
-          <p>Edit Priority</p>
-          <p>Edit Due Date</p>
-          <p>Add Notes</p>
-          <p>Move to antother project</p>
-        </div>
-      </section>
-    </main>
-    <!-- Footer  -->
-    <!-- <footer class="footer-container">
+        <!-- Right Section -->
+        <!--  <section id="right-section">
+          <div class="properties__container">
+            <h2>Edit</h2>
+            <label for="edit-title"></label>
+            <input type="text" id="edit-title" placeholder="Title" />
+            <label for="edit-description"></label>
+            <input
+              type="text"
+              id="edit-description"
+              placeholder="Description"
+            />
+            <label for="edit-priority"></label>
+            <select name="priority" id="edit-priority">
+              <option selected="selected" selected disabled hidden>
+                Priority
+              </option>
+              <option value="normal">Normal</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+            </select>
+
+            <label for="edit-date"></label>
+            <input type="date" id="edit-date" />
+          </div>
+        </section> -->
+      </main>
+      <!-- Footer  -->
+      <!-- <footer class="footer-container">
       <div class="footer-container__text">Antonis Maras</div>
       <div class="footer-container__date">2022</div>
       <img
@@ -255,5 +319,6 @@
         alt=" github icon"
       />
     </footer> -->
+    </div>
   </body>
 </html>
