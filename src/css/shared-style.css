@@ -34,9 +34,17 @@
   --top-radius: 30px 30px 0px 0px;
   --bottom-radius: 0px 0px 30px 30px;
   --bottom-radius-section: 0px 0px 0px 30px;
+
+  /* DATE Input border radius */
+  --border-radius-value: 10px;
+
+  /* Box-Shadows */
+  --box-shadows: 1px 1px 2px 1px #ededed;
 }
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -44,7 +52,6 @@
 
 html {
   font-size: 62.5%;
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
@@ -54,6 +61,42 @@ body {
   display: grid;
   font-size: 1.6rem;
   color: var(--Dark-liver);
+  font-family: Arial, Helvetica, sans-serif;
+  /*   --jb-date-input-value-color: var(--White);
+  --jb-date-input-bgcolor: var(--Ultramarine-blue);
+  --jb-date-input-box-height: max-content;
+  --jb-date-input-margin: 1rem; */
+}
+
+button {
+  padding: 1.2rem 2rem;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--border-radius-value);
+  background-color: var(--Ultramarine-blue);
+  color: var(--Ghost-white);
+}
+
+button:hover {
+  transform: scaleX(1.025);
+  transition: 0.1s;
+  background-color: var(--Ultra-Red);
+}
+
+button:active {
+  transform: translateY(2px);
+  transition: 0.1s;
+  background-color: var(--Paradise-Pink);
+}
+
+button,
+label,
+input,
+textarea,
+select,
+option {
+  font-size: 1.6rem;
+  font-family: inherit;
 }
 
 ul,
@@ -92,4 +135,16 @@ main {
   display: flex;
   border-bottom-left-radius: inherit;
   border-bottom-right-radius: inherit;
+}
+
+.visible {
+  display: block;
+}
+
+.hidden {
+  display: none;
+}
+
+.active {
+  background-color: var(--Ghost-white);
 }
