@@ -14,7 +14,7 @@
 /* Select the divs in home container  */
 .left-section__home-container > div {
   padding: 1rem;
-  border-radius: 5px;
+  border-radius: var(--border-radius-value);
   position: relative;
   display: grid;
   grid-auto-flow: column;
@@ -25,10 +25,9 @@
 
 .left-section__home-container > div:hover {
   background-color: var(--Ghost-white);
-  background-image: linear-gradient(62deg, #f1f4fd 0%, #c0cdff 100%);
 
   cursor: pointer;
-  box-shadow: 1px 1px 2px 1px rgb(237, 237, 237);
+  box-shadow: var(--box-shadows);
 }
 .left-section__home-container > div:hover * {
   fill: var(--Ultramarine-blue);
