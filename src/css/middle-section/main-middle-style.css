@@ -1,6 +1,7 @@
 #middle-section {
   flex: 5;
   background-color: var(--Ghost-white);
+  /* inside main border */
   border-top-left-radius: 35px;
-  padding: 3rem;
+  padding: 1rem 3rem;
 }

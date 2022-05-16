@@ -2,18 +2,193 @@
   width: 100%;
 }
 
+/* List Style */
 .main__task-list__list {
   display: flex;
   flex-direction: column;
   gap: 2rem;
   margin-bottom: 2rem;
 }
+/* ----------------------------------------------------------- */
 
+/* List item style */
 .main__task-list__list-item {
-  border-radius: 25px;
-  border-left: 10px solid red;
+  padding: 2rem;
   background-color: var(--White);
+  min-height: 260px;
+  border-left: 8px solid var(--Carolina-blue);
+
+  border-radius: var(--border-radius-value);
+
+  display: grid;
+  grid-template-columns: 3fr 330px;
+  grid-template-rows: auto auto 1fr 2fr;
+  column-gap: 0.8rem;
+  row-gap: 1rem;
 }
+/* ------------------------------------------------------------ */
+
+/* List item header */
+.main__task-list__list-item__title-container {
+  grid-column: 1/-1;
+  grid-row: 1/2;
+  display: flex;
+  align-items: center;
+  padding: 0.4rem;
+}
+
+.main__task-list__list-item__title-container div {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+#main__task-list__list-item__title {
+  width: 100%;
+  margin-right: 0.3rem;
+  padding: 0.4rem;
+  border: none;
+  border-radius: var(--border-radius-value);
+}
+
+#main__task-list__list-item__title:focus {
+  outline: 1px solid var(--Ghost-white3);
+}
+
+.main__task-list__list-item__title-container div:nth-child(1) {
+  flex: 1;
+}
+
+/* Make task left svg a bit smaller */
+.main__task-list__list-item__title-container div:nth-child(1) svg {
+  width: 12px;
+}
+
+/* -------------------------------------------------------------- */
+/* List Item Notes */
+.main__task-list__list-item__notes-container {
+  grid-column: 1/2;
+  grid-row: 2/5;
+  display: flex;
+  flex-direction: column;
+}
+
+.main__task-list__list-item__notes-container label {
+  margin-bottom: 0.4rem;
+}
+
+#main__task-list__list-item__textarea {
+  resize: none;
+  height: 100%;
+  width: 100%;
+  background-color: var(--Ghost-white);
+  padding: 1rem;
+  border-radius: var(--border-radius-value);
+
+  border: none;
+}
+
+#main__task-list__list-item__textarea:focus {
+  outline: 2px solid var(--Ghost-white3);
+}
+
+/* ---------------------------------------------------------------- */
+
+/* List Item Date */
+.main__task-list__list-item__date-container {
+  grid-column: 2/3;
+  grid-row: 2/3;
+}
+
+.main__task-list__list-item__date-title {
+  margin-bottom: 0.4rem;
+}
+
+.main__task-list__list-item__date-container > div {
+  display: flex;
+}
+
+#today-btn {
+  border-top-left-radius: var(--border-radius-value);
+  border-bottom-left-radius: var(--border-radius-value);
+  border-bottom-right-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
+#tomorrow-btn {
+  border-radius: 0px;
+}
+
+#main__task-list__list-item__date {
+  border: none;
+  background-color: var(--Ultramarine-blue);
+  color: var(--White);
+  padding: 1rem;
+  border-top-right-radius: var(--border-radius-value);
+  border-bottom-right-radius: var(--border-radius-value);
+}
+
+#main__task-list__list-item__date:hover,
+.main__task-list__list-item__date-container > div > button:hover {
+  background-color: var(--Ultra-Red);
+}
+
+#main__task-list__list-item__date:active,
+.main__task-list__list-item__date-container > div > button:active {
+  transform: translateY(1px);
+}
+
+#main__task-list__list-item__date:focus,
+.main__task-list__list-item__date-container > div > button:focus {
+  outline: none;
+  background-color: var(--Paradise-Pink);
+  position: relative;
+}
+
+/* change the color of date icon */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(100%);
+}
+
+/* -------------------------------------------------------------------- */
+
+/* List Item Priority */
+.main__task-list__list-item__priority-container {
+  grid-column: 2/3;
+  grid-row: 3/4;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.main__task-list__list-item__priority-container label {
+  margin-bottom: 0.4rem;
+}
+
+#main__task-list__list-item__priority {
+  border: none;
+  background-color: var(--Ultramarine-blue);
+  color: var(--White);
+  border-radius: var(--border-radius-value);
+  outline: none;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+#main__task-list__list-item__priority option {
+  background: var(--Ghost-white);
+  color: var(--Dark-liver);
+}
+
+/* ------------------------------------------------------------ */
+
+/* List Item Btn */
+.main__task-list__list-item__delete-task__btn {
+  justify-self: end;
+  align-self: flex-end;
+}
+
+/* ------------------------------------------------------------------------------ */
 
 /* Add Task style */
 .main__task-list__add-task_container {
@@ -22,6 +197,11 @@
   background-color: var(--White);
   padding: 1rem 0.8rem;
   gap: 0.2rem;
+  border-radius: var(--border-radius-value);
+}
+
+.main__task-list__add-task_container:focus-within {
+  border: 1px solid var(--Ghost-white3);
 }
 
 .main__task-list__add-task_container > svg:hover {
