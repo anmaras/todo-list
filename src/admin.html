@@ -48,7 +48,7 @@
               <p>Today</p>
               <p>0</p>
             </div>
-            <div class="left-section__home-container__week">
+            <div class="left-section__home-container__tomorrow">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -61,10 +61,10 @@
                   d="M9,10H7V12H9V10M13,10H11V12H13V10M17,10H15V12H17V10M19,3H18V1H16V3H8V1H6V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M19,19H5V8H19V19Z"
                 />
               </svg>
-              <p>Next Week</p>
+              <p>Scheduled</p>
               <p>0</p>
             </div>
-            <div class="left-section__home-container__important">
+            <div class="left-section__home-container__scheduled">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -77,7 +77,7 @@
                   d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"
                 />
               </svg>
-              <p>Important</p>
+              <p>Scheduled</p>
               <p>0</p>
             </div>
           </div>
@@ -87,7 +87,7 @@
             <h2>Projects</h2>
             <div class="left-section__projects__container">
               <ul>
-                <li>
+                <!--  <li>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -117,7 +117,7 @@
                       d="M12,16A2,2 0 0,1 14,18A2,2 0 0,1 12,20A2,2 0 0,1 10,18A2,2 0 0,1 12,16M12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12A2,2 0 0,1 12,10M12,4A2,2 0 0,1 14,6A2,2 0 0,1 12,8A2,2 0 0,1 10,6A2,2 0 0,1 12,4Z"
                     />
                   </svg>
-                </li>
+                </li> -->
                 <div class="project-creation__container">
                   <label for="rename-action"></label>
                   <input
@@ -140,6 +140,24 @@
                 </div>
               </ul>
             </div>
+          </div>
+          <div class="main__task-list__add-task_container">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              version="1.1"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+            >
+              <path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+            </svg>
+            <label for="main__task-list__add-task"></label>
+            <input
+              type="text"
+              id="main__task-list__add-task"
+              placeholder="New Project..."
+            />
           </div>
           <button class="left-section__projects__add-btn">
             <span>Add Project</span>
@@ -236,27 +254,74 @@
           <div class="main__task-list__container">
             <ul class="main__task-list__list">
               <li class="main__task-list__list-item">
-                <!-- Title -->
-                <label for="main__task-list__list-item__title"></label>
-                <input type="text" id="main__task-list__list-item__title" />
-                <!-- CheckBox -->
-                <label for="main__task-list__list-item__checkbox"></label>
-                <input
-                  type="checkbox"
-                  id="main__task-list__list-item__checkbox"
-                />
-                <!-- Description -->
-                <!--  <p class="main__task-list__list-item__description">
-                  Task Description
-                </p> -->
-                <!-- Due Date -->
-                <p class="main__task-list__list-item__date">Task Due Date</p>
-                <img
-                  src="/src/icons/dots-vertical.svg"
-                  alt="dots icon"
-                  class="main__task-list__list-item__edit"
-                />
-                <div class="main__task-list__list-item__priority"></div>
+                <!-- Header -->
+                <div class="main__task-list__list-item__title-container">
+                  <div>
+                    <label for="main__task-list__list-item__checkbox"></label>
+                    <input
+                      type="checkbox"
+                      id="main__task-list__list-item__checkbox"
+                    />
+                    <label for="main__task-list__list-item__title"></label>
+                    <input type="text" id="main__task-list__list-item__title" />
+                  </div>
+
+                  <div>
+                    <p for="main__task-list__list-item__date-reference">Date</p>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      version="1.1"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <!-- Notes -->
+                <div class="main__task-list__list-item__notes-container">
+                  <label for="main__task-list__list-item__textarea"
+                    >Notes</label
+                  >
+                  <textarea
+                    id="main__task-list__list-item__textarea"
+                  ></textarea>
+                </div>
+                <!-- Date -->
+                <div class="main__task-list__list-item__date-container">
+                  <p class="main__task-list__list-item__date-title">Due Date</p>
+                  <div>
+                    <button id="today-btn">Today</button>
+                    <button id="tomorrow-btn">Tomorrow</button>
+                    <label for="main__task-list__list-item__date"></label>
+                    <input type="date" id="main__task-list__list-item__date" />
+                  </div>
+                </div>
+                <!-- Priority -->
+                <div class="main__task-list__list-item__priority-container">
+                  <label for="main__task-list__list-item__priority"
+                    >Priority</label
+                  >
+                  <select
+                    name="select-priority"
+                    id="main__task-list__list-item__priority"
+                  >
+                    <option value="none" selected="selected" disabled>
+                      Select an Option
+                    </option>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                  </select>
+                </div>
+                <!-- Delete Btn -->
+                <button class="main__task-list__list-item__delete-task__btn">
+                  Delete
+                </button>
               </li>
             </ul>
             <div class="main__task-list__add-task_container">
@@ -278,38 +343,7 @@
               />
             </div>
           </div>
-
-          <!--  <button class="projects-btn__add-project main-section">
-            Add Todo
-          </button> -->
         </section>
-
-        <!-- Right Section -->
-        <!--  <section id="right-section">
-          <div class="properties__container">
-            <h2>Edit</h2>
-            <label for="edit-title"></label>
-            <input type="text" id="edit-title" placeholder="Title" />
-            <label for="edit-description"></label>
-            <input
-              type="text"
-              id="edit-description"
-              placeholder="Description"
-            />
-            <label for="edit-priority"></label>
-            <select name="priority" id="edit-priority">
-              <option selected="selected" selected disabled hidden>
-                Priority
-              </option>
-              <option value="normal">Normal</option>
-              <option value="medium">Medium</option>
-              <option value="high">High</option>
-            </select>
-
-            <label for="edit-date"></label>
-            <input type="date" id="edit-date" />
-          </div>
-        </section> -->
       </main>
       <!-- Footer  -->
       <!-- <footer class="footer-container">
