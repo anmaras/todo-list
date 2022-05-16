@@ -237,7 +237,8 @@
             <ul class="main__task-list__list">
               <li class="main__task-list__list-item">
                 <!-- Title -->
-                <h3 class="main__task-list__list-item__title">Task Title</h3>
+                <label for="main__task-list__list-item__title"></label>
+                <input type="text" id="main__task-list__list-item__title" />
                 <!-- CheckBox -->
                 <label for="main__task-list__list-item__checkbox"></label>
                 <input
@@ -245,9 +246,9 @@
                   id="main__task-list__list-item__checkbox"
                 />
                 <!-- Description -->
-                <p class="main__task-list__list-item__description">
+                <!--  <p class="main__task-list__list-item__description">
                   Task Description
-                </p>
+                </p> -->
                 <!-- Due Date -->
                 <p class="main__task-list__list-item__date">Task Due Date</p>
                 <img
@@ -258,57 +259,29 @@
                 <div class="main__task-list__list-item__priority"></div>
               </li>
             </ul>
-          </div>
-          <!-- Task List Task Edit Start-->
-          <!--     <div class="main-section__task-list__container edit">
-          <ul class="main-section__task-list edit">
-            <li class="main-section__task-list__task edit">
-              <h3 class="main-section__task-list__task-title edit">
-                Task Title edit
-              </h3>
-              <label for="main-section__task-list__task-checkbox edit"></label>
+            <div class="main__task-list__add-task_container">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                version="1.1"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+              >
+                <path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+              </svg>
+              <label for="main__task-list__add-task"></label>
               <input
-                type="checkbox"
-                id="main-section__task-list__task-checkbox edit"
+                type="text"
+                id="main__task-list__add-task"
+                placeholder="New task..."
               />
-              <p class="main-section__task-list__task-description edit">
-                Item Description Text edit
-              </p>
-              <p class="main-section__task-list__task-date edit">
-                Item Due Date edit
-              </p>
+            </div>
+          </div>
 
-              <div class="main-section__task-list__task-priority edit">
-                Priority icon edit
-              </div>
-            </li>
-          </ul>
-        </div> -->
-          <!-- Task List Task Edit End-->
-
-          <!-- add form start -->
-          <!--   <div class="main-section__submit-form">
-          <label for="main-section__submit-form__task-title">Task Title</label>
-          <input type="text" id="main-section__submit-form__task-title" />
-          <label for="main-section__submit-form__task-description"
-            >Task Description</label
-          >
-          <input type="text" id="main-section__submit-form__task-description" />
-          <label for="main-section__submit-form__task-date">Due Date</label>
-          <input type="date" id="main-section__submit-form__task-date" />
-          <label for="main-section__submit-form__task-priority">Priority</label>
-          <select id="main-section__submit-form__task-priority">
-            <option value="high">High</option>
-            <option value="normal" selected="selected">Normal</option>
-            <option value="low">Low</option>
-          </select>
-          <button class="main-section__submit-form__task-add">Add Task</button>
-          <button class="main-section__submit-form__task-cancel">Cancel</button>
-        </div> -->
-
-          <button class="projects-btn__add-project main-section">
+          <!--  <button class="projects-btn__add-project main-section">
             Add Todo
-          </button>
+          </button> -->
         </section>
 
         <!-- Right Section -->
