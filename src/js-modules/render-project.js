@@ -1,7 +1,6 @@
-export function createListItem() {
-  const projectListContainer = document.querySelector(
-    ".left-section__projects__container > ul"
-  );
+import { projectListDomElement, projectInputDomElement } from "./dom-elements";
+
+export function renderProjectListItem(name) {
   const markup = `<li>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -14,12 +13,12 @@ export function createListItem() {
                     <path
                       d="M20,18H4V8H20M20,6H12L10,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V8C22,6.89 21.1,6 20,6Z"
                     />
-                  </svg>
+                  </svg> 
                   <div class="left-section__projects__user-actions">
                     <button>Rename</button>
                     <button>Delete</button>
                   </div>
-                  <p>New Project</p>
+                  <p>${projectInputDomElement.value}</p>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -33,7 +32,7 @@ export function createListItem() {
                     />
                   </svg>
                 </li>`;
-  projectListContainer.insertAdjacentHTML("beforeend", markup);
+  projectListDomElement.insertAdjacentHTML("beforeend", markup);
 
-  return projectListContainer;
+  return projectListDomElement;
 }
