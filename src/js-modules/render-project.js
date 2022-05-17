@@ -1,6 +1,7 @@
-import { projectListDomElement, projectInputDomElement } from "./dom-elements";
+import { projectListDomElement } from "./dom-elements";
+import { createNewProjectInstance } from "./create-project";
 
-export function renderProjectListItem(name) {
+function renderProjectListItem() {
   const markup = `<li>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -18,7 +19,7 @@ export function renderProjectListItem(name) {
                     <button>Rename</button>
                     <button>Delete</button>
                   </div>
-                  <p>${projectInputDomElement.value}</p>
+                  <p>${createNewProjectInstance().name}</p>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -36,3 +37,5 @@ export function renderProjectListItem(name) {
 
   return projectListDomElement;
 }
+
+export { renderProjectListItem };
