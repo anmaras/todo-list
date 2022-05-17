@@ -1,0 +1,3 @@
+const projectArray = [];
+
+export { projectArray };
