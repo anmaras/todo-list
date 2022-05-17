@@ -24,11 +24,10 @@ export function objectArrayIndex(textInput) {
   return projectArray.findIndex((object) => object.name === textInput);
 }
 
-/* Delete Dom and Array Function */
 export function deleteDomProjectListItem(list, listItem) {
   list.removeChild(listItem);
 }
 
-export function deleteProjectFromArray(text) {
-  projectArray.splice(objectArrayIndex(text), 1);
+export function deleteProjectFromArray(objectName) {
+  projectArray.splice(objectArrayIndex(objectName), 1);
 }
