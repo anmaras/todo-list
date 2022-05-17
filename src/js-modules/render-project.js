@@ -35,7 +35,7 @@ const projectIcon = `<svg
 function renderProjectListItem() {
   const markup = `<li class="project-list__item">
                   ${projectIcon}
-                  <p>${createNewProjectInstance().name}</p>
+                  <input value="${createNewProjectInstance().name}"></>
                   ${garbageIcon}
                 </li>`;
   projectListDomElement.insertAdjacentHTML("beforeend", markup);
