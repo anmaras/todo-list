@@ -13,4 +13,4 @@ import "./css/header-style.css";
 import "jb-date-input";
 import html from "./admin.html";
 
-import { projectInput } from "./js-modules/name-project";
+import * as events from "./js-modules/event-listeners";
