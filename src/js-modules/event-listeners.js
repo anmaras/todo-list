@@ -7,7 +7,8 @@ import {
 import {
   clearInputValue,
   highlight,
-  deleteDomProjectListItemAndArray,
+  deleteDomProjectListItem,
+  deleteProjectFromArray,
 } from "./utilities-functions";
 import { projectArray } from "./arrays";
 import { Project } from "./project-class";
@@ -32,6 +33,7 @@ list.addEventListener("click", function (e) {
   }
   /* If condition met delete the dom element and remove it from array */
   if (targetId === "garbageIcon") {
-    deleteDomProjectListItemAndArray(list, target, targetText);
+    deleteDomProjectListItem(list, target);
+    deleteProjectFromArray(targetText);
   }
 });
