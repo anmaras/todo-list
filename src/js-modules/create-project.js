@@ -2,8 +2,7 @@ import { Project } from "./project-class";
 import { projectInputDomElement } from "./dom-elements";
 
 function createNewProjectInstance() {
-  const newProject = new Project(projectInputDomElement.value);
-  return newProject;
+  return new Project(projectInputDomElement.value);
 }
 
 export { createNewProjectInstance };
