@@ -1,8 +1,13 @@
 import { renderProjectListItem } from "./render-project";
-import { projectInputDomElement } from "./dom-elements";
+import { projectInputDomElement as input } from "./dom-elements";
+import { projectArray } from "./arrays";
+import { clearInputValue } from "./utilities-functions";
+import { Project } from "./project-class";
 
-projectInputDomElement.addEventListener("keypress", (e) => {
-  if (e.key === "Enter") {
+input.addEventListener("keypress", (e) => {
+  if (e.key === "Enter" && input.value !== "") {
     renderProjectListItem();
+    clearInputValue();
+    console.log(projectArray);
   }
 });
