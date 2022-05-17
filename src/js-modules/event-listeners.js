@@ -9,6 +9,7 @@ import {
   highlight,
   deleteDomProjectListItem,
   deleteProjectFromArray,
+  objectArrayIndex,
 } from "./utilities-functions";
 import { projectArray } from "./arrays";
 import { Project } from "./project-class";
@@ -36,4 +37,7 @@ list.addEventListener("click", function (e) {
     deleteDomProjectListItem(list, target);
     deleteProjectFromArray(targetText);
   }
+  if (!e.target.value) return;
+  projectArray[objectArrayIndex(e.target.value)].name;
+  console.log(typeof e.target.value);
 });
