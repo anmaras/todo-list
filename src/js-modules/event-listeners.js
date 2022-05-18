@@ -2,22 +2,20 @@ import { renderProjectListItem } from "./render-project";
 import {
   projectInputDomElement as input,
   projectListDomElement as list,
-  projectItemsOptions as userOptions,
 } from "./dom-elements";
 import {
   clearInputValue,
   highlight,
   deleteDomProjectListItem,
   deleteProjectFromArray,
-  objectArrayIndex,
+  renameProject,
 } from "./utilities-functions";
-import { projectArray } from "./arrays";
-import { Project } from "./project-class";
 import { createNewProjectInstance } from "./create-project";
 
 input.addEventListener("keypress", (e) => {
   if (e.key === "Enter" && input.value !== "") {
-    renderProjectListItem();
+    const project = createNewProjectInstance(e.target.value);
+    renderProjectListItem(project.name, project.id);
     clearInputValue();
   }
 });
@@ -25,19 +23,22 @@ input.addEventListener("keypress", (e) => {
 list.addEventListener("click", function (e) {
   /* The method elem.closest(selector) returns the nearest ancestor that matches the selector. */
   let target = e.target.closest("li");
-  /* Select inside li the p element */
-  let targetText = target.children[1].textContent;
   let targetId = e.target.id;
-  /* If condition met highlight the li item */
+  let index = e.target.parentElement.id;
+  let text = e.target.value;
+  let className = e.target.className;
+
+  /* Highlight the Project Selection */
   if (target && list.contains(target)) {
     highlight(target);
   }
-  /* If condition met delete the dom element and remove it from array */
-  if (targetId === "garbageIcon") {
+  /* Delete Dom Element & Object from Array */
+  if (targetId === "garbageIcon" && e.target !== null) {
     deleteDomProjectListItem(list, target);
-    deleteProjectFromArray(targetText);
+    deleteProjectFromArray(index);
   }
-  if (!e.target.value) return;
-  projectArray[objectArrayIndex(e.target.value)].name;
-  console.log(typeof e.target.value);
+  /* Rename Object */
+  if (className === "project") {
+    renameProject(text, index);
+  }
 });
