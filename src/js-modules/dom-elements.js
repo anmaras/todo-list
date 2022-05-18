@@ -9,4 +9,11 @@ const projectListDomElement = document.querySelector(
 /* Project List Dom Item Element */
 const projectListItem = document.querySelectorAll(".project-list__item");
 
-export { projectInputDomElement, projectListDomElement, projectListItem };
+const projectInputValue = document.querySelector("#project");
+
+export {
+  projectInputDomElement,
+  projectListDomElement,
+  projectListItem,
+  projectInputValue,
+};
