@@ -20,14 +20,31 @@ export function highlight(li) {
   selectedLi.classList.add("active");
 }
 
+/* Find the index of the object in array using its name string */
 export function objectArrayIndex(textInput) {
   return projectArray.findIndex((object) => object.name === textInput);
 }
 
+/* Remove project DOM item  */
 export function deleteDomProjectListItem(list, listItem) {
   list.removeChild(listItem);
 }
 
-export function deleteProjectFromArray(objectName) {
-  projectArray.splice(objectArrayIndex(objectName), 1);
+/* Remove the object from the array */
+export function deleteProjectFromArray(input) {
+  projectArray.splice(Number(input), 1);
+}
+
+/* Rename the array Object */
+export function renameProject(newName, index) {
+  projectArray[index].name = newName;
+}
+
+/* Increment Function */
+export function increment() {
+  let count = 0;
+  function counter() {
+    return count++;
+  }
+  return counter;
 }
