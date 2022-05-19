@@ -35,13 +35,15 @@ const projectIcon = `<svg
 function renderProjectListItem(title, id) {
   const markup = `<li id="${id}" class="project-list__item">
                   ${projectIcon}
-                  <label for="project"></label>
-                  <input value="${title}" class="project"  ></>
+                  <label for="projectInput"></label>
+                  <input value="${title}" id="projectInput"  ></>
                   ${garbageIcon}
                 </li>`;
   projectListDomElement.insertAdjacentHTML("beforeend", markup);
 
   return projectListDomElement;
 }
+
+function renderProjectTaskItem(title) {}
 
 export { renderProjectListItem };

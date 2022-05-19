@@ -1,4 +1,7 @@
-import { projectInputDomElement as input } from "./dom-elements";
+import {
+  projectInputDomElement as input,
+  notProjectYetContainer,
+} from "./dom-elements";
 import { projectArray } from "./arrays";
 
 let selectedLi;
@@ -21,8 +24,8 @@ export function highlight(li) {
 }
 
 /* Find the index of the object in array using its name string */
-export function objectArrayIndex(textInput) {
-  return projectArray.findIndex((object) => object.name === textInput);
+export function objectArrayIndex(input) {
+  return projectArray.findIndex((object) => object.id === input);
 }
 
 /* Remove project DOM item  */
@@ -32,7 +35,7 @@ export function deleteDomProjectListItem(list, listItem) {
 
 /* Remove the object from the array */
 export function deleteProjectFromArray(input) {
-  projectArray.splice(Number(input), 1);
+  projectArray.splice(input, 1);
 }
 
 /* Rename the array Object */
@@ -47,4 +50,22 @@ export function increment() {
     return count++;
   }
   return counter;
+}
+
+/* Toggle notProjectScreen class */
+export function toggleNotProjectScreen() {
+  if (projectArray.length) {
+    console.log("not empty");
+    // notProjectYetContainer.classList.add("hidden");
+
+    notProjectYetContainer.classList.add("opacityOff");
+    setTimeout(function () {
+      notProjectYetContainer.classList.add("hidden");
+    }, 250);
+  } else {
+    notProjectYetContainer.classList.remove("hidden");
+    setTimeout(function () {
+      notProjectYetContainer.classList.remove("opacityOff");
+    }, 0);
+  }
 }

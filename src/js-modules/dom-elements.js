@@ -11,9 +11,19 @@ const projectListItem = document.querySelectorAll(".project-list__item");
 
 const projectInputValue = document.querySelector("#project");
 
+const homeListDomeElement = document.querySelector(
+  ".left-section__home-container"
+);
+
+const notProjectYetContainer = document.querySelector(
+  ".middle-section__noprojects__container"
+);
+
 export {
   projectInputDomElement,
   projectListDomElement,
   projectListItem,
   projectInputValue,
+  homeListDomeElement,
+  notProjectYetContainer,
 };
