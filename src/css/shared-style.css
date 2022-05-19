@@ -40,6 +40,9 @@
 
   /* Box-Shadows */
   --box-shadows: 1px 1px 2px 1px #ededed;
+
+  /* Opacity transition */
+  --opacity-transition: 0.25s;
 }
 
 *,
@@ -138,13 +141,21 @@ main {
 }
 
 .visible {
-  display: block;
+  display: block !important;
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 .active {
   background-color: var(--Ghost-white);
+}
+
+.opacityOn {
+  opacity: 1 !important;
+}
+
+.opacityOff {
+  opacity: 0 !important;
 }
