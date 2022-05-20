@@ -8,8 +8,12 @@ import "./css/left-section/project-create-rename-form.css";
 import "./css/middle-section/middle-header.css";
 import "./css/middle-section/middle-sorting-box.css";
 import "./css/middle-section/middle-todo-list.css";
+import "./css/middle-section/noproject-style.css";
 import "./css/header-style.css";
 import "jb-date-input";
 import html from "./admin.html";
+import { projectArray } from "./js-modules/arrays";
 
 import * as events from "./js-modules/event-listeners";
+
+import { createNewTodoInstance } from "./js-modules/create-project";

@@ -1,8 +1,11 @@
 import {
   projectInputDomElement as input,
   notProjectYetContainer,
+  todoHeaderTitle,
+  todoHeaderContainer,
 } from "./dom-elements";
 import { projectArray } from "./arrays";
+import { renderProjectListItem } from "./render-project";
 
 let selectedLi;
 
@@ -31,6 +34,7 @@ export function objectArrayIndex(input) {
 /* Remove project DOM item  */
 export function deleteDomProjectListItem(list, listItem) {
   list.removeChild(listItem);
+  todoHeaderContainer.replaceChildren();
 }
 
 /* Remove the object from the array */
@@ -41,6 +45,11 @@ export function deleteProjectFromArray(input) {
 /* Rename the array Object */
 export function renameProject(newName, index) {
   projectArray[index].name = newName;
+}
+
+/* Rename Todo Title */
+export function renameTodoTitle(index) {
+  todoHeaderTitle.textContent = projectArray[index].name;
 }
 
 /* Increment Function */
@@ -55,17 +64,15 @@ export function increment() {
 /* Toggle notProjectScreen class */
 export function toggleNotProjectScreen() {
   if (projectArray.length) {
-    console.log("not empty");
-    // notProjectYetContainer.classList.add("hidden");
-
-    notProjectYetContainer.classList.add("opacityOff");
-    setTimeout(function () {
+    // notProjectYetContainer.classList.add("opacityOff");
+    notProjectYetContainer.classList.add("hidden");
+    /*  setTimeout(function () {
       notProjectYetContainer.classList.add("hidden");
-    }, 250);
+    }, 250); */
   } else {
     notProjectYetContainer.classList.remove("hidden");
-    setTimeout(function () {
+    /*  setTimeout(function () {
       notProjectYetContainer.classList.remove("opacityOff");
-    }, 0);
+    }, 0); */
   }
 }

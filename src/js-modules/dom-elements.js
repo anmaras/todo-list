@@ -19,6 +19,18 @@ const notProjectYetContainer = document.querySelector(
   ".middle-section__noprojects__container"
 );
 
+const middleSection = document.getElementById("middle-section");
+
+const todoHeaderContainer = document.querySelector(".main__container__header");
+
+const todoHeaderTitle = document.querySelector(
+  ".main__container__header-title"
+);
+
+const todoAddTodoContainer = document.querySelector(
+  ".main__task-list__add-task_container"
+);
+
 export {
   projectInputDomElement,
   projectListDomElement,
@@ -26,4 +38,8 @@ export {
   projectInputValue,
   homeListDomeElement,
   notProjectYetContainer,
+  middleSection,
+  todoHeaderTitle,
+  todoHeaderContainer,
+  todoAddTodoContainer,
 };

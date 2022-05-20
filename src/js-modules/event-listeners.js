@@ -1,9 +1,11 @@
-import { renderProjectListItem } from "./render-project";
+import { renderProjectListItem, renderTodoHeaderTitle } from "./render-project";
+import { Todo } from "./project-class";
 
 import {
   projectInputDomElement as input,
   projectListDomElement as list,
   homeListDomeElement as home,
+  todoHeaderContainer,
 } from "./dom-elements";
 
 import {
@@ -14,20 +16,10 @@ import {
   deleteProjectFromArray,
   renameProject,
   toggleNotProjectScreen,
+  renameTodoTitle,
 } from "./utilities-functions";
 
-import { createNewProjectInstance } from "./create-project";
-
-// import { projectArray } from "./arrays";
-
-input.addEventListener("keypress", (e) => {
-  if (e.key === "Enter" && input.value !== "") {
-    const project = createNewProjectInstance(e.target.value);
-    renderProjectListItem(project.name, project.id);
-    clearInputValue();
-    toggleNotProjectScreen();
-  }
-});
+import { projectArray } from "./arrays";
 
 home.addEventListener("click", function (e) {
   const target = e.target.closest("div");
@@ -36,27 +28,49 @@ home.addEventListener("click", function (e) {
   }
 });
 
+input.addEventListener("keypress", (e) => {
+  if (e.key === "Enter" && input.value !== "") {
+    const project = new Todo(e.target.value, null);
+    renderProjectListItem(project.name, project.id);
+    clearInputValue();
+    console.log(projectArray);
+    // toggleNotProjectScreen();
+  }
+});
+
 list.addEventListener("click", function (e) {
   /* The method elem.closest(selector) returns the nearest ancestor that matches the selector. */
   let target = e.target.closest("li");
   let targetId = e.target.id;
   let text = e.target.value;
-  let className = e.target.className;
   /* find the object index in the array  */
-  let objectIndex = objectArrayIndex(Number(e.target.parentElement.id));
+  let objectIndex = objectArrayIndex(Number(target.id));
 
   /* Highlight the Project Selection */
   if (target && list.contains(target)) {
     highlight(target);
+    console.log(projectArray[objectIndex]);
+    /* Render Project Todo Title */
+    renderTodoHeaderTitle(
+      projectArray[objectIndex].name,
+      projectArray[objectIndex].id
+    );
   }
+
   /* Delete Dom Element & Object from Array */
   if (targetId === "garbageIcon") {
     deleteProjectFromArray(objectIndex);
     deleteDomProjectListItem(list, target);
-    toggleNotProjectScreen();
+    // toggleNotProjectScreen();
   }
+
   /* Rename Object */
-  if (targetId === "projectInput") {
-    renameProject(text, objectIndex);
-  }
+  /* 
+  if (e.target.className === "project-list__item") {
+    // renameTodoTitle()
+    // console.log(targetId);
+    console.log(projectArray[objectIndex]);
+
+    console.log(objectIndex);
+  } */
 });

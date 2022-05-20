@@ -3,7 +3,7 @@
   position: relative;
   justify-content: space-between;
   align-items: center;
-  display: none;
+  /* display: none; */
 }
 
 .main__container__header h2 {
