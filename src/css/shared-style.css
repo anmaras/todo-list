@@ -99,6 +99,7 @@ textarea,
 select,
 option {
   font-size: 1.6rem;
+  color: inherit;
   font-family: inherit;
 }
 
@@ -116,7 +117,7 @@ h3 {
 
 svg {
   fill: var(--Dark-liver);
-  height: 24px;
+  height: auto;
   width: 24px;
 }
 
