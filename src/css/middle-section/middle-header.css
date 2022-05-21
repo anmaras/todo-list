@@ -1,9 +1,12 @@
 .main__container__header {
-  display: flex;
+  display: none;
   position: relative;
   justify-content: space-between;
   align-items: center;
-  /* display: none; */
+}
+
+.main__container__header.visible {
+  display: flex;
 }
 
 .main__container__header h2 {

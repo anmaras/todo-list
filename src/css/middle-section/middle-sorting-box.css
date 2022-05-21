@@ -1,10 +1,13 @@
 .main__sorting-order {
-  display: flex;
+  display: none;
   justify-content: flex-end;
   gap: 0.2rem;
   padding: 0.5rem 0.8rem;
   align-items: center;
-  /* display: none; */
+}
+
+.main__sorting-order.visible {
+  display: flex;
 }
 
 .main__sorting-order > svg {
