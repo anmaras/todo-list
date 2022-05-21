@@ -114,6 +114,29 @@ const crossIcon = `<svg
 
 const star = `<svg id="garbageIcon"xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24" viewBox="0 0 24 24"><path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" /></svg>`;
 
+const cross = `<svg
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                version="1.1"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+              >
+                <path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+              </svg>`;
+
+const sortIcon = `<svg
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                version="1.1"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M18 21L14 17H17V7H14L18 3L22 7H19V17H22M2 19V17H12V19M2 13V11H9V13M2 7V5H6V7H2Z"
+                />
+              </svg>`;
 /* Render Project Dom Elements Function */
 function renderProjectListItem() {
   const createProjectElement = document.createElement("li");
@@ -135,10 +158,22 @@ function renderProjectListItem() {
 
 function renderTodoHeaderTitle() {
   todoHeaderContainer.replaceChildren();
+
   const createTodoTitle = document.createElement("h2");
   createTodoTitle.className = ".main__container__header-title";
   createTodoTitle.textContent = this.name;
-  todoHeaderContainer.append(createTodoTitle);
+
+  const createTodoTitleSortContainer = document.createElement("div");
+  createTodoTitleSortContainer.className = "main__header__sort-container";
+
+  const sortContainerMarkup = `${sortIcon} <p>Sort</p>`;
+
+  createTodoTitleSortContainer.insertAdjacentHTML(
+    "beforeend",
+    sortContainerMarkup
+  );
+
+  todoHeaderContainer.append(createTodoTitle, createTodoTitleSortContainer);
 
   return todoHeaderContainer;
 }
