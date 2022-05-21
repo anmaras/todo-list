@@ -23,12 +23,15 @@ const middleSection = document.getElementById("middle-section");
 
 const todoHeaderContainer = document.querySelector(".main__container__header");
 
-const todoHeaderTitle = document.querySelector(
-  ".main__container__header-title"
-);
+const todoHeaderTitle = document.querySelector(".main__container__header h2");
 
-const todoAddTodoContainer = document.querySelector(
-  ".main__task-list__add-task_container"
+const todoSortOptions = document.querySelector(
+  ".main__header__sort-container__options"
+);
+const todoSortOrder = document.querySelector(".main__sorting-order");
+
+const addTodoTaskInputContainer = document.querySelector(
+  ".middle__task-list__add-task_container"
 );
 
 export {
@@ -41,5 +44,7 @@ export {
   middleSection,
   todoHeaderTitle,
   todoHeaderContainer,
-  todoAddTodoContainer,
+  todoSortOptions,
+  todoSortOrder,
+  addTodoTaskInputContainer,
 };
