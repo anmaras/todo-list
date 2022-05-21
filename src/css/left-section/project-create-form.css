@@ -1,0 +1,27 @@
+/* Add Task style */
+.main__task-list__add-task_container {
+  width: 100%;
+  display: flex;
+  padding: 1rem 0.8rem;
+  gap: 0.2rem;
+  border-radius: var(--border-radius-value);
+  background-color: var(--White);
+}
+
+.main__task-list__add-task_container:focus-within {
+  border: 1px solid var(--Ghost-white3);
+}
+
+.main__task-list__add-task_container > svg:hover {
+  fill: var(--Ultramarine-blue);
+}
+
+#main__task-list__add-task {
+  width: 100%;
+  border: none;
+  padding: 0rem 0.2rem;
+}
+
+#main__task-list__add-task:focus {
+  outline: none;
+}
