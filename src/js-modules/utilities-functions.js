@@ -3,9 +3,9 @@ import {
   notProjectYetContainer,
   todoHeaderTitle,
   todoHeaderContainer,
+  addTodoTaskInputContainer,
 } from "./dom-elements";
 import { projectArray } from "./arrays";
-import { renderProjectListItem } from "./render-project";
 
 let selectedLi;
 
@@ -34,7 +34,6 @@ export function objectArrayIndex(input) {
 /* Remove project DOM item  */
 export function deleteDomProjectListItem(list, listItem) {
   list.removeChild(listItem);
-  todoHeaderContainer.replaceChildren();
 }
 
 /* Remove the object from the array */
@@ -45,12 +44,7 @@ export function deleteProjectFromArray(input) {
 /* Rename the array Object and DOM Element names*/
 export function renameProject(newName) {
   this.name = newName;
-  todoHeaderContainer.firstChild.textContent = this.name;
-}
-
-/* Rename Todo Title */
-export function renameTodoTitle(index) {
-  todoHeaderTitle.textContent = projectArray[index].name;
+  todoHeaderTitle.textContent = this.name;
 }
 
 /* Increment Function */
@@ -75,5 +69,20 @@ export function toggleNotProjectScreen() {
     /*  setTimeout(function () {
       notProjectYetContainer.classList.remove("opacityOff");
     }, 0); */
+  }
+}
+
+/* Change the name of todo title */
+export function createTodoName() {
+  return (todoHeaderTitle.textContent = this.name);
+}
+
+export function toggleMiddleElementsVisibility() {
+  if (projectArray.length) {
+    todoHeaderContainer.classList.add("visible");
+    addTodoTaskInputContainer.classList.add("visible");
+  } else {
+    todoHeaderContainer.classList.remove("visible");
+    addTodoTaskInputContainer.classList.remove("visible");
   }
 }

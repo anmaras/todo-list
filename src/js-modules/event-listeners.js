@@ -1,10 +1,17 @@
-import { renderProjectListItem, renderTodoHeaderTitle } from "./render-project";
+import {
+  renderProjectListItem,
+  renderTodoHeaderTitle,
+  renderTodoAddTaskInput,
+} from "./render-project";
 import { Todo } from "./project-class";
 
 import {
   projectInputDomElement as input,
   projectListDomElement as list,
   homeListDomeElement as home,
+  middleSection as rightSection,
+  addTodoTaskInputContainer,
+  todoHeaderTitle as todoTitle,
 } from "./dom-elements";
 
 import {
@@ -15,6 +22,8 @@ import {
   deleteProjectFromArray,
   renameProject,
   toggleNotProjectScreen,
+  createTodoName,
+  toggleMiddleElementsVisibility,
 } from "./utilities-functions";
 
 import { projectArray } from "./arrays";
@@ -44,21 +53,21 @@ list.addEventListener("click", function (e) {
 
   if (listTarget && list.contains(listTarget)) {
     const project = projectArray[objectIndex];
-    /* HighLight the target */
     highlight(listTarget);
-    /* Render Project Todo Title */
-    renderTodoHeaderTitle.call(project);
-    // renameProject.call(project, newName);
+    createTodoName.call(project);
+    toggleMiddleElementsVisibility();
   }
+
   /* Delete Dom Element & Object from Array */
   if (targetId === "garbageIcon") {
     deleteProjectFromArray(objectIndex);
     deleteDomProjectListItem(list, listTarget);
+    toggleMiddleElementsVisibility();
     // toggleNotProjectScreen();
   }
 });
 
-/* Rename Object */
+/* Rename Object and dom elements */
 list.addEventListener("keypress", function (e) {
   const listTarget = e.target.closest("li");
   const objectIndex = objectArrayIndex(Number(listTarget.id));
