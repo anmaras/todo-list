@@ -42,9 +42,10 @@ export function deleteProjectFromArray(input) {
   projectArray.splice(input, 1);
 }
 
-/* Rename the array Object */
-export function renameProject(newName, index) {
-  projectArray[index].name = newName;
+/* Rename the array Object and DOM Element names*/
+export function renameProject(newName) {
+  this.name = newName;
+  todoHeaderContainer.firstChild.textContent = this.name;
 }
 
 /* Rename Todo Title */
