@@ -5,7 +5,6 @@ import {
   projectInputDomElement as input,
   projectListDomElement as list,
   homeListDomeElement as home,
-  todoHeaderContainer,
 } from "./dom-elements";
 
 import {
@@ -16,7 +15,6 @@ import {
   deleteProjectFromArray,
   renameProject,
   toggleNotProjectScreen,
-  renameTodoTitle,
 } from "./utilities-functions";
 
 import { projectArray } from "./arrays";
@@ -31,46 +29,43 @@ home.addEventListener("click", function (e) {
 input.addEventListener("keypress", (e) => {
   if (e.key === "Enter" && input.value !== "") {
     const project = new Todo(e.target.value, null);
-    renderProjectListItem(project.name, project.id);
+    renderProjectListItem.call(project);
     clearInputValue();
-    console.log(projectArray);
     // toggleNotProjectScreen();
   }
 });
 
 list.addEventListener("click", function (e) {
   /* The method elem.closest(selector) returns the nearest ancestor that matches the selector. */
-  let target = e.target.closest("li");
-  let targetId = e.target.id;
-  let text = e.target.value;
-  /* find the object index in the array  */
-  let objectIndex = objectArrayIndex(Number(target.id));
+  const listTarget = e.target.closest("li");
+  if (!listTarget) return;
+  const targetId = e.target.id;
+  const objectIndex = objectArrayIndex(Number(listTarget.id));
 
-  /* Highlight the Project Selection */
-  if (target && list.contains(target)) {
-    highlight(target);
-    console.log(projectArray[objectIndex]);
+  if (listTarget && list.contains(listTarget)) {
+    const project = projectArray[objectIndex];
+    /* HighLight the target */
+    highlight(listTarget);
     /* Render Project Todo Title */
-    renderTodoHeaderTitle(
-      projectArray[objectIndex].name,
-      projectArray[objectIndex].id
-    );
+    renderTodoHeaderTitle.call(project);
+    // renameProject.call(project, newName);
   }
-
   /* Delete Dom Element & Object from Array */
   if (targetId === "garbageIcon") {
     deleteProjectFromArray(objectIndex);
-    deleteDomProjectListItem(list, target);
+    deleteDomProjectListItem(list, listTarget);
     // toggleNotProjectScreen();
   }
+});
 
-  /* Rename Object */
-  /* 
-  if (e.target.className === "project-list__item") {
-    // renameTodoTitle()
-    // console.log(targetId);
-    console.log(projectArray[objectIndex]);
+/* Rename Object */
+list.addEventListener("keypress", function (e) {
+  const listTarget = e.target.closest("li");
+  const objectIndex = objectArrayIndex(Number(listTarget.id));
+  const object = projectArray[objectIndex];
+  const newName = e.target.value;
 
-    console.log(objectIndex);
-  } */
+  if (e.key === "Enter" && newName !== "") {
+    renameProject.call(object, newName);
+  }
 });
