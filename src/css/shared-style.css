@@ -99,7 +99,6 @@ textarea,
 select,
 option {
   font-size: 1.6rem;
-  color: inherit;
   font-family: inherit;
 }
 
@@ -142,11 +141,15 @@ main {
 }
 
 .visible {
-  display: block !important;
+  display: block;
+}
+
+.flex {
+  display: flex !important;
 }
 
 .hidden {
-  display: none !important;
+  display: none;
 }
 
 .active {
