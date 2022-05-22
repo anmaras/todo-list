@@ -1,5 +1,6 @@
 .main__sorting-order {
-  display: none;
+  visibility: hidden;
+  display: flex;
   justify-content: flex-end;
   gap: 0.2rem;
   padding: 0.5rem 0.8rem;
@@ -7,7 +8,6 @@
 }
 
 .main__sorting-order.visible {
-  display: flex;
 }
 
 .main__sorting-order > svg {
@@ -31,11 +31,13 @@
   background-color: var(--White);
   box-shadow: var(--box-shadows);
 
-  display: flex;
   display: none;
   flex-direction: column;
   gap: 1.5rem;
   border-radius: var(--border-radius-value);
+}
+.main__header__sort-container__options.visible {
+  display: flex;
 }
 
 .main__header__sort-container__options > p {
