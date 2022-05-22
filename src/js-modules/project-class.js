@@ -6,25 +6,20 @@ class Project {
   constructor(name) {
     this.name = name;
     this.id = Project.id++;
-    this.todo = [];
+    this.todoList = [];
+
     /* add static method to constructor so every time an instance
     is created it will be stored to the external project array */
-    Project.addToArray(this);
-  }
-
-  static addToArray(instance) {
-    projectArray.push(instance);
   }
 }
 
-class Todo extends Project {
-  constructor(name, todoName) {
-    super(name);
-    this.todoName = todoName;
-  }
-
-  show() {
-    return this;
+class Todo {
+  constructor(name, id) {
+    this.todoName = name;
+    this.projectId = id;
+    this.date = null;
+    this.notes = null;
+    this.priority = null;
   }
 }
 
