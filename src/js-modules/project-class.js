@@ -14,9 +14,11 @@ class Project {
 }
 
 class Todo {
+  static id = 0;
   constructor(name, id) {
     this.todoName = name;
     this.projectId = id;
+    this.todoId = Todo.id++;
     this.date = null;
     this.notes = null;
     this.priority = null;
