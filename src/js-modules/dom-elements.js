@@ -25,7 +25,7 @@ const todoHeaderContainer = document.querySelector(".main__container__header");
 
 const todoHeaderTitle = document.querySelector(".main__container__header h2");
 
-const todoSortOptions = document.querySelector(
+const todoSortOptionsContainer = document.querySelector(
   ".main__header__sort-container__options"
 );
 const todoSortOrder = document.querySelector(".main__sorting-order");
@@ -33,6 +33,8 @@ const todoSortOrder = document.querySelector(".main__sorting-order");
 const addTodoTaskInputContainer = document.querySelector(
   ".middle__task-list__add-task_container"
 );
+
+const sortButton = document.querySelector(".main__header__sort-container");
 
 export {
   projectInputDomElement,
@@ -44,7 +46,8 @@ export {
   middleSection,
   todoHeaderTitle,
   todoHeaderContainer,
-  todoSortOptions,
+  todoSortOptionsContainer,
   todoSortOrder,
   addTodoTaskInputContainer,
+  sortButton,
 };
