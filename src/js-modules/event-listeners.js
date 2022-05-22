@@ -14,6 +14,7 @@ import {
   addTodoTaskInputContainer as todoInput,
   todoHeaderTitle as todoTitle,
   sortButton,
+  todoList,
 } from "./dom-elements";
 
 import {
@@ -29,23 +30,33 @@ import {
   toggleSortingOptionVisibility,
   createTodoDataSet,
   addTodoObjectToArray,
+  deleteTodoFromArray,
+  deleteDomTodoItem,
 } from "./utilities-functions";
 
 import { projectArray } from "./arrays";
 
+/* Home Section  */
 home.addEventListener("click", function (e) {
   const target = e.target.closest("div");
   if (target && home.contains(target)) {
+    /* Highlight selection on click */
     highlight(target);
   }
 });
 
+/* Project Sections */
 input.addEventListener("keypress", (e) => {
   if (e.key === "Enter" && input.value !== "") {
+    /* Create a new instance object from Project class */
     const project = new Project(e.target.value);
+    /* Push the new instance into projectArray */
     projectArray.push(project);
+    /* Call the function to render the project on DOM and bind it with call */
     renderProjectListItem.call(project);
+    /* Clear the input value after  */
     clearInputValue();
+    /* Hide the Img and text after create the first project */
     // toggleNotProjectScreen();
   }
 });
@@ -64,14 +75,29 @@ list.addEventListener("click", function (e) {
     createTodoName.call(project);
     toggleMiddleElementsVisibility();
     createTodoDataSet.call(project);
-  }
+    /* Delete Dom Element & Object from Array */
+    if (targetId === "garbageIcon") {
+      deleteProjectFromArray(objectIndex);
+      deleteDomProjectListItem(list, listTarget);
+      toggleMiddleElementsVisibility();
+      deleteDomTodoItem.call(project);
+      // toggleNotProjectScreen();
+    }
 
-  /* Delete Dom Element & Object from Array */
-  if (targetId === "garbageIcon") {
-    deleteProjectFromArray(objectIndex);
-    deleteDomProjectListItem(list, listTarget);
-    toggleMiddleElementsVisibility();
-    // toggleNotProjectScreen();
+    if (
+      (project.todoList.length && todoList.childNodes.length) ||
+      (!project.todoList.length && todoList.childNodes.length)
+    ) {
+      todoList.replaceChildren();
+    }
+
+    if (project.todoList.length && !todoList.childNodes.length) {
+      project.todoList.forEach((todo) => {
+        renderProjectTodoListItem.call(todo);
+      });
+    }
+
+    if (!project.todoList.length && !todoList.childNodes.length) return;
   }
 });
 
@@ -95,18 +121,35 @@ todoInput.addEventListener("keypress", (e) => {
 
   if (e.key === "Enter" && target.value !== "") {
     const inputText = target.value;
-    const objectIndex = objectArrayIndex(Number(target.dataset.id));
-    const project = projectArray[objectIndex];
-    const todoObject = new Todo(inputText, project.id);
+    const projectIndex = objectArrayIndex(Number(target.dataset.id));
+    const projectObject = projectArray[projectIndex];
+    const todoObject = new Todo(inputText, projectObject.id);
 
-    addTodoObjectToArray.call(project, todoObject);
+    addTodoObjectToArray.call(projectObject, todoObject);
 
     renderProjectTodoListItem.call(todoObject);
 
-    console.log("project array", projectArray);
-    console.log(projectArray[objectIndex]);
-    console.log("project todo list", projectArray[objectIndex].todoList);
+    // console.log("projectObject array", projectArray);
+    // console.log(projectArray[projectIndex]);
+    // console.log("projectObject todo list", projectArray[projectIndex].todoList);
   }
 });
 
-/* Dokimase na baleis to id to object sto input tou todo dynamicaly */
+todoList.addEventListener("click", (e) => {
+  const target = e.target.closest("li");
+  const todoId = Number(target.dataset.todoId);
+  const todoObjIndex = objectArrayIndex(todoId);
+  const todoObj = projectArray;
+
+  // console.log(e.target.type);
+  // console.log(todoList.contains(target));
+  /*  if (target && todoList.contains(target)) {
+    e.preventDefault();
+    if (e.target.id === "delete") {
+      console.log(target.dataset.todoId);
+      for (let project of projectArray) {
+        console.log(project);
+      }
+    }
+  } */
+});

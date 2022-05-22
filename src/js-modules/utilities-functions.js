@@ -6,6 +6,7 @@ import {
   addTodoTaskInputContainer,
   todoSortOptionsContainer,
   addTodoTaskInputContainer as newTodoInput,
+  todoList,
 } from "./dom-elements";
 import { projectArray } from "./arrays";
 
@@ -38,6 +39,12 @@ export function deleteDomProjectListItem(list, listItem) {
   list.removeChild(listItem);
 }
 
+export function deleteDomTodoItem() {
+  if (!projectArray.includes(this)) {
+    todoList.innerHTML = "";
+  }
+}
+
 /* Remove the object from the array */
 export function deleteProjectFromArray(input) {
   projectArray.splice(input, 1);
@@ -65,16 +72,15 @@ export function increment() {
 /* Toggle notProjectScreen class */
 export function toggleNotProjectScreen() {
   if (projectArray.length) {
-    // notProjectYetContainer.classList.add("opacityOff");
+    notProjectYetContainer.classList.add("opacityOff");
     notProjectYetContainer.classList.add("hidden");
-    /*  setTimeout(function () {
-      notProjectYetContainer.classList.add("hidden");
-    }, 250); */
+    notProjectYetContainer.classList.add("hidden");
+    setTimeout(function () {}, 0);
   } else {
     notProjectYetContainer.classList.remove("hidden");
-    /*  setTimeout(function () {
+    setTimeout(function () {
       notProjectYetContainer.classList.remove("opacityOff");
-    }, 0); */
+    }, 0);
   }
 }
 

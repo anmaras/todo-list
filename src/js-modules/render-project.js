@@ -50,7 +50,7 @@ function renderProjectListItem() {
 function renderProjectTodoListItem() {
   const todoList = document.querySelector(".main__task-list__list");
 
-  const listItemMarkup = `<li class="main__task-list__list-item">
+  const listItemMarkup = `<li class="main__task-list__list-item" data-todo-id = ${this.todoId}>
 
                 <!-- Header -->
                 <div class="main__task-list__list-item__title-container">
@@ -110,7 +110,7 @@ function renderProjectTodoListItem() {
                 </div>
                 
                 <!-- Delete Btn -->
-                <button class="main__task-list__list-item__delete-task__btn">
+                <button id="delete" class="main__task-list__list-item__delete-task__btn">
                   Delete
                 </button>
               </li>`;

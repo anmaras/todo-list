@@ -34,6 +34,8 @@ const addTodoTaskInputContainer = document.querySelector(
   ".middle__task-list__add-task_container"
 );
 
+const todoList = document.querySelector(".main__task-list__list");
+
 const sortButton = document.querySelector(".main__header__sort-container");
 
 export {
@@ -50,4 +52,5 @@ export {
   todoSortOrder,
   addTodoTaskInputContainer,
   sortButton,
+  todoList,
 };
