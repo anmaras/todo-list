@@ -4,6 +4,8 @@ import {
   todoHeaderTitle,
   todoHeaderContainer,
   addTodoTaskInputContainer,
+  todoSortOptionsContainer,
+  addTodoTaskInputContainer as newTodoInput,
 } from "./dom-elements";
 import { projectArray } from "./arrays";
 
@@ -39,6 +41,10 @@ export function deleteDomProjectListItem(list, listItem) {
 /* Remove the object from the array */
 export function deleteProjectFromArray(input) {
   projectArray.splice(input, 1);
+}
+
+export function deleteTodoFromArray(index) {
+  this.todoList.splice(index, 1);
 }
 
 /* Rename the array Object and DOM Element names*/
@@ -77,6 +83,13 @@ export function createTodoName() {
   return (todoHeaderTitle.textContent = this.name);
 }
 
+/* Create Data-set for todo input */
+export function createTodoDataSet() {
+  const todoInput = newTodoInput.lastElementChild;
+  todoInput.setAttribute("data-id", this.id);
+}
+
+/* Toggle the visibility for middle section title and todo input element */
 export function toggleMiddleElementsVisibility() {
   if (projectArray.length) {
     todoHeaderContainer.classList.add("visible");
@@ -85,4 +98,13 @@ export function toggleMiddleElementsVisibility() {
     todoHeaderContainer.classList.remove("visible");
     addTodoTaskInputContainer.classList.remove("visible");
   }
+}
+
+/* Toggle function for sort option container */
+export function toggleSortingOptionVisibility() {
+  todoSortOptionsContainer.classList.toggle("visible");
+}
+
+export function addTodoObjectToArray(object) {
+  this.todoList.push(object);
 }
