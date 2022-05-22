@@ -16,6 +16,18 @@ const projectIcon = `<svg
                     />
                   </svg> `;
 
+const chevronUp = `<svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      version="1.1"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z"
+                      />
+                    </svg>`;
 /* Render Project Dom Elements Function */
 function renderProjectListItem() {
   const createProjectElement = document.createElement("li");
@@ -35,4 +47,75 @@ function renderProjectListItem() {
   return projectListDomElement;
 }
 
-export { renderProjectListItem };
+function renderProjectTodoListItem() {
+  const todoList = document.querySelector(".main__task-list__list");
+
+  const listItemMarkup = `<li class="main__task-list__list-item">
+
+                <!-- Header -->
+                <div class="main__task-list__list-item__title-container">
+                  <div>
+                    <label for="main__task-list__list-item__checkbox"></label>
+                    <input
+                      type="checkbox"
+                      id="main__task-list__list-item__checkbox"
+                    />
+                    <label for="main__task-list__list-item__title"></label>
+                    <input type="text" id="main__task-list__list-item__title"
+                    value="${this.todoName}" />
+                  </div>
+                  <div>
+                    <p class="main__task-list__list-item__date-reference">Date</p>
+                    ${chevronUp}
+                  </div>
+                </div>
+
+                <!-- Notes -->
+                <div class="main__task-list__list-item__notes-container">
+                  <label for="main__task-list__list-item__textarea"
+                    >Notes</label
+                  >
+                  <textarea
+                    id="main__task-list__list-item__textarea"
+                  ></textarea>
+                </div>
+
+                <!-- Date -->
+                <div class="main__task-list__list-item__date-container">
+                  <p class="main__task-list__list-item__date-title">Due Date</p>
+                  <div>
+                    <button id="today-btn">Today</button>
+                    <button id="tomorrow-btn">Tomorrow</button>
+                    <label for="main__task-list__list-item__date"></label>
+                    <input type="date" id="main__task-list__list-item__date" />
+                  </div>
+                </div>
+
+                <!-- Priority -->
+                <div class="main__task-list__list-item__priority-container">
+                  <label for="main__task-list__list-item__priority"
+                    >Priority</label
+                  >
+                  <select
+                    name="select-priority"
+                    id="main__task-list__list-item__priority"
+                  >
+                    <option value="none" selected="selected" disabled>
+                      Select an Option
+                    </option>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                  </select>
+                </div>
+                
+                <!-- Delete Btn -->
+                <button class="main__task-list__list-item__delete-task__btn">
+                  Delete
+                </button>
+              </li>`;
+
+  return todoList.insertAdjacentHTML("beforeend", listItemMarkup);
+}
+
+export { renderProjectListItem, renderProjectTodoListItem };
