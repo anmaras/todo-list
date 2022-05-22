@@ -10,6 +10,7 @@
   gap: 2rem;
   margin-bottom: 2rem;
 }
+
 /* ----------------------------------------------------------- */
 
 /* List item style */
@@ -213,12 +214,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   fill: var(--Ultramarine-blue);
 }
 
-#main__task-list__add-task {
+#main__task-list__add-task,
+#todo__task-list__add-todo {
   width: 100%;
   border: none;
   padding: 0rem 0.2rem;
 }
 
-#main__task-list__add-task:focus {
+#main__task-list__add-task:focus,
+#todo__task-list__add-todo:focus {
   outline: none;
 }
