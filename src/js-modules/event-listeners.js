@@ -2,16 +2,18 @@ import {
   renderProjectListItem,
   renderTodoHeaderTitle,
   renderTodoAddTaskInput,
+  renderProjectTodoListItem,
 } from "./render-project";
-import { Todo } from "./project-class";
+import { Project, Todo } from "./project-class";
 
 import {
   projectInputDomElement as input,
   projectListDomElement as list,
   homeListDomeElement as home,
   middleSection as rightSection,
-  addTodoTaskInputContainer,
+  addTodoTaskInputContainer as todoInput,
   todoHeaderTitle as todoTitle,
+  sortButton,
 } from "./dom-elements";
 
 import {
@@ -24,6 +26,9 @@ import {
   toggleNotProjectScreen,
   createTodoName,
   toggleMiddleElementsVisibility,
+  toggleSortingOptionVisibility,
+  createTodoDataSet,
+  addTodoObjectToArray,
 } from "./utilities-functions";
 
 import { projectArray } from "./arrays";
@@ -37,7 +42,8 @@ home.addEventListener("click", function (e) {
 
 input.addEventListener("keypress", (e) => {
   if (e.key === "Enter" && input.value !== "") {
-    const project = new Todo(e.target.value, null);
+    const project = new Project(e.target.value);
+    projectArray.push(project);
     renderProjectListItem.call(project);
     clearInputValue();
     // toggleNotProjectScreen();
@@ -53,9 +59,11 @@ list.addEventListener("click", function (e) {
 
   if (listTarget && list.contains(listTarget)) {
     const project = projectArray[objectIndex];
+
     highlight(listTarget);
     createTodoName.call(project);
     toggleMiddleElementsVisibility();
+    createTodoDataSet.call(project);
   }
 
   /* Delete Dom Element & Object from Array */
@@ -78,3 +86,27 @@ list.addEventListener("keypress", function (e) {
     renameProject.call(object, newName);
   }
 });
+
+/* Toggle sorting options display */
+sortButton.addEventListener("click", toggleSortingOptionVisibility);
+
+todoInput.addEventListener("keypress", (e) => {
+  const target = e.target.closest("input");
+
+  if (e.key === "Enter" && target.value !== "") {
+    const inputText = target.value;
+    const objectIndex = objectArrayIndex(Number(target.dataset.id));
+    const project = projectArray[objectIndex];
+    const todoObject = new Todo(inputText, project.id);
+
+    addTodoObjectToArray.call(project, todoObject);
+
+    renderProjectTodoListItem.call(todoObject);
+
+    console.log("project array", projectArray);
+    console.log(projectArray[objectIndex]);
+    console.log("project todo list", projectArray[objectIndex].todoList);
+  }
+});
+
+/* Dokimase na baleis to id to object sto input tou todo dynamicaly */
