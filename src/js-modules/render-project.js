@@ -50,7 +50,7 @@ function renderProjectListItem() {
 function renderProjectTodoListItem() {
   const todoList = document.querySelector(".main__task-list__list");
 
-  const listItemMarkup = `<li class="main__task-list__list-item" data-todo-id = ${this.todoId}>
+  const listItemMarkup = `<li class="main__task-list__list-item" data-todo-id = ${this.todoId} data-projectId = ${this.projectId}>
 
                 <!-- Header -->
                 <div class="main__task-list__list-item__title-container">
