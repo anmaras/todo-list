@@ -4,4 +4,5 @@
   /* inside main border */
   border-top-left-radius: 35px;
   padding: 1rem 3rem;
+  position: relative;
 }

@@ -14,7 +14,7 @@
   font-size: 2.4rem;
   padding: 1.6rem 2rem;
   border-radius: var(--border-radius-value);
-  background-color: var(--White);
+  /* background-color: var(--White); */
   user-select: none;
 }
 
