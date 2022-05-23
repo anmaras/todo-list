@@ -1,137 +1,155 @@
-import {
-  renderProjectListItem,
-  renderTodoHeaderTitle,
-  renderTodoAddTaskInput,
-  renderProjectTodoListItem,
-} from "./render-project";
+import * as renderModule from "./render-project";
+
 import { Project, Todo } from "./project-class";
 
 import {
   projectInputDomElement as input,
   projectListDomElement as list,
   homeListDomeElement as home,
-  middleSection as rightSection,
   addTodoTaskInputContainer as todoInput,
   todoHeaderTitle as todoTitle,
+  todoHeaderContainer as header,
   sortButton,
   todoList,
 } from "./dom-elements";
 
-import {
-  clearInputValue,
-  highlight,
-  deleteDomProjectListItem,
-  objectArrayIndex,
-  deleteProjectFromArray,
-  renameProject,
-  toggleNotProjectScreen,
-  createTodoName,
-  toggleMiddleElementsVisibility,
-  toggleSortingOptionVisibility,
-  createTodoDataSet,
-  addTodoObjectToArray,
-  deleteTodoFromArray,
-  deleteDomTodoItem,
-} from "./utilities-functions";
+import * as utilities from "./utilities-functions";
 
 import { projectArray } from "./arrays";
 
 /* Home Section  */
 home.addEventListener("click", function (e) {
+  /* The method elem.closest(selector) returns the nearest ancestor 
+  that matches the selector. */
   const target = e.target.closest("div");
   if (target && home.contains(target)) {
     /* Highlight selection on click */
-    highlight(target);
+    utilities.highlight(target);
   }
 });
 
 /* Project Sections */
 input.addEventListener("keypress", (e) => {
   if (e.key === "Enter" && input.value !== "") {
+    const name = e.target.value;
     /* Create a new instance object from Project class */
-    const project = new Project(e.target.value);
+    const object = new Project(name);
     /* Push the new instance into projectArray */
-    projectArray.push(project);
-    /* Call the function to render the project on DOM and bind it with call */
-    renderProjectListItem.call(project);
+    projectArray.push(object);
+    /*Filter the array,find the object and render it to DOM*/
+    projectArray
+      .filter((obj) => obj.id === object.id)
+      .forEach(renderModule.renderProjectListItem, object);
     /* Clear the input value after  */
-    clearInputValue();
+    utilities.clearInputValue();
     /* Hide the Img and text after create the first project */
-    // toggleNotProjectScreen();
+    utilities.toggleNotProjectScreen();
   }
 });
 
 list.addEventListener("click", function (e) {
-  /* The method elem.closest(selector) returns the nearest ancestor that matches the selector. */
   const listTarget = e.target.closest("li");
   if (!listTarget) return;
   const targetId = e.target.id;
-  const objectIndex = objectArrayIndex(Number(listTarget.id));
+  /* Find The index of project in array */
+  const objectIndex = projectArray.findIndex(
+    (obj) => obj.id === Number(listTarget.id)
+  );
+  const project = projectArray[objectIndex];
 
-  if (listTarget && list.contains(listTarget)) {
-    const project = projectArray[objectIndex];
+  if (listTarget && list.contains(listTarget) && targetId !== "garbageIcon") {
+    /* HighLight the project list item on selection */
+    utilities.highlight(listTarget);
+    /* Make header visible */
+    header.classList.add("visible");
+    todoInput.classList.add("visible");
+    /* Add the project name at header title */
+    todoTitle.textContent = project.name;
+    /* add custom data set to todo input */
+    utilities.createTodoDataSet.call(project);
 
-    highlight(listTarget);
-    createTodoName.call(project);
-    toggleMiddleElementsVisibility();
-    createTodoDataSet.call(project);
-    /* Delete Dom Element & Object from Array */
-    if (targetId === "garbageIcon") {
-      deleteProjectFromArray(objectIndex);
-      deleteDomProjectListItem(list, listTarget);
-      toggleMiddleElementsVisibility();
-      deleteDomTodoItem.call(project);
-      // toggleNotProjectScreen();
+    if (project.todoList.length && todoList.childNodes.length) {
+      todoList.replaceChildren();
+
+      project.todoList.forEach((todoItem) => {
+        renderModule.renderProjectTodoListItem.call(todoItem);
+      });
+      return;
     }
 
-    if (
-      (project.todoList.length && todoList.childNodes.length) ||
-      (!project.todoList.length && todoList.childNodes.length)
-    ) {
+    if (!project.todoList.length && todoList.childNodes.length) {
       todoList.replaceChildren();
+      return;
     }
 
     if (project.todoList.length && !todoList.childNodes.length) {
-      project.todoList.forEach((todo) => {
-        renderProjectTodoListItem.call(todo);
+      project.todoList.forEach((todoItem) => {
+        renderModule.renderProjectTodoListItem.call(todoItem);
       });
+      return;
     }
+  }
 
-    if (!project.todoList.length && !todoList.childNodes.length) return;
+  if (targetId === "garbageIcon") {
+    /* remove the highlight from other projects */
+    utilities.highlight(listTarget);
+    /* Find the index of the object in the project array */
+    /* remove the object from the array */
+    projectArray.splice(objectIndex, 1);
+    /* remove the dom element */
+    list.removeChild(listTarget);
+    /* Remove visible class from middle elements section */
+    header.classList.remove("visible");
+    todoInput.classList.remove("visible");
+    /* If project array is empty toggle back img */
+    utilities.toggleNotProjectScreen();
+
+    todoList.replaceChildren();
   }
 });
 
 /* Rename Object and dom elements */
-list.addEventListener("keypress", function (e) {
-  const listTarget = e.target.closest("li");
-  const objectIndex = objectArrayIndex(Number(listTarget.id));
-  const object = projectArray[objectIndex];
-  const newName = e.target.value;
+list.addEventListener("keypress", (e) => {
+  const text = e.target.value;
+  const id = e.target.parentElement.id;
 
-  if (e.key === "Enter" && newName !== "") {
-    renameProject.call(object, newName);
+  if (e.key === "Enter" && text) {
+    const newArray = projectArray
+      .filter((obj) => obj.id === Number(id))
+      .map((obj) => {
+        const copyProjectArray = { ...obj };
+        copyProjectArray.name = text;
+        todoTitle.textContent = copyProjectArray.name;
+        return copyProjectArray;
+      });
+
+    console.log(newArray);
   }
 });
 
 /* Toggle sorting options display */
-sortButton.addEventListener("click", toggleSortingOptionVisibility);
+sortButton.addEventListener("click", utilities.toggleSortingOptionVisibility);
 
+/* Add functionality to todo input */
 todoInput.addEventListener("keypress", (e) => {
   const target = e.target.closest("input");
+  const inputText = target.value;
+  const projectIndex = projectArray.findIndex(
+    (obj) => obj.id === Number(target.dataset.id)
+  );
+  const counter = projectArray[projectIndex].todoList.length;
 
   if (e.key === "Enter" && target.value !== "") {
-    const inputText = target.value;
-    const projectIndex = objectArrayIndex(Number(target.dataset.id));
-    const projectObject = projectArray[projectIndex];
-    const todoObject = new Todo(inputText, projectObject.id);
+    /* Find the projectIndex of object in array */
 
-    addTodoObjectToArray.call(projectObject, todoObject);
+    /* Create new todo */
+    const todoObject = new Todo(inputText, projectIndex, counter);
 
-    renderProjectTodoListItem.call(todoObject);
+    /* Push the todo to project array todo list */
+    projectArray[projectIndex].todoList.push(todoObject);
 
-    // console.log("projectObject array", projectArray);
-    // console.log(projectArray[projectIndex]);
-    // console.log("projectObject todo list", projectArray[projectIndex].todoList);
+    /* Render the todo */
+    renderModule.renderProjectTodoListItem.call(todoObject);
   }
 });
 
