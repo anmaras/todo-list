@@ -150,14 +150,29 @@ todoInput.addEventListener("keypress", (e) => {
 
     /* Render the todo */
     renderModule.renderProjectTodoListItem.call(todoObject);
+
+    /* Clear the todo input */
+    target.value = "";
   }
 });
 
 todoList.addEventListener("click", (e) => {
   const target = e.target.closest("li");
+  /* check target */
+  if (!target) return;
+  const targetId = e.target.id;
   const todoId = Number(target.dataset.todoId);
-  const todoObjIndex = objectArrayIndex(todoId);
-  const todoObj = projectArray;
+  const projectId = Number(target.dataset.projectid);
+
+  if (target && todoList.contains(target) && targetId === "delete") {
+    /* Delete todo from project property array */
+    projectArray[projectId].todoList.splice(todoId, 1);
+    /* delete it from dom */
+    todoList.removeChild(target);
+  }
+
+  // const todoObjIndex = objectArrayIndex(todoId);
+  // const todoObj = projectArray;
 
   // console.log(e.target.type);
   // console.log(todoList.contains(target));
