@@ -9,6 +9,7 @@ import {
   todoList,
 } from "./dom-elements";
 import { projectArray } from "./arrays";
+import { Project } from "./project-class";
 
 let selectedLi;
 
@@ -27,6 +28,11 @@ export function highlight(li) {
   /* add truthy value to variable outside the scope of the function */
   selectedLi = li;
   selectedLi.classList.add("active");
+}
+
+/* Create a new project instance and push it to projectArray */
+export function createProjectInstanceAndPush(projectName) {
+  return new Project(projectName);
 }
 
 /* Find the index of the object in array using its name string */
@@ -57,7 +63,7 @@ export function deleteTodoFromArray(index) {
 /* Rename the array Object and DOM Element names*/
 export function renameProject(newName) {
   this.name = newName;
-  todoHeaderTitle.textContent = this.name;
+  // todoHeaderTitle.textContent = this.name;
 }
 
 /* Increment Function */
@@ -73,9 +79,9 @@ export function increment() {
 export function toggleNotProjectScreen() {
   if (projectArray.length) {
     notProjectYetContainer.classList.add("opacityOff");
-    notProjectYetContainer.classList.add("hidden");
-    notProjectYetContainer.classList.add("hidden");
-    setTimeout(function () {}, 0);
+    setTimeout(function () {
+      notProjectYetContainer.classList.add("hidden");
+    }, 0);
   } else {
     notProjectYetContainer.classList.remove("hidden");
     setTimeout(function () {
