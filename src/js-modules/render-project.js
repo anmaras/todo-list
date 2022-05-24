@@ -57,11 +57,11 @@ function renderProjectTodoListItem() {
                   <div>
                     <label for="main__task-list__list-item__checkbox"></label>
                     <input
-                      type="checkbox"
-                      id="main__task-list__list-item__checkbox"
+                      type="checkbox" ${this.checkbox}
+                      id="main__task-list__list-item__checkbox "
                     />
                     <label for="main__task-list__list-item__title"></label>
-                    <input type="text" id="main__task-list__list-item__title"
+                    <input type="text" id="main__task-list__list-item__title" class="${this.checkbox}"
                     value="${this.todoName}" />
                   </div>
                   <div>
