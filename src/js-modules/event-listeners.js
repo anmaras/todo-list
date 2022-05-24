@@ -158,42 +158,48 @@ todoInput.addEventListener("keypress", (e) => {
 /* Delete todo object and its dom element */
 todoList.addEventListener("click", (e) => {
   const target = e.target.closest("li");
-  /* check target */
+  /* check target if its falsy and if it is return */
   if (!target) return;
   const targetId = e.target.id;
   const todoId = Number(target.dataset.todoId);
   const projectId = Number(target.dataset.projectid);
-  const input = document.querySelector("#main__task-list__list-item__title");
-  const titleInputId = "main__task-list__list-item__title";
-
+  const isChecked = e.target.checked;
+  const todoTitle = e.target.parentElement.lastElementChild;
   /* Delete todo from project property array */
   if (target && todoList.contains(target) && targetId === "delete") {
     projectArray[projectId].todoList.splice(todoId, 1);
     /* delete it from dom */
     todoList.removeChild(target);
   }
+  /* Checkbox condition check for refactor it later */
+  if (isChecked) {
+    projectArray[projectId].todoList[todoId].checkbox = "checked";
+    todoTitle.classList.add("checked");
+    todoTitle.disabled = isChecked;
+  } else {
+    todoTitle.classList.remove("checked");
+    todoTitle.disabled = isChecked;
+    projectArray[projectId].todoList[todoId].checkbox = "";
+  }
+  console.log(projectArray[projectId].todoList);
 });
 
 todoList.addEventListener("keypress", (e) => {
   const target = e.target.closest("input");
-  console.log(target.value);
   if (!target) return;
-  const targetId = e.target.id;
   const projectId = Number(
     target.parentElement.parentElement.parentElement.dataset.projectid
   );
-
   const todoId = Number(
     target.parentElement.parentElement.parentElement.dataset.todoId
   );
-  const titleInputId = "main__task-list__list-item__title";
-
   if (e.key === "Enter") {
     projectArray[projectId].todoList
       .filter((todoItem) => todoItem.todoId === todoId)
       .map((todo) => {
-        /* need to find a way when i  switching projects todo names to stay with the
-        new array because now they change back to the original array  */
+        /* need to find a way when i switching projects todo names to stay with the
+        new array because now they change back to the original array and now i have to mutate
+        it to work */
         todo.todoName = e.target.value;
 
         target.value = todo.todoName;
@@ -202,6 +208,3 @@ todoList.addEventListener("keypress", (e) => {
       });
   }
 });
-
-/* des to input giati allazei se ola ta todo
- */
