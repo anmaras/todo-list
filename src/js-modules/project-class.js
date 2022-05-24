@@ -21,6 +21,7 @@ class Todo {
     this.date = null;
     this.notes = null;
     this.priority = null;
+    this.checkbox = "";
   }
 }
 
