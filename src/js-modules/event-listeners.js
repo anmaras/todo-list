@@ -68,6 +68,7 @@ list.addEventListener("click", function (e) {
     /* add custom data set to todo input */
     utilities.createTodoDataSet.call(project);
 
+    /* Conditions for todo list  */
     if (project.todoList.length && todoList.childNodes.length) {
       todoList.replaceChildren();
 
@@ -108,7 +109,7 @@ list.addEventListener("click", function (e) {
   }
 });
 
-/* Rename Object and dom elements */
+/* Rename Project Object and its dom elements */
 list.addEventListener("keypress", (e) => {
   const text = e.target.value;
   const id = e.target.parentElement.id;
@@ -122,8 +123,6 @@ list.addEventListener("keypress", (e) => {
         todoTitle.textContent = copyProjectArray.name;
         return copyProjectArray;
       });
-
-    console.log(newArray);
   }
 });
 
@@ -156,6 +155,7 @@ todoInput.addEventListener("keypress", (e) => {
   }
 });
 
+/* Delete todo object and its dom element */
 todoList.addEventListener("click", (e) => {
   const target = e.target.closest("li");
   /* check target */
@@ -163,26 +163,45 @@ todoList.addEventListener("click", (e) => {
   const targetId = e.target.id;
   const todoId = Number(target.dataset.todoId);
   const projectId = Number(target.dataset.projectid);
+  const input = document.querySelector("#main__task-list__list-item__title");
+  const titleInputId = "main__task-list__list-item__title";
 
+  /* Delete todo from project property array */
   if (target && todoList.contains(target) && targetId === "delete") {
-    /* Delete todo from project property array */
     projectArray[projectId].todoList.splice(todoId, 1);
     /* delete it from dom */
     todoList.removeChild(target);
   }
-
-  // const todoObjIndex = objectArrayIndex(todoId);
-  // const todoObj = projectArray;
-
-  // console.log(e.target.type);
-  // console.log(todoList.contains(target));
-  /*  if (target && todoList.contains(target)) {
-    e.preventDefault();
-    if (e.target.id === "delete") {
-      console.log(target.dataset.todoId);
-      for (let project of projectArray) {
-        console.log(project);
-      }
-    }
-  } */
 });
+
+todoList.addEventListener("keypress", (e) => {
+  const target = e.target.closest("input");
+  console.log(target.value);
+  if (!target) return;
+  const targetId = e.target.id;
+  const projectId = Number(
+    target.parentElement.parentElement.parentElement.dataset.projectid
+  );
+
+  const todoId = Number(
+    target.parentElement.parentElement.parentElement.dataset.todoId
+  );
+  const titleInputId = "main__task-list__list-item__title";
+
+  if (e.key === "Enter") {
+    projectArray[projectId].todoList
+      .filter((todoItem) => todoItem.todoId === todoId)
+      .map((todo) => {
+        /* need to find a way when i  switching projects todo names to stay with the
+        new array because now they change back to the original array  */
+        todo.todoName = e.target.value;
+
+        target.value = todo.todoName;
+
+        return todo;
+      });
+  }
+});
+
+/* des to input giati allazei se ola ta todo
+ */
