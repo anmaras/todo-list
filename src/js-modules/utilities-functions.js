@@ -70,8 +70,10 @@ export function renameProject(newName) {
 export function increment() {
   let count = 0;
   function counter() {
-    return count++;
+    ++count;
+    return count;
   }
+  counter.reset = () => (count = 0);
   return counter;
 }
 
@@ -98,7 +100,7 @@ export function createTodoName() {
 /* Create Data-set for todo input */
 export function createTodoDataSet() {
   const todoInput = newTodoInput.lastElementChild;
-  todoInput.setAttribute("data-id", this.id);
+  todoInput.setAttribute("data-project-Todo-ID", this.id);
 }
 
 /* Toggle the visibility for middle section title and todo input element */

@@ -1,3 +1,5 @@
 const projectArray = [];
 
-export { projectArray };
+const todoArray = [];
+
+export { projectArray, todoArray };

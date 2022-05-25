@@ -32,6 +32,7 @@ const chevronUp = `<svg
 function renderProjectListItem() {
   const createProjectElement = document.createElement("li");
   createProjectElement.id = this.id;
+  createProjectElement.setAttribute("data-project-id", this.id);
   createProjectElement.className = "project-list__item";
 
   const projectListLabelInputMarkUp = `

@@ -1,15 +1,10 @@
 import { projectArray } from "./arrays";
 
 class Project {
-  static id = 0;
-
-  constructor(name) {
+  constructor(name, id) {
     this.name = name;
-    this.id = Project.id++;
+    this.id = id;
     this.todoList = [];
-
-    /* add static method to constructor so every time an instance
-    is created it will be stored to the external project array */
   }
 }
 
