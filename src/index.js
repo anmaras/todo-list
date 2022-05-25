@@ -12,8 +12,12 @@ import "./css/middle-section/noproject-style.css";
 import "./css/header-style.css";
 import "jb-date-input";
 import html from "./admin.html";
-import { projectArray } from "./js-modules/arrays";
+import { projectArray, todoArray } from "./js-modules/arrays";
 
 import * as events from "./js-modules/event-listeners";
 
 import { createNewTodoInstance } from "./js-modules/create-project";
+
+document.body.addEventListener("click", (e) => {
+  console.log(projectArray);
+});
