@@ -129,6 +129,7 @@ list.addEventListener("keypress", (e) => {
   }
 });
 
+/* Render todo while switching projects */
 list.addEventListener("click", function (e) {
   const listTarget = e.target.closest("li");
   if (!listTarget) return;
@@ -202,42 +203,34 @@ todoList.addEventListener("click", (e) => {
   );
   const project = projectArray[projectIndex];
 
-  if (!projectArray.includes(project)) return;
-
   const isChecked = e.target.checked;
   const todoTitle = e.target.parentElement.lastElementChild;
+
+  if (!projectArray.includes(project)) return;
 
   /* Delete todo from project property array */
   if (targetId === "delete") {
     projectArray[projectIndex].todoList.splice(todoIndex, 1);
-
     /* delete it from dom */
     todoList.removeChild(target);
-
     if (!projectArray[projectIndex].todoList.length) {
       // todoList.innerHTML = "";
       todoCounter.reset();
     }
-
-    console.log("todoId", todoId);
-    console.log("projectId", projectId);
-    console.log("projectIndex", projectIndex);
-    console.log("todoIndex", todoIndex);
-    console.log(projectArray[projectIndex].todoList);
   }
   // console.log("array after delete", projectArray[objectIndex]);
 
   //   /* Checkbox condition check for refactor it later */
-  // if (isChecked && e.target.type === "checkbox") {
-  //   projectArray[projectId].todoList[todoId].checkbox = "checked";
-  //   todoTitle.classList.add("checked");
-  //   todoTitle.disabled = isChecked;
-  // }
-  // if (!isChecked && e.target.type === "checkbox") {
-  //   projectArray[projectId].todoList[todoId].checkbox = "";
-  //   todoTitle.classList.remove("checked");
-  //   todoTitle.disabled = isChecked;
-  // }
+  if (isChecked && e.target.type === "checkbox") {
+    projectArray[projectIndex].todoList[todoIndex].checkbox = "checked";
+    todoTitle.classList.add("checked");
+    todoTitle.disabled = isChecked;
+  }
+  if (!isChecked && e.target.type === "checkbox") {
+    projectArray[projectIndex].todoList[todoIndex].checkbox = "";
+    todoTitle.classList.remove("checked");
+    todoTitle.disabled = isChecked;
+  }
 });
 
 // todoList.addEventListener("keypress", (e) => {
