@@ -202,7 +202,6 @@ todoList.addEventListener("click", (e) => {
     (todo) => todo.todoId === Number(todoId)
   );
   const project = projectArray[projectIndex];
-
   const isChecked = e.target.checked;
   const todoTitle = e.target.parentElement.lastElementChild;
 
@@ -218,7 +217,6 @@ todoList.addEventListener("click", (e) => {
       todoCounter.reset();
     }
   }
-  // console.log("array after delete", projectArray[objectIndex]);
 
   //   /* Checkbox condition check for refactor it later */
   if (isChecked && e.target.type === "checkbox") {
@@ -233,27 +231,34 @@ todoList.addEventListener("click", (e) => {
   }
 });
 
-// todoList.addEventListener("keypress", (e) => {
-//   const target = e.target.closest("input");
-//   if (!target) return;
-//   const projectId = Number(
-//     target.parentElement.parentElement.parentElement.dataset.projectid
-//   );
-//   const todoId = Number(
-//     target.parentElement.parentElement.parentElement.dataset.todoId
-//   );
-//   if (e.key === "Enter") {
-//     projectArray[projectId].todoList
-//       .filter((todoItem) => todoItem.todoId === todoId)
-//       .map((todo) => {
-//         /* need to find a way when i switching projects todo names to stay with the
-//         new array because now they change back to the original array and now i have to mutate
-//         it to work */
-//         todo.todoName = e.target.value;
+todoList.addEventListener("keypress", (e) => {
+  const target = e.target.closest("input");
+  const newTodoName = e.target.value;
+  if (!target) return;
+  const projectId = Number(
+    target.parentElement.parentElement.parentElement.dataset.projectid
+  );
+  const todoId = Number(
+    target.parentElement.parentElement.parentElement.dataset.todoId
+  );
+  const projectIndex = projectArray.findIndex(
+    (obj) => obj.id === Number(projectId)
+  );
+  const project = projectArray[projectIndex];
 
-//         target.value = todo.todoName;
+  if (!projectArray.includes(project)) return;
 
-//         return todo;
-//       });
-//   }
-// });
+  if (e.key === "Enter") {
+    /* for the specific project using the projectIndex filter its todoList 
+    for the todo item and then with map rename it */
+    projectArray[projectIndex].todoList
+      .filter((todoItem) => todoItem.todoId === todoId)
+      .map((todo) => {
+        /* todo name equals to new todo name */
+        todo.todoName = newTodoName;
+        /* Dom todo name change to new todo object name */
+        target.value = todo.todoName;
+        return todo;
+      });
+  }
+});
