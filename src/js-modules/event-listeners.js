@@ -204,11 +204,16 @@ todoList.addEventListener("click", (e) => {
   const project = projectArray[projectIndex];
   const isChecked = e.target.checked;
   const todoTitle = e.target.parentElement.lastElementChild;
+  const priority = document.querySelector(`[data-select-id ="${todoId}"]`);
+
+  console.log(priority);
+
+  const todo = projectArray[projectIndex].todoList[todoIndex];
 
   if (!projectArray.includes(project)) return;
 
-  /* Delete todo from project property array */
   if (targetId === "delete") {
+    /* Delete todo from project property array */
     projectArray[projectIndex].todoList.splice(todoIndex, 1);
     /* delete it from dom */
     todoList.removeChild(target);
@@ -218,7 +223,7 @@ todoList.addEventListener("click", (e) => {
     }
   }
 
-  //   /* Checkbox condition check for refactor it later */
+  //   /* Checkbox condition check for refactor it later  using todos project checkbox property*/
   if (isChecked && e.target.type === "checkbox") {
     projectArray[projectIndex].todoList[todoIndex].checkbox = "checked";
     todoTitle.classList.add("checked");
@@ -229,8 +234,39 @@ todoList.addEventListener("click", (e) => {
     todoTitle.classList.remove("checked");
     todoTitle.disabled = isChecked;
   }
+
+  /* Priority */
+  const todoItem = document.querySelector(`[data-todo-id="${todoId}"]`);
+  if (!todoItem) return;
+
+  if (todo.hasOwnProperty("priority")) {
+    todo.priority = priority.value;
+  }
+
+  todoItem.classList.toggle("low", priority.value === "low");
+  todoItem.classList.toggle("medium", priority.value === "medium");
+  todoItem.classList.toggle("high", priority.value === "high");
+  /*  if (todo.priority === "low") {
+    todoItem.classList.add("low");
+  }
+  if (todo.priority === "medium") {
+    todoItem.classList.add("medium");
+  }
+  if (todo.priority === "high") {
+    todoItem.classList.add("high");
+  } */
+  // console.log(todo.hasOwnProperty("priority"));
+
+  // projectArray[projectIndex].todoList[todoIndex].priority = priority.value;
+
+  // projectArray[projectIndex].todoList[todoIndex].priority = priority.value;
+
+  // if (projectArray[projectIndex].todoList[todoIndex].priority === "low") {
+  //   todoItem.classList.add("lowPriority");
+  // }
 });
 
+/* Todo rename functionality */
 todoList.addEventListener("keypress", (e) => {
   const target = e.target.closest("input");
   const newTodoName = e.target.value;
