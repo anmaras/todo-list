@@ -18,9 +18,9 @@
   padding: 2rem;
   background-color: var(--White);
   min-height: 260px;
-  border-left: 8px solid var(--Carolina-blue);
 
   border-radius: var(--border-radius-value);
+  border-left: 8px solid var(--battleship-gray);
 
   display: grid;
   grid-template-columns: 3fr 330px;
@@ -29,7 +29,14 @@
   row-gap: 1rem;
 }
 
-.main__task-list__list-item.lowPriority {
+.main__task-list__list-item.low {
+  border-left: 8px solid var(--Carolina-blue);
+}
+.main__task-list__list-item.medium {
+  border-left: 8px solid var(--Maximum-yellow-red);
+}
+.main__task-list__list-item.high {
+  border-left: 8px solid var(--Orange-red-crayola);
 }
 
 /* ------------------------------------------------------------ */
