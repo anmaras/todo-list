@@ -78,7 +78,9 @@ function renderProjectTodoListItem() {
                   >
                   <textarea
                     id="main__task-list__list-item__textarea"
-                  ></textarea>
+                    data-textarea-id = ${this.todoId}
+                    placeholder = "Add your notes here..."
+                  >${this.notes}</textarea>
                 </div>
 
                 <!-- Date -->
