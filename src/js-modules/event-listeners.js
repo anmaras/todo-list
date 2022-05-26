@@ -111,6 +111,24 @@ list.addEventListener("click", function (e) {
   }
 });
 
+/* Rename Project Object and its dom elements */
+list.addEventListener("keypress", (e) => {
+  const newText = e.target.value;
+  const projectId = e.target.parentElement.dataset.projectId;
+
+  if (e.key === "Enter" && newText) {
+    /* filter the array using the parent id */
+    projectArray
+      .filter((project) => project.id === Number(projectId))
+      .map((project) => {
+        /* Rename the project name */
+        project.name = newText;
+        todoTitle.textContent = project.name;
+        return project;
+      });
+  }
+});
+
 list.addEventListener("click", function (e) {
   const listTarget = e.target.closest("li");
   if (!listTarget) return;
@@ -162,23 +180,6 @@ todoInput.addEventListener("keypress", (e) => {
     target.value = "";
 
     return;
-  }
-});
-
-/* Rename Project Object and its dom elements */
-list.addEventListener("keypress", (e) => {
-  const text = e.target.value;
-  const id = e.target.parentElement.id;
-
-  if (e.key === "Enter" && text) {
-    projectArray
-      .filter((obj) => obj.id === Number(id))
-      .map((obj) => {
-        // const copyProjectArray = { ...obj };
-        obj.name = text;
-        todoTitle.textContent = obj.name;
-        return obj;
-      });
   }
 });
 
