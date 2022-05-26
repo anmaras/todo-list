@@ -205,9 +205,6 @@ todoList.addEventListener("click", (e) => {
   const isChecked = e.target.checked;
   const todoTitle = e.target.parentElement.lastElementChild;
   const priority = document.querySelector(`[data-select-id ="${todoId}"]`);
-
-  // console.log(priority);
-
   const todo = projectArray[projectIndex].todoList[todoIndex];
 
   if (!projectArray.includes(project)) return;
@@ -241,15 +238,20 @@ todoList.addEventListener("click", (e) => {
   }
 
   /* Priority */
-  const todoItem = document.querySelector(`[data-todo-id="${todoId}"]`);
-  if (!todoItem) return;
+  /* Select the li item  check */
+  // const todoItem = document.querySelector(`[data-todo-id="${todoId}"]`);
+  // if (!todoItem) return;
+
+  // console.log(todoItem);
 
   if (todo.hasOwnProperty("priority")) {
     todo.priority = priority.value;
-    todoItem.classList.toggle("low", priority.value === "low");
-    todoItem.classList.toggle("medium", priority.value === "medium");
-    todoItem.classList.toggle("high", priority.value === "high");
+    target.classList.toggle("low", priority.value === "low");
+    target.classList.toggle("medium", priority.value === "medium");
+    target.classList.toggle("high", priority.value === "high");
   }
+
+  const todoNotes = document.querySelector(`[data-todo-id="${todoId}"]`);
 });
 
 /* Todo rename functionality */
