@@ -166,6 +166,9 @@ todoInput.addEventListener("keypress", (e) => {
   const objectIndex = projectArray.findIndex(
     (obj) => obj.id === Number(projectId)
   );
+  /* CHECK IT FOR LATER IT MAKES THE TODO ID TO START FROM 0
+  IN CASE ID MESSED UP THE TODO IDS */
+  // const todoId = projectArray[objectIndex].todoList.length;
 
   if (e.key === "Enter" && target.value !== "") {
     /* Create new todo */
@@ -250,8 +253,6 @@ todoList.addEventListener("click", (e) => {
     target.classList.toggle("medium", priority.value === "medium");
     target.classList.toggle("high", priority.value === "high");
   }
-
-  const todoNotes = document.querySelector(`[data-todo-id="${todoId}"]`);
 });
 
 /* Todo rename functionality */
@@ -271,9 +272,8 @@ todoList.addEventListener("keypress", (e) => {
   const project = projectArray[projectIndex];
 
   if (!projectArray.includes(project)) return;
-
   if (e.key === "Enter") {
-    /* for the specific project using the projectIndex filter its todoList 
+    /* for the specific project using the projectIndex filter its todoList
     for the todo item and then with map rename it */
     projectArray[projectIndex].todoList
       .filter((todoItem) => todoItem.todoId === todoId)
@@ -284,5 +284,29 @@ todoList.addEventListener("keypress", (e) => {
         target.value = todo.todoName;
         return todo;
       });
+  }
+});
+
+todoList.addEventListener("keypress", (e) => {
+  const targetTextArea = e.target.closest("textarea");
+  if (!targetTextArea) return;
+  const todoId = targetTextArea.dataset.textareaId;
+  const todoNotes = document.querySelector(`[data-textarea-id="${todoId}"]`);
+  // const newTodoName = e.target.value;
+  // if (!target) return;
+  const projectId = Number(
+    targetTextArea.parentElement.parentElement.dataset.projectid
+  );
+  const projectIndex = projectArray.findIndex(
+    (obj) => obj.id === Number(projectId)
+  );
+
+  const todoIndex = projectArray[projectIndex].todoList.findIndex(
+    (todo) => todo.todoId === Number(todoId)
+  );
+  const project = projectArray[projectIndex];
+  if (!projectArray.includes(project)) return;
+  if (e.key === "Enter") {
+    projectArray[projectIndex].todoList[todoIndex].notes = targetTextArea.value;
   }
 });
