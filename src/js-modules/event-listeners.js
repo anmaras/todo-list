@@ -28,7 +28,6 @@ const counter = utilities.increment();
 /* Project Sections */
 input.addEventListener("keypress", (e) => {
   if (e.key === "Enter" && input.value !== "") {
-    const list = document.querySelector(".project-list");
     const name = e.target.value;
     // count++;
     /* Create a new instance object from Project class */
@@ -48,18 +47,18 @@ input.addEventListener("keypress", (e) => {
 list.addEventListener("click", function (e) {
   /* Select the closest li element inside project list */
   const listTarget = e.target.closest("li");
+  const targetId = e.target.id;
   /* if that selection is falsy return */
   if (!listTarget) return;
-  const targetId = e.target.id;
   /* Every time you click on a project find The index of project in array
   using target id and project id */
-  const objectIndex = projectArray.findIndex(
+  const projectIndex = projectArray.findIndex(
     (obj) => obj.id === Number(listTarget.id)
   );
-
   /* Find the project object in array using the index above */
-  const project = projectArray[objectIndex];
-
+  const project = projectArray[projectIndex];
+  /* If the project does not exist return */
+  if (!projectArray.includes(project)) return;
   /* If list project item is in project list container and the target id is not garbage icon */
   if (listTarget && list.contains(listTarget) && targetId !== "garbageIcon") {
     /* HighLight the project list item on selection */
@@ -73,15 +72,69 @@ list.addEventListener("click", function (e) {
     /* add custom data set to todo input */
     utilities.createTodoDataSet.call(project);
   }
+});
 
+list.addEventListener("click", function (e) {
+  const listTarget = e.target.closest("li");
+  if (!listTarget) return;
+  const projectIndex = projectArray.findIndex(
+    (obj) => obj.id === Number(listTarget.id)
+  );
+  const project = projectArray[projectIndex];
+
+  if (!projectArray.includes(project)) return;
+  /* If target id is this icon */
   if (e.target.id === "garbageIcon") {
-    projectArray.splice(objectIndex, 1);
+    /* remove the project from project array */
+    projectArray.splice(projectIndex, 1);
+    /* Remove the rendered item from dom */
     list.removeChild(listTarget);
+    /* Remove the visible class from header */
+    header.classList.remove("visible");
+    /* Remove the visible class from the todo input */
+    todoInput.classList.remove("visible");
+    /* Change the main title content to empty */
+    todoTitle.textContent = "";
+    /* Clear the html inside the todoList  */
+    todoList.innerHTML = "";
+    /* If the project array is empty */
     if (!projectArray.length) {
-      counter.reset();
+      /* Clear its list inner html */
       list.innerHTML = "";
+      /* Reset the counter function */
+      counter.reset();
+      /* Clear again the todo list inner html just in case */
+      todoList.innerHTML = "";
+      /* Turn on the no project state  */
+      utilities.toggleNotProjectScreen();
     }
   }
+});
+
+list.addEventListener("click", function (e) {
+  const listTarget = e.target.closest("li");
+  if (!listTarget) return;
+  const todoListItems = document.querySelectorAll(
+    `[data-projectid="${listTarget.id}"]`
+  );
+  const projectIndex = projectArray.findIndex(
+    (obj) => obj.id === Number(listTarget.id)
+  );
+  const project = projectArray[projectIndex];
+  if (!projectArray.includes(project)) return;
+
+  /* Replace the todo list content  */
+  todoList.replaceChildren(...todoListItems, ...todoListItems);
+
+  /* For selected project search in its todo array  */
+  projectArray[projectIndex].todoList.forEach((todo) => {
+    /* Save the todo in item variable using the data set and todo id */
+    let item = document.querySelector(`[data-todo-id="${todo.todoId}"]`);
+    /* If the item already exist in list in dom return*/
+    if (item && todoList.contains(item)) return;
+    /* if the todo it does not exist in dom render it */
+    renderModule.renderProjectTodoListItem.call(todo);
+  });
 });
 
 /* -----------------Add functionality to todo input -----------------------------------------*/
@@ -94,8 +147,6 @@ todoInput.addEventListener("keypress", (e) => {
   const objectIndex = projectArray.findIndex(
     (obj) => obj.id === Number(projectId)
   );
-
-  const counter = projectArray[objectIndex].todoList.length;
 
   if (e.key === "Enter" && target.value !== "") {
     /* Create new todo */
@@ -155,19 +206,21 @@ todoList.addEventListener("click", (e) => {
 
   /* Delete todo from project property array */
   if (targetId === "delete") {
-    console.log(todoId);
-    console.log(projectId);
-    console.log(projectIndex);
-    console.log(todoIndex);
     projectArray[projectIndex].todoList.splice(todoIndex, 1);
-    console.log(projectArray[projectIndex].todoList);
 
     /* delete it from dom */
     todoList.removeChild(target);
 
     if (!projectArray[projectIndex].todoList.length) {
-      todoList.innerHTML = "";
+      // todoList.innerHTML = "";
+      todoCounter.reset();
     }
+
+    console.log("todoId", todoId);
+    console.log("projectId", projectId);
+    console.log("projectIndex", projectIndex);
+    console.log("todoIndex", todoIndex);
+    console.log(projectArray[projectIndex].todoList);
   }
   // console.log("array after delete", projectArray[objectIndex]);
 
