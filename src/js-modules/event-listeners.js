@@ -246,11 +246,10 @@ todoList.addEventListener("click", (e) => {
 
   if (todo.hasOwnProperty("priority")) {
     todo.priority = priority.value;
+    todoItem.classList.toggle("low", priority.value === "low");
+    todoItem.classList.toggle("medium", priority.value === "medium");
+    todoItem.classList.toggle("high", priority.value === "high");
   }
-
-  todoItem.classList.toggle("low", priority.value === "low");
-  todoItem.classList.toggle("medium", priority.value === "medium");
-  todoItem.classList.toggle("high", priority.value === "high");
 });
 
 /* Todo rename functionality */
