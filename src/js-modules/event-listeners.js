@@ -166,21 +166,21 @@ todoInput.addEventListener("keypress", (e) => {
 });
 
 /* Rename Project Object and its dom elements */
-// list.addEventListener("keypress", (e) => {
-//   const text = e.target.value;
-//   const id = e.target.parentElement.id;
+list.addEventListener("keypress", (e) => {
+  const text = e.target.value;
+  const id = e.target.parentElement.id;
 
-//   if (e.key === "Enter" && text) {
-//     projectArray
-//       .filter((obj) => obj.id === Number(id))
-//       .map((obj) => {
-//         // const copyProjectArray = { ...obj };
-//         obj.name = text;
-//         todoTitle.textContent = obj.name;
-//         return obj;
-//       });
-//   }
-// });
+  if (e.key === "Enter" && text) {
+    projectArray
+      .filter((obj) => obj.id === Number(id))
+      .map((obj) => {
+        // const copyProjectArray = { ...obj };
+        obj.name = text;
+        todoTitle.textContent = obj.name;
+        return obj;
+      });
+  }
+});
 
 /* -----------------Toggle sorting options display ------------------------------------------*/
 // sortButton.addEventListener("click", utilities.toggleSortingOptionVisibility);
@@ -193,13 +193,15 @@ todoList.addEventListener("click", (e) => {
   const targetId = e.target.id;
   const todoId = Number(target.dataset.todoId);
   const projectId = Number(target.dataset.projectid);
-
   const projectIndex = projectArray.findIndex(
     (obj) => obj.id === Number(projectId)
   );
   const todoIndex = projectArray[projectIndex].todoList.findIndex(
     (todo) => todo.todoId === Number(todoId)
   );
+  const project = projectArray[projectIndex];
+
+  if (!projectArray.includes(project)) return;
 
   const isChecked = e.target.checked;
   const todoTitle = e.target.parentElement.lastElementChild;
