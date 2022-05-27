@@ -1,4 +1,5 @@
 import { projectArray } from "./arrays";
+import { todoHeaderTitle } from "./dom-elements";
 
 class Project {
   constructor(name, id) {
@@ -17,6 +18,34 @@ class Todo {
     this.notes = "";
     this.priority = "";
     this.checkbox = "";
+  }
+
+  select() {
+    if (!this.priority) {
+      let text = "Select an option";
+      return text;
+    }
+    if (this.priority) {
+      return this.priority;
+    }
+  }
+
+  classSetForSelect() {
+    if (!this.priority) {
+      return this.priority;
+    }
+    if (this.priority) {
+      return this.priority.toLowerCase();
+    }
+  }
+
+  classSetForCheck() {
+    if (!this.checkbox) {
+      return "";
+    }
+    if (this.checkbox) {
+      return "disabled";
+    }
   }
 }
 
