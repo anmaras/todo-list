@@ -140,6 +140,9 @@ projectList.addEventListener("click", function (e) {
   const todoListItems = document.querySelectorAll(
     `[data-projectid="${listTarget.id}"]`
   );
+  const todoListItem = document.querySelector(
+    `[data-projectid="${listTarget.id}"]`
+  );
   const projectIndex = projectArray.findIndex(
     (obj) => obj.id === Number(listTarget.id)
   );
@@ -147,6 +150,9 @@ projectList.addEventListener("click", function (e) {
   if (!projectArray.includes(project)) return;
 
   /* Replace the todo list content  */
+
+  if (todoList.contains(todoListItem)) return;
+
   todoList.replaceChildren(...todoListItems, ...todoListItems);
 
   /* For selected project search in its todo array  */
@@ -154,7 +160,8 @@ projectList.addEventListener("click", function (e) {
     /* Save the todo in item variable using the data set and todo id */
     let item = document.querySelector(`[data-todo-id="${todo.todoId}"]`);
     /* If the item already exist in list in dom return*/
-    if (item && todoList.contains(item)) return;
+    // if (todoList.contains(todoListItem)) return;
+    // if (item && todoList.contains(item)) return;
     /* if the todo it does not exist in dom render it */
     renderModule.renderProjectTodoListItem.call(todo);
   });
