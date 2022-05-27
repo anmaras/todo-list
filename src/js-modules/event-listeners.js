@@ -2,7 +2,7 @@ import * as renderModule from "./render-project";
 import { Project, Todo } from "./project-class";
 import {
   projectInputDomElement as input,
-  projectListDomElement as list,
+  projectListDomElement as projectList,
   homeListDomeElement as home,
   addTodoTaskInputContainer as todoInput,
   todoHeaderTitle as todoTitle,
@@ -44,7 +44,7 @@ input.addEventListener("keypress", (e) => {
 });
 
 /* Project List */
-list.addEventListener("click", function (e) {
+projectList.addEventListener("click", function (e) {
   /* Select the closest li element inside project list */
   const listTarget = e.target.closest("li");
   const targetId = e.target.id;
@@ -60,7 +60,11 @@ list.addEventListener("click", function (e) {
   /* If the project does not exist return */
   if (!projectArray.includes(project)) return;
   /* If list project item is in project list container and the target id is not garbage icon */
-  if (listTarget && list.contains(listTarget) && targetId !== "garbageIcon") {
+  if (
+    listTarget &&
+    projectList.contains(listTarget) &&
+    targetId !== "garbageIcon"
+  ) {
     /* HighLight the project list item on selection */
     utilities.highlight(listTarget);
     /* Make header visible */
@@ -74,7 +78,7 @@ list.addEventListener("click", function (e) {
   }
 });
 
-list.addEventListener("click", function (e) {
+projectList.addEventListener("click", function (e) {
   const listTarget = e.target.closest("li");
   if (!listTarget) return;
   const projectIndex = projectArray.findIndex(
@@ -88,7 +92,7 @@ list.addEventListener("click", function (e) {
     /* remove the project from project array */
     projectArray.splice(projectIndex, 1);
     /* Remove the rendered item from dom */
-    list.removeChild(listTarget);
+    projectList.removeChild(listTarget);
     /* Remove the visible class from header */
     header.classList.remove("visible");
     /* Remove the visible class from the todo input */
@@ -100,7 +104,7 @@ list.addEventListener("click", function (e) {
     /* If the project array is empty */
     if (!projectArray.length) {
       /* Clear its list inner html */
-      list.innerHTML = "";
+      projectList.innerHTML = "";
       /* Reset the counter function */
       counter.reset();
       /* Clear again the todo list inner html just in case */
@@ -112,7 +116,7 @@ list.addEventListener("click", function (e) {
 });
 
 /* Rename Project Object and its dom elements */
-list.addEventListener("keypress", (e) => {
+projectList.addEventListener("keypress", (e) => {
   const newText = e.target.value;
   const projectId = e.target.parentElement.dataset.projectId;
 
@@ -130,7 +134,7 @@ list.addEventListener("keypress", (e) => {
 });
 
 /* Render todo while switching projects */
-list.addEventListener("click", function (e) {
+projectList.addEventListener("click", function (e) {
   const listTarget = e.target.closest("li");
   if (!listTarget) return;
   const todoListItems = document.querySelectorAll(
@@ -187,9 +191,6 @@ todoInput.addEventListener("keypress", (e) => {
   }
 });
 
-/* -----------------Toggle sorting options display ------------------------------------------*/
-// sortButton.addEventListener("click", utilities.toggleSortingOptionVisibility);
-
 // /* Delete todo object and its dom element */
 todoList.addEventListener("click", (e) => {
   const target = e.target.closest("li");
@@ -240,18 +241,12 @@ todoList.addEventListener("click", (e) => {
     todoTitle.disabled = isChecked;
   }
 
-  /* Priority */
-  /* Select the li item  check */
-  // const todoItem = document.querySelector(`[data-todo-id="${todoId}"]`);
-  // if (!todoItem) return;
-
-  // console.log(todoItem);
-
+  if (priority.value === "none") return;
   if (todo.hasOwnProperty("priority")) {
     todo.priority = priority.value;
-    target.classList.toggle("low", priority.value === "low");
-    target.classList.toggle("medium", priority.value === "medium");
-    target.classList.toggle("high", priority.value === "high");
+    target.classList.toggle("low", priority.value === "Low");
+    target.classList.toggle("medium", priority.value === "Medium");
+    target.classList.toggle("high", priority.value === "High");
   }
 });
 
@@ -309,4 +304,38 @@ todoList.addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
     projectArray[projectIndex].todoList[todoIndex].notes = targetTextArea.value;
   }
+});
+
+/* -----------------Toggle sorting options display ------------------------------------------*/
+sortButton.addEventListener("click", utilities.toggleSortingOptionVisibility);
+
+const alphaButton = document.querySelector(
+  ".main__header__sort-container__options div"
+);
+
+alphaButton.addEventListener("click", (e) => {
+  const projectList = document.querySelector(".project-list");
+  const projectId = +header.dataset.projectId;
+  const projectIndex = projectArray.findIndex(
+    (obj) => obj.id === Number(projectId)
+  );
+  const project = projectArray[projectIndex];
+
+  project.todoList.sort((a, b) => {
+    const nameA = a.todoName.toLowerCase();
+    const nameB = b.todoName.toLowerCase();
+
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+    return 0;
+  });
+  todoList.innerHTML = "";
+
+  project.todoList.forEach((todo) => {
+    renderModule.renderProjectTodoListItem.call(todo);
+  });
 });
