@@ -99,6 +99,7 @@ export function createTodoName() {
 
 /* Create Data-set for todo input */
 export function createTodoDataSet() {
+  todoHeaderContainer.setAttribute("data-project-id", this.id);
   const todoInput = newTodoInput.lastElementChild;
   todoInput.setAttribute("data-project-Todo-ID", this.id);
 }
