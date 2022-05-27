@@ -9,6 +9,8 @@ import {
   todoHeaderContainer as header,
   sortButton,
   todoList,
+  todoSortOptionsContainer,
+  todoSortOrder,
 } from "./dom-elements";
 import * as utilities from "./utilities-functions";
 import { projectArray } from "./arrays";
@@ -52,19 +54,13 @@ projectList.addEventListener("click", function (e) {
   if (!listTarget) return;
   /* Every time you click on a project find The index of project in array
   using target id and project id */
-  const projectIndex = projectArray.findIndex(
-    (obj) => obj.id === Number(listTarget.id)
-  );
+  const projectIndex = projectArray.findIndex((obj) => obj.id === Number(listTarget.id));
   /* Find the project object in array using the index above */
   const project = projectArray[projectIndex];
   /* If the project does not exist return */
   if (!projectArray.includes(project)) return;
   /* If list project item is in project list container and the target id is not garbage icon */
-  if (
-    listTarget &&
-    projectList.contains(listTarget) &&
-    targetId !== "garbageIcon"
-  ) {
+  if (listTarget && projectList.contains(listTarget) && targetId !== "garbageIcon") {
     /* HighLight the project list item on selection */
     utilities.highlight(listTarget);
     /* Make header visible */
@@ -81,9 +77,7 @@ projectList.addEventListener("click", function (e) {
 projectList.addEventListener("click", function (e) {
   const listTarget = e.target.closest("li");
   if (!listTarget) return;
-  const projectIndex = projectArray.findIndex(
-    (obj) => obj.id === Number(listTarget.id)
-  );
+  const projectIndex = projectArray.findIndex((obj) => obj.id === Number(listTarget.id));
   const project = projectArray[projectIndex];
 
   if (!projectArray.includes(project)) return;
@@ -137,15 +131,9 @@ projectList.addEventListener("keypress", (e) => {
 projectList.addEventListener("click", function (e) {
   const listTarget = e.target.closest("li");
   if (!listTarget) return;
-  const todoListItems = document.querySelectorAll(
-    `[data-projectid="${listTarget.id}"]`
-  );
-  const todoListItem = document.querySelector(
-    `[data-projectid="${listTarget.id}"]`
-  );
-  const projectIndex = projectArray.findIndex(
-    (obj) => obj.id === Number(listTarget.id)
-  );
+  const todoListItems = document.querySelectorAll(`[data-projectid="${listTarget.id}"]`);
+  const todoListItem = document.querySelector(`[data-projectid="${listTarget.id}"]`);
+  const projectIndex = projectArray.findIndex((obj) => obj.id === Number(listTarget.id));
   const project = projectArray[projectIndex];
   if (!projectArray.includes(project)) return;
 
@@ -165,6 +153,8 @@ projectList.addEventListener("click", function (e) {
     /* if the todo it does not exist in dom render it */
     renderModule.renderProjectTodoListItem.call(todo);
   });
+  todoSortOrder.classList.remove("visibility");
+  // document.querySelector(".main__sorting-order svg").setAttribute("data-position", "up");
 });
 
 /* -----------------Add functionality to todo input -----------------------------------------*/
@@ -174,9 +164,7 @@ todoInput.addEventListener("keypress", (e) => {
   const target = e.target.closest("input");
   const inputText = target.value;
   const projectId = Number(e.target.dataset.projectTodoId);
-  const objectIndex = projectArray.findIndex(
-    (obj) => obj.id === Number(projectId)
-  );
+  const objectIndex = projectArray.findIndex((obj) => obj.id === Number(projectId));
   /* CHECK IT FOR LATER IT MAKES THE TODO ID TO START FROM 0
   IN CASE ID MESSED UP THE TODO IDS */
   // const todoId = projectArray[objectIndex].todoList.length;
@@ -206,9 +194,7 @@ todoList.addEventListener("click", (e) => {
   const targetId = e.target.id;
   const todoId = Number(target.dataset.todoId);
   const projectId = Number(target.dataset.projectid);
-  const projectIndex = projectArray.findIndex(
-    (obj) => obj.id === Number(projectId)
-  );
+  const projectIndex = projectArray.findIndex((obj) => obj.id === Number(projectId));
   const todoIndex = projectArray[projectIndex].todoList.findIndex(
     (todo) => todo.todoId === Number(todoId)
   );
@@ -265,12 +251,8 @@ todoList.addEventListener("keypress", (e) => {
   const projectId = Number(
     target.parentElement.parentElement.parentElement.dataset.projectid
   );
-  const todoId = Number(
-    target.parentElement.parentElement.parentElement.dataset.todoId
-  );
-  const projectIndex = projectArray.findIndex(
-    (obj) => obj.id === Number(projectId)
-  );
+  const todoId = Number(target.parentElement.parentElement.parentElement.dataset.todoId);
+  const projectIndex = projectArray.findIndex((obj) => obj.id === Number(projectId));
   const project = projectArray[projectIndex];
 
   if (!projectArray.includes(project)) return;
@@ -296,12 +278,8 @@ todoList.addEventListener("keypress", (e) => {
   const todoNotes = document.querySelector(`[data-textarea-id="${todoId}"]`);
   // const newTodoName = e.target.value;
   // if (!target) return;
-  const projectId = Number(
-    targetTextArea.parentElement.parentElement.dataset.projectid
-  );
-  const projectIndex = projectArray.findIndex(
-    (obj) => obj.id === Number(projectId)
-  );
+  const projectId = Number(targetTextArea.parentElement.parentElement.dataset.projectid);
+  const projectIndex = projectArray.findIndex((obj) => obj.id === Number(projectId));
 
   const todoIndex = projectArray[projectIndex].todoList.findIndex(
     (todo) => todo.todoId === Number(todoId)
@@ -316,32 +294,58 @@ todoList.addEventListener("keypress", (e) => {
 /* -----------------Toggle sorting options display ------------------------------------------*/
 sortButton.addEventListener("click", utilities.toggleSortingOptionVisibility);
 
-const alphaButton = document.querySelector(
-  ".main__header__sort-container__options div"
-);
-
-alphaButton.addEventListener("click", (e) => {
+todoSortOptionsContainer.addEventListener("click", (e) => {
+  const target = e.target.closest("div div > p");
+  const todoSortingName = document.querySelector(".main__sorting-order p");
   const projectList = document.querySelector(".project-list");
   const projectId = +header.dataset.projectId;
-  const projectIndex = projectArray.findIndex(
-    (obj) => obj.id === Number(projectId)
-  );
+  const projectIndex = projectArray.findIndex((obj) => obj.id === Number(projectId));
+  const project = projectArray[projectIndex];
+  const arrow = document.querySelector(".main__sorting-order svg");
+  let state = 0;
+
+  if (target && todoSortOptionsContainer.contains(target)) {
+    state = 1;
+    todoSortingName.textContent = target.textContent;
+    arrow.setAttribute("data-position", "up");
+  }
+
+  todoSortOptionsContainer.classList.toggle("visible");
+  todoSortOrder.classList.toggle("visibility", state > 0);
+});
+
+document.querySelector(".main__sorting-order svg").addEventListener("click", function () {
+  const projectId = +header.dataset.projectId;
+  const projectIndex = projectArray.findIndex((obj) => obj.id === Number(projectId));
   const project = projectArray[projectIndex];
 
   project.todoList.sort((a, b) => {
     const nameA = a.todoName.toLowerCase();
     const nameB = b.todoName.toLowerCase();
+    if (this.dataset.position === "up") {
+      this.setAttribute("data-position", "down");
 
-    if (nameA < nameB) {
-      return -1;
+      if (nameA > nameB) {
+        return -1;
+      }
+      if (nameA < nameB) {
+        return 1;
+      }
     }
-    if (nameA > nameB) {
-      return 1;
+    if (this.dataset.position === "down") {
+      this.setAttribute("data-position", "up");
+
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
     }
     return 0;
   });
-  todoList.innerHTML = "";
 
+  todoList.innerHTML = "";
   project.todoList.forEach((todo) => {
     renderModule.renderProjectTodoListItem.call(todo);
   });
