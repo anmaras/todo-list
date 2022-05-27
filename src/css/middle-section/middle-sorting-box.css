@@ -7,7 +7,8 @@
   align-items: center;
 }
 
-.main__sorting-order.visible {
+.main__sorting-order.visibility {
+  visibility: visible;
 }
 
 .main__sorting-order > svg {
@@ -52,6 +53,11 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+}
+
+.main__header__sort-container__options > div p {
+  width: 100%;
+  padding: 0.5rem;
 }
 
 .main__header__sort-container__options > div:hover,
