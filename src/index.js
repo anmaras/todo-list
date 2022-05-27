@@ -18,6 +18,7 @@ import * as events from "./js-modules/event-listeners";
 
 import { createNewTodoInstance } from "./js-modules/create-project";
 
-document.body.addEventListener("click", (e) => {
+/* document.body.addEventListener("click", (e) => {
   console.log(projectArray);
 });
+ */
