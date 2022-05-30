@@ -321,11 +321,9 @@ todoList.addEventListener("keypress", (e) => {
 sortButton.addEventListener("click", utilities.toggleSortingOptionVisibility);
 
 todoSortOptionsContainer.addEventListener("click", (e) => {
-  /* Target the sort option button element  */
-  const sortButton = e.target.matches(".sortBy");
-  const targetButton = e.target.closest("div div > p");
-  /* Select the p in sorting order container so to change its text  */
-  const todoSortingName = document.querySelector(".main__sorting-order p");
+  const sortByContainer = e.target.matches(".sortBy");
+  const sortByButton = e.target.closest("div div > p");
+  const sortingMethodBox = document.querySelector(".main__sorting-order p");
   const projectList = document.querySelector(".project-list");
   const projectId = +header.dataset.projectId;
   const projectIndex = projectArray.findIndex(
@@ -338,9 +336,9 @@ todoSortOptionsContainer.addEventListener("click", (e) => {
   const button = document.querySelector(".sortBy");
   console.log(button);
 
-  if (sortButton && todoSortOptionsContainer.contains(targetButton)) {
+  if (sortByContainer && todoSortOptionsContainer.contains(sortByButton)) {
     state = 1;
-    todoSortingName.textContent = targetButton.textContent;
+    sortingMethodBox.textContent = sortByButton.textContent;
     // arrow.setAttribute("data-position", "up");
     todoSortOptionsContainer.classList.toggle("visible");
     todoSortOrder.classList.toggle("visibility", state > 0);
