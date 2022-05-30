@@ -11,6 +11,7 @@ import {
   todoList,
   todoSortOptionsContainer,
   todoSortOrder,
+  shortingArrow,
 } from "./dom-elements";
 import * as utilities from "./utilities-functions";
 import { projectArray } from "./arrays";
@@ -253,12 +254,15 @@ todoList.addEventListener("click", (e) => {
   }
 
   if (priority.value === "none") return;
+
   if (todo.hasOwnProperty("priority")) {
     todo.priority = priority.value;
-    target.classList.toggle("low", priority.value === "Low");
-    target.classList.toggle("medium", priority.value === "Medium");
-    target.classList.toggle("high", priority.value === "High");
+    target.classList.toggle("low", priority.value === "low");
+    target.classList.toggle("medium", priority.value === "medium");
+    target.classList.toggle("high", priority.value === "high");
   }
+
+  todo.priority = priority.value;
 });
 
 /* Todo rename functionality */
@@ -320,6 +324,7 @@ todoList.addEventListener("keypress", (e) => {
 /* -----------------Toggle sorting options display ------------------------------------------*/
 sortButton.addEventListener("click", utilities.toggleSortingOptionVisibility);
 
+let order = true;
 todoSortOptionsContainer.addEventListener("click", (e) => {
   const sortByContainer = e.target.matches(".sortBy");
   const sortByButton = e.target.closest("div div > p");
@@ -330,58 +335,29 @@ todoSortOptionsContainer.addEventListener("click", (e) => {
     (obj) => obj.id === Number(projectId)
   );
   const project = projectArray[projectIndex];
-  const arrow = document.querySelector(".main__sorting-order svg");
-  let state = 0;
+  todoSortOptionsContainer.classList.toggle("visible");
 
-  const button = document.querySelector(".sortBy");
-  console.log(button);
-
-  if (sortByContainer && todoSortOptionsContainer.contains(sortByButton)) {
-    state = 1;
-    sortingMethodBox.textContent = sortByButton.textContent;
-    // arrow.setAttribute("data-position", "up");
-    todoSortOptionsContainer.classList.toggle("visible");
-    todoSortOrder.classList.toggle("visibility", state > 0);
-  }
-});
-
-/* document
-  .querySelector(".main__sorting-order svg")
-  .addEventListener("click", function () {
-    const projectId = +header.dataset.projectId;
-    const projectIndex = projectArray.findIndex(
-      (obj) => obj.id === Number(projectId)
-    );
-    const project = projectArray[projectIndex];
-
+  if (sortByButton.textContent === "Alphabetically") {
+    order = !order;
     project.todoList.sort((a, b) => {
       const nameA = a.todoName.toLowerCase();
       const nameB = b.todoName.toLowerCase();
-      if (this.dataset.position === "up") {
-        this.setAttribute("data-position", "down");
 
-        if (nameA > nameB) {
-          return -1;
-        }
-        if (nameA < nameB) {
-          return 1;
-        }
-      }
-      if (this.dataset.position === "down") {
-        this.setAttribute("data-position", "up");
-
-        if (nameA < nameB) {
-          return -1;
-        }
-        if (nameA > nameB) {
-          return 1;
-        }
-      }
-      return 0;
+      return order ? nameA < nameB : nameA > nameB;
     });
+  }
+  if (sortByButton.textContent === "Due Date") {
+    order = !order;
+    project.todoList.sort((a, b) => {
+      const priorityA = a.changeToNum(a.priority);
+      const priorityB = b.changeToNum(b.priority);
 
-    todoList.innerHTML = "";
-    project.todoList.forEach((todo) => {
-      renderModule.renderProjectTodoListItem.call(todo);
+      return order ? priorityA < priorityB : priorityA > priorityB;
     });
-  }); */
+  }
+
+  todoList.innerHTML = "";
+  project.todoList.forEach((todo) => {
+    renderModule.renderProjectTodoListItem.call(todo);
+  });
+});
