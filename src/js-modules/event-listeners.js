@@ -322,7 +322,7 @@ sortButton.addEventListener("click", utilities.toggleSortingOptionVisibility);
 
 todoSortOptionsContainer.addEventListener("click", (e) => {
   /* Target the sort option button element  */
-  const target = e.target.matches(".sortBy");
+  const sortButton = e.target.matches(".sortBy");
   const targetButton = e.target.closest("div div > p");
   /* Select the p in sorting order container so to change its text  */
   const todoSortingName = document.querySelector(".main__sorting-order p");
@@ -338,11 +338,11 @@ todoSortOptionsContainer.addEventListener("click", (e) => {
   const button = document.querySelector(".sortBy");
   console.log(button);
 
-  if (target && todoSortOptionsContainer.contains(targetButton)) {
+  if (sortButton && todoSortOptionsContainer.contains(targetButton)) {
     state = 1;
     todoSortingName.textContent = targetButton.textContent;
     // arrow.setAttribute("data-position", "up");
-    todoSortOptionsContainer.classList.toggle("visible", state < 0);
+    todoSortOptionsContainer.classList.toggle("visible");
     todoSortOrder.classList.toggle("visibility", state > 0);
   }
 });
