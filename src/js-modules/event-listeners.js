@@ -326,16 +326,15 @@ sortButton.addEventListener("click", utilities.toggleSortingOptionVisibility);
 
 let order = true;
 todoSortOptionsContainer.addEventListener("click", (e) => {
-  const sortByContainer = e.target.matches(".sortBy");
   const sortByButton = e.target.closest("div div > p");
-  const sortingMethodBox = document.querySelector(".main__sorting-order p");
-  const projectList = document.querySelector(".project-list");
+  if (!sortByButton) return;
   const projectId = +header.dataset.projectId;
   const projectIndex = projectArray.findIndex(
     (obj) => obj.id === Number(projectId)
   );
   const project = projectArray[projectIndex];
-  todoSortOptionsContainer.classList.toggle("visible");
+
+  todoSortOptionsContainer.classList.toggle("visible", !sortByButton);
 
   if (sortByButton.textContent === "Alphabetically") {
     order = !order;
@@ -346,8 +345,9 @@ todoSortOptionsContainer.addEventListener("click", (e) => {
       return order ? nameA < nameB : nameA > nameB;
     });
   }
-  if (sortByButton.textContent === "Due Date") {
+  if (sortByButton.textContent === "Priority") {
     order = !order;
+
     project.todoList.sort((a, b) => {
       const priorityA = a.changeToNum(a.priority);
       const priorityB = b.changeToNum(b.priority);
@@ -355,7 +355,6 @@ todoSortOptionsContainer.addEventListener("click", (e) => {
       return order ? priorityA < priorityB : priorityA > priorityB;
     });
   }
-
   todoList.innerHTML = "";
   project.todoList.forEach((todo) => {
     renderModule.renderProjectTodoListItem.call(todo);
