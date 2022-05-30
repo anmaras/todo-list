@@ -26,8 +26,32 @@ class Todo {
       return text;
     }
     if (this.priority) {
-      return this.priority;
+      return this.priority.charAt(0).toUpperCase() + this.priority.slice(1);
     }
+  }
+
+  changeToNum(input) {
+    let num;
+    if (input === "low") {
+      num = 3;
+      return num;
+    }
+    if (input === "medium") {
+      num = 2;
+      return num;
+    }
+    if (input === "high") {
+      num = 1;
+      return num;
+    }
+    if (!input || input === "no") {
+      num = 4;
+      return num;
+    }
+  }
+
+  test() {
+    console.log("test");
   }
 
   classSetForSelect() {
