@@ -53,7 +53,7 @@ function renderProjectTodoListItem() {
 
   const listItemMarkup = `<li class="main__task-list__list-item ${this.classSetForSelect()}" data-todo-id = ${
     this.todoId
-  } data-projectId = ${this.projectId}>
+  } data-projectId = ${this.projectId} >
 
                 <!-- Header -->
                 <div class="main__task-list__list-item__title-container">
@@ -112,10 +112,10 @@ function renderProjectTodoListItem() {
                     <option value="none" selected="Select an option" disabled hidden>
                       ${this.select()}
                     </option>
-                    <option value="Low">Low</option>
-                    <option value="Medium">Medium</option>
-                    <option value="High">High</option>
-                    <option value="None">None</option>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                    <option value="no">None</option>
                   </select>
                 </div>
                 
