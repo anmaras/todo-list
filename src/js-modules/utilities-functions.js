@@ -70,7 +70,7 @@ export function renameProject(newName) {
 export function increment() {
   let count = 0;
   function counter() {
-    ++count;
+    count += 1;
     return count;
   }
   counter.reset = () => (count = 0);
@@ -80,15 +80,9 @@ export function increment() {
 /* Toggle notProjectScreen class */
 export function toggleNotProjectScreen() {
   if (projectArray.length) {
-    notProjectYetContainer.classList.add("opacityOff");
-    setTimeout(function () {
-      notProjectYetContainer.classList.add("hidden");
-    }, 0);
+    notProjectYetContainer.classList.add("hidden");
   } else {
     notProjectYetContainer.classList.remove("hidden");
-    setTimeout(function () {
-      notProjectYetContainer.classList.remove("opacityOff");
-    }, 0);
   }
 }
 
@@ -118,10 +112,6 @@ export function toggleMiddleElementsVisibility() {
 /* Toggle function for sort option container */
 export function toggleSortingOptionVisibility() {
   todoSortOptionsContainer.classList.toggle("visible");
-}
-
-export function addTodoObjectToArray(object) {
-  this.todoList.push(object);
 }
 
 /* Sorting function */
@@ -165,4 +155,38 @@ export function compare(property, condition) {
         : 0;
     };
   }
+}
+/* Generate a random number */
+export function randomNumber() {
+  return Math.floor(Math.random() * 9999);
+}
+
+/* Get the projects back from local storage */
+export function getProject() {
+  return JSON.parse(localStorage.getItem("projects") || []);
+}
+
+/* Save the projects in to the local storage*/
+export function saveProject(projects) {
+  localStorage.setItem("projects", JSON.stringify(projects));
+}
+
+/* Clear the local storage */
+export function clearLocalStorage() {
+  localStorage.clear();
+}
+
+/* Delete an object from local storage */
+export function removeProjectFromStorage(projectId) {
+  /* Get the data from local storage */
+  let storedObjects = JSON.parse(localStorage.getItem("projects"));
+
+  /* Find the index of the object  */
+  let objectIndex = storedObjects.findIndex((item) => item.id === projectId);
+
+  /* Remove the object using the id */
+  storedObjects.splice(objectIndex, 1);
+
+  /* Set again the new array back to the local storage */
+  saveProject(storedObjects);
 }
