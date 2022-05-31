@@ -16,6 +16,14 @@ import {
 import * as utilities from "./utilities-functions";
 import { projectArray } from "./arrays";
 
+window.addEventListener("load", () => {
+  utilities.getProject().forEach((item) => {
+    projectArray.push(item);
+    renderModule.renderProjectListItem.call(item);
+  });
+  utilities.toggleNotProjectScreen();
+});
+
 /* Home Section  */
 home.addEventListener("click", function (e) {
   /* The method elem.closest(selector) returns the nearest ancestor 
@@ -27,18 +35,27 @@ home.addEventListener("click", function (e) {
   }
 });
 
-const counter = utilities.increment();
+// const counter = utilities.increment();
 /* Project Sections */
 input.addEventListener("keypress", (e) => {
   if (e.key === "Enter" && input.value !== "") {
     const name = e.target.value;
     // count++;
     /* Create a new instance object from Project class */
-    const object = new Project(name, counter());
+    const object = new Project(name, utilities.randomNumber());
     /* Push the new instance into projectArray */
     projectArray.push(object);
     /*Render the object at DOM*/
+    // renderModule.renderProjectListItem.call(object);
+    utilities.saveProject(projectArray);
+    const projectList = document.querySelector(".project-list");
+    const projectItem = document.querySelector(
+      `[data-project-id="${object.id}"]`
+    );
+
+    // if (projectList.contains(projectItem)) return;
     renderModule.renderProjectListItem.call(object);
+
     /* Clear the input value after  */
     utilities.clearInputValue();
     /* Hide the Img and text after create the first project */
@@ -104,16 +121,21 @@ projectList.addEventListener("click", function (e) {
     todoTitle.textContent = "";
     /* Clear the html inside the todoList  */
     todoList.innerHTML = "";
+    /* Remove local storage entries */
+    utilities.removeProjectFromStorage(project.id);
+
     /* If the project array is empty */
     if (!projectArray.length) {
       /* Clear its list inner html */
       projectList.innerHTML = "";
       /* Reset the counter function */
-      counter.reset();
+      // counter.reset();
       /* Clear again the todo list inner html just in case */
       todoList.innerHTML = "";
       /* Turn on the no project state  */
       utilities.toggleNotProjectScreen();
+
+      utilities.clearLocalStorage();
     }
   }
 });
@@ -325,6 +347,7 @@ todoList.addEventListener("keypress", (e) => {
 sortButton.addEventListener("click", utilities.toggleSortingOptionVisibility);
 
 let order = true;
+/* Sorting option  */
 todoSortOptionsContainer.addEventListener("click", (e) => {
   const sortByButton = e.target.closest("div div > p");
   if (!sortByButton) return;
