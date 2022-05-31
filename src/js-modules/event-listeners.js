@@ -338,23 +338,14 @@ todoSortOptionsContainer.addEventListener("click", (e) => {
 
   if (sortByButton.textContent === "Alphabetically") {
     order = !order;
-    project.todoList.sort((a, b) => {
-      const nameA = a.todoName.toLowerCase();
-      const nameB = b.todoName.toLowerCase();
-
-      return order ? nameA < nameB : nameA > nameB;
-    });
+    project.todoList.sort(utilities.compare("todoName", order));
   }
+
   if (sortByButton.textContent === "Priority") {
     order = !order;
-
-    project.todoList.sort((a, b) => {
-      const priorityA = a.changeToNum(a.priority);
-      const priorityB = b.changeToNum(b.priority);
-
-      return order ? priorityA < priorityB : priorityA > priorityB;
-    });
+    project.todoList.sort(utilities.compare("priority", order));
   }
+
   todoList.innerHTML = "";
   project.todoList.forEach((todo) => {
     renderModule.renderProjectTodoListItem.call(todo);
