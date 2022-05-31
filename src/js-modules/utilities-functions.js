@@ -124,10 +124,13 @@ export function addTodoObjectToArray(object) {
   this.todoList.push(object);
 }
 
+/* Sorting function */
 export function compare(property, condition) {
+  /* if it is for priority sorting */
   if (property === "priority") {
     if (condition) {
       return function (a, b) {
+        /* Use object method to turn the priority value to number */
         return a.changeToNum(a[property]) < b.changeToNum(b[property])
           ? -1
           : a.changeToNum(a[property]) > b.changeToNum(b[property])
@@ -144,14 +147,22 @@ export function compare(property, condition) {
       };
     }
   }
-
+  /* Sort for letters and numbers */
   if (condition) {
     return function (a, b) {
-      return a[property] < b[property] ? -1 : a[property] > b[property] ? 1 : 0;
+      return a[property].toLowerCase() < b[property].toLowerCase()
+        ? -1
+        : a[property].toLowerCase() > b[property].toLowerCase()
+        ? 1
+        : 0;
     };
   } else {
     return function (a, b) {
-      return a[property] > b[property] ? -1 : a[property] < b[property] ? 1 : 0;
+      return a[property].toLowerCase() > b[property].toLowerCase()
+        ? -1
+        : a[property].toLowerCase() < b[property].toLowerCase()
+        ? 1
+        : 0;
     };
   }
 }
