@@ -9,7 +9,7 @@ import {
   todoList,
 } from "./dom-elements";
 import { projectArray } from "./arrays";
-import { Project } from "./project-class";
+import { Project, Todo } from "./project-class";
 
 let selectedLi;
 
@@ -122,4 +122,36 @@ export function toggleSortingOptionVisibility() {
 
 export function addTodoObjectToArray(object) {
   this.todoList.push(object);
+}
+
+export function compare(property, condition) {
+  if (property === "priority") {
+    if (condition) {
+      return function (a, b) {
+        return a.changeToNum(a[property]) < b.changeToNum(b[property])
+          ? -1
+          : a.changeToNum(a[property]) > b.changeToNum(b[property])
+          ? 1
+          : 0;
+      };
+    } else {
+      return function (a, b) {
+        return a.changeToNum(a[property]) > b.changeToNum(b[property])
+          ? -1
+          : a.changeToNum(a[property]) < b.changeToNum(b[property])
+          ? 1
+          : 0;
+      };
+    }
+  }
+
+  if (condition) {
+    return function (a, b) {
+      return a[property] < b[property] ? -1 : a[property] > b[property] ? 1 : 0;
+    };
+  } else {
+    return function (a, b) {
+      return a[property] > b[property] ? -1 : a[property] < b[property] ? 1 : 0;
+    };
+  }
 }
