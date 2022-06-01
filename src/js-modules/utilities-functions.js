@@ -11,6 +11,7 @@ import {
 import { projectArray } from "./arrays";
 import { Project, Todo } from "./project-class";
 import * as dateFns from "date-fns";
+import { el } from "date-fns/locale";
 
 let selectedLi;
 
@@ -256,14 +257,32 @@ export function classSetForCheck() {
 
 export function setDate(data, id) {
   if (data === "today") {
-    this.date = dateFns.format(new Date(), "yyyy/MM/dd");
+    this.date = dateFns.format(new Date(), "yyyy-MM-dd");
   }
   if (data === "tomorrow") {
-    this.date = dateFns.format(dateFns.startOfTomorrow(), "yyyy/MM/dd");
+    this.date = dateFns.format(dateFns.startOfTomorrow(), "yyyy-MM-dd");
   }
   if (data === "specific") {
     this.date = document.querySelector(`[data-id="${id}"]`).value;
   }
 
   saveProjectToLocalStorage(projectArray);
+}
+
+/* Rendered date input value */
+export function valueForDateDisplay() {
+  /* make a new date object from todo date */
+  const date = new Date(this.date);
+  /* Check if todo day is today */
+  const todayCheck = dateFns.isToday(date);
+  /* Check if todo day is tomorrow */
+  const tomorrowCheck = dateFns.isTomorrow(date);
+
+  /* If condition met return ""
+ that function is used in render module to keep the display
+ value of date input to this.date if is set for days that are neither 
+ today or tomorrow */
+  if (todayCheck || tomorrowCheck) return "";
+
+  return this.date;
 }
