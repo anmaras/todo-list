@@ -18,6 +18,7 @@ class Todo {
     this.notes = "";
     this.priority = "";
     this.checkbox = "";
+    this.dateId = "";
   }
 }
 
