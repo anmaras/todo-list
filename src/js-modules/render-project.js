@@ -40,10 +40,7 @@ function renderProjectListItem() {
                     ${projectIcon}
                     <input value="${this.name}" id="projectInput"  ></>
                                 <img src=${Icon} id="garbageIcon">`;
-  createProjectElement.insertAdjacentHTML(
-    "beforeend",
-    projectListLabelInputMarkUp
-  );
+  createProjectElement.insertAdjacentHTML("beforeend", projectListLabelInputMarkUp);
 
   projectListDomElement.append(createProjectElement);
   return projectListDomElement;
@@ -52,89 +49,76 @@ function renderProjectListItem() {
 function renderProjectTodoListItem() {
   const todoList = document.querySelector(".main__task-list__list");
 
-  const listItemMarkup = `<li class="main__task-list__list-item ${utilities.classSetForSelect.call(
-    this
-  )}" data-todo-id = ${this.todoId} data-projectId = ${this.projectId} >
-
-  <!-- Header -->
-                <div class="main__task-list__list-item__title-container">
-                  <div>
-                    <label for="main__task-list__list-item__checkbox"></label>
-                    <input
-                      type="checkbox" ${this.checkbox}
-                      id="main__task-list__list-item__checkbox "
-                    />
-                    <label for="main__task-list__list-item__title"></label>
-                    <input type="text" id="main__task-list__list-item__title" class="${
-                      this.checkbox
-                    }"
-                    value="${this.todoName}"
-                   ${utilities.classSetForCheck.call(this)} />
-                  </div>
-                  <div>
-                    <p class="main__task-list__list-item__date-reference">${
-                      this.date
-                    }</p>
-                    ${chevronUp}
-                  </div>
-                </div>
-
-                <!-- Notes -->
-                <div class="main__task-list__list-item__notes-container">
-                  <label for="main__task-list__list-item__textarea"
-                    >Notes</label
-                  >
-                  <textarea
-                    id="main__task-list__list-item__textarea"
-                    data-textarea-id = ${this.todoId}
-                    placeholder = "Add your notes here..."
-                  >${this.notes}</textarea>
-                </div>
-
-                <!-- Date -->
-                <div class="main__task-list__list-item__date-container">
-                  <p class="main__task-list__list-item__date-title">Due Date</p>
-                  <div>
-                    <button id="today-btn" data-date="today" data-date-id=${
-                      this.todoId
-                    } >Today</button>
-                    <button id="tomorrow-btn"data-date="tomorrow" data-tomorrow-id = ${
-                      this.todoId
-                    }>Tomorrow</button>
-                    <label for="main__task-list__list-item__date"></label>
-                    <input type="date" value ="${utilities.valueForDateDisplay.call(
-                      this
-                    )}" id="main__task-list__list-item__date" data-date="specific" data-id="${
-    this.todoId
-  }"  />
-                  </div>
-                </div>
-
-                <!-- Priority -->
-                <div class="main__task-list__list-item__priority-container">
-                  <label for="main__task-list__list-item__priority"
-                    >Priority</label
-                  >
-                  <select
-                    name="select-priority"
-                    id="main__task-list__list-item__priority"
-                    data-select-id = ${this.todoId}
-                  >
-                    <option value="none" selected="Select an option" disabled hidden>
-                      ${utilities.selectTagText.call(this)}
-                    </option>
-                    <option value="low">Low</option>
-                    <option value="medium">Medium</option>
-                    <option value="high">High</option>
-                    <option value="no">None</option>
-                  </select>
-                </div>
-                
-                <!-- Delete Btn -->
-                <button id="delete" class="main__task-list__list-item__delete-task__btn">
-                  Delete
-                </button>
-              </li>`;
+  const listItemMarkup = `<li 
+  class="main__task-list__list-item ${utilities.classSetForSelect.call(this)}" 
+  data-todo-id = ${this.todoId} data-projectId = ${this.projectId} >
+   <!-- Header -->
+   <div class="main__task-list__list-item__title-container">
+      <div>
+         <label for="main__task-list__list-item__checkbox"></label>
+         <input
+         type="checkbox" ${this.checkbox}
+         id="main__task-list__list-item__checkbox "
+         />
+         <label for="main__task-list__list-item__title"></label>
+         <input type="text" id="main__task-list__list-item__title" class="${this.checkbox}"
+         value="${this.todoName}"
+         ${utilities.classSetForCheck.call(this)} />
+      </div>
+      <div>
+         <p class="main__task-list__list-item__date-reference">${this.date}</p>
+         ${chevronUp}
+      </div>
+   </div>
+   <!-- Notes -->
+   <div class="main__task-list__list-item__notes-container">
+      <label for="main__task-list__list-item__textarea"
+         >Notes</label
+         >
+      <textarea
+         id="main__task-list__list-item__textarea"
+         data-textarea-id = ${this.todoId}
+         placeholder = "Add your notes here..."
+         >${this.notes}</textarea>
+   </div>
+   <!-- Date -->
+   <div class="main__task-list__list-item__date-container">
+      <p class="main__task-list__list-item__date-title">Due Date</p>
+      <div>
+         <button id="today-btn" data-date="today" data-date-id=${this.todoId} >Today</button>
+         <button id="tomorrow-btn"data-date="tomorrow" data-tomorrow-id = ${
+           this.todoId
+         }>Tomorrow</button>
+         <label for="main__task-list__list-item__date"></label>
+         <input type="date" value ="${utilities.valueForDateDisplay.call(
+           this
+         )}" id="main__task-list__list-item__date" data-date="specific" data-id="${this.todoId}"  />
+      </div>
+   </div>
+   <!-- Priority -->
+   <div class="main__task-list__list-item__priority-container">
+      <label for="main__task-list__list-item__priority"
+         >Priority</label
+         >
+      <select
+         name="select-priority"
+         id="main__task-list__list-item__priority"
+         data-select-id = ${this.todoId}
+         >
+         <option value="none" selected="Select an option" disabled hidden>
+            ${utilities.selectTagText.call(this)}
+         </option>
+         <option value="low">Low</option>
+         <option value="medium">Medium</option>
+         <option value="high">High</option>
+         <option value="no">None</option>
+      </select>
+   </div>
+   <!-- Delete Btn -->
+   <button id="delete" class="main__task-list__list-item__delete-task__btn">
+   Delete
+   </button>
+</li>`;
 
   return todoList.insertAdjacentHTML("beforeend", listItemMarkup);
 }
