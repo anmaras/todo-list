@@ -255,30 +255,49 @@ export function classSetForCheck() {
   }
 }
 
-export function classSetForDateButtons() {
+/* Need to find a way to make those 3 into 1 */
+export function classSetForTodayButtons() {
   if (!this.dateId) return "";
 
-  if (
-    this.dateId === "today" ||
-    this.dateId === "tomorrow" ||
-    this.dateId === "specific"
-  ) {
+  if (this.dateId === "today") {
     return "activeDate";
   }
 }
 
+export function classSetForTomorrowButtons() {
+  if (!this.dateId) return "";
+
+  if (this.dateId === "tomorrow") {
+    return "activeDate";
+  }
+}
+export function classSetForSpecificButtons() {
+  if (!this.dateId) return "";
+
+  if (this.dateId === "specific") {
+    return "activeDate";
+  }
+}
+
+export function dateReference() {
+  return this.date;
+}
+
 export function setDate(data, id) {
   if (data === "today") {
+    this.dateId = data;
     this.date = dateFns.format(new Date(), "yyyy-MM-dd");
   }
   if (data === "tomorrow") {
+    this.dateId = data;
     this.date = dateFns.format(dateFns.startOfTomorrow(), "yyyy-MM-dd");
   }
   if (data === "specific") {
-    this.date = document.querySelector(`[data-id="${id}"]`).value;
+    this.dateId = data;
+    this.date = document.querySelector(`[data-specific-id="${id}"]`).value;
   }
 
-  this.dateId = data;
+  // this.dateId = data;
 
   saveProjectToLocalStorage(projectArray);
 }
