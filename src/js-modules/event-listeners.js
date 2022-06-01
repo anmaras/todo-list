@@ -265,7 +265,6 @@ todoList.addEventListener("click", (e) => {
     utilities.saveProjectToLocalStorage(projectArray);
   }
 
-  /* If there is no check for that value it reset the todo priority */
   /* Dates  */
   if (
     targetData.date === TODAY ||
@@ -275,12 +274,15 @@ todoList.addEventListener("click", (e) => {
     const todayBtn = document.querySelector(`[data-date-id="${todoId}"]`);
     const tomorrowBtn = document.querySelector(`[data-tomorrow-id="${todoId}"]`);
 
-    // todayBtn.classList.toggle("activeDate");
     // tomorrowBtn.classList.toggle("activeDate", targetData.date === TOMORROW);
-
+    // todayBtn.classList.toggle("activeDate", targetData.date === TODAY);
+    console.log("test");
     utilities.setDate.call(todo, targetData.date, todoId);
   }
 
+  /* Priority */
+
+  /* If there is no check for that value it reset the todo priority */
   if (priority.value === "none") return;
 
   if (todo.hasOwnProperty("priority")) {
