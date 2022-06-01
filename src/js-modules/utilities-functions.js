@@ -10,6 +10,7 @@ import {
 } from "./dom-elements";
 import { projectArray } from "./arrays";
 import { Project, Todo } from "./project-class";
+import * as dateFns from "date-fns";
 
 let selectedLi;
 
@@ -251,4 +252,18 @@ export function classSetForCheck() {
   if (this.checkbox) {
     return "disabled";
   }
+}
+
+export function setDate(data, id) {
+  if (data === "today") {
+    this.date = dateFns.format(new Date(), "yyyy/MM/dd");
+  }
+  if (data === "tomorrow") {
+    this.date = dateFns.format(dateFns.startOfTomorrow(), "yyyy/MM/dd");
+  }
+  if (data === "specific") {
+    this.date = document.querySelector(`[data-id="${id}"]`).value;
+  }
+
+  saveProjectToLocalStorage(projectArray);
 }
