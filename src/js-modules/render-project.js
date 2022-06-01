@@ -66,7 +66,8 @@ function renderProjectTodoListItem() {
          ${utilities.classSetForCheck.call(this)} />
       </div>
       <div>
-         <p class="main__task-list__list-item__date-reference">${this.date}</p>
+         <p class="main__task-list__list-item__date-reference">
+         ${utilities.dateReference.call(this)}</p>
          ${chevronUp}
       </div>
    </div>
@@ -85,14 +86,30 @@ function renderProjectTodoListItem() {
    <div class="main__task-list__list-item__date-container">
       <p class="main__task-list__list-item__date-title">Due Date</p>
       <div>
-         <button id="today-btn" data-date="today" data-date-id=${this.todoId} >Today</button>
-         <button id="tomorrow-btn"data-date="tomorrow" data-tomorrow-id = ${
-           this.todoId
-         }>Tomorrow</button>
-         <label for="main__task-list__list-item__date"></label>
-         <input type="date" value ="${utilities.valueForDateDisplay.call(
-           this
-         )}" id="main__task-list__list-item__date" data-date="specific" data-id="${this.todoId}"  />
+         <button 
+         id="today-btn" 
+         data-date="today" 
+         data-today-id=${this.todoId}
+         class="${utilities.classSetForTodayButtons.call(this)}" >
+         Today
+         </button>
+
+         <button 
+         id="tomorrow-btn"
+         data-date="tomorrow" 
+         data-tomorrow-id = ${this.todoId}
+         class="${utilities.classSetForTomorrowButtons.call(this)}"
+         >Tomorrow
+         </button>
+
+         <label for="main__task-list__list-item__date">
+         </label>
+         <input type="date" 
+         value ="${utilities.valueForDateDisplay.call(this)}" 
+         id="main__task-list__list-item__date" 
+         class="${utilities.classSetForSpecificButtons.call(this)}"
+         data-date="specific" 
+         data-specific-id="${this.todoId}">
       </div>
    </div>
    <!-- Priority -->
