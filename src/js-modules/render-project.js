@@ -1,4 +1,5 @@
 import { projectListDomElement } from "./dom-elements";
+import * as utilities from "./utilities-functions";
 
 import Icon from "/src/icons/delete-outline.png";
 
@@ -51,9 +52,9 @@ function renderProjectListItem() {
 function renderProjectTodoListItem() {
   const todoList = document.querySelector(".main__task-list__list");
 
-  const listItemMarkup = `<li class="main__task-list__list-item ${this.classSetForSelect()}" data-todo-id = ${
-    this.todoId
-  } data-projectId = ${this.projectId} >
+  const listItemMarkup = `<li class="main__task-list__list-item ${utilities.classSetForSelect.call(
+    this
+  )}" data-todo-id = ${this.todoId} data-projectId = ${this.projectId} >
 
                 <!-- Header -->
                 <div class="main__task-list__list-item__title-container">
@@ -68,7 +69,7 @@ function renderProjectTodoListItem() {
                       this.checkbox
                     }"
                     value="${this.todoName}"
-                   ${this.classSetForCheck()} />
+                   ${utilities.classSetForCheck.call(this)} />
                   </div>
                   <div>
                     <p class="main__task-list__list-item__date-reference">Date</p>
@@ -110,7 +111,7 @@ function renderProjectTodoListItem() {
                     data-select-id = ${this.todoId}
                   >
                     <option value="none" selected="Select an option" disabled hidden>
-                      ${this.select()}
+                      ${utilities.selectTagText.call(this)}
                     </option>
                     <option value="low">Low</option>
                     <option value="medium">Medium</option>
