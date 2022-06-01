@@ -265,17 +265,7 @@ todoList.addEventListener("click", (e) => {
     utilities.saveProjectToLocalStorage(projectArray);
   }
 
-  // if (priority.value === "none") return;
-
-  if (todo.hasOwnProperty("priority")) {
-    todo.priority = priority.value;
-    target.classList.toggle("low", priority.value === "low");
-    target.classList.toggle("medium", priority.value === "medium");
-    target.classList.toggle("high", priority.value === "high");
-    utilities.saveProjectToLocalStorage(projectArray);
-  }
-  todo.priority = priority.value;
-
+  /* If there is no check for that value it reset the todo priority */
   /* Dates  */
   if (
     targetData.date === TODAY ||
@@ -285,11 +275,23 @@ todoList.addEventListener("click", (e) => {
     const todayBtn = document.querySelector(`[data-date-id="${todoId}"]`);
     const tomorrowBtn = document.querySelector(`[data-tomorrow-id="${todoId}"]`);
 
-    todayBtn.classList.toggle("activeDate", targetData.date === TODAY);
-    tomorrowBtn.classList.toggle("activeDate", targetData.date === TOMORROW);
+    // todayBtn.classList.toggle("activeDate");
+    // tomorrowBtn.classList.toggle("activeDate", targetData.date === TOMORROW);
 
     utilities.setDate.call(todo, targetData.date, todoId);
   }
+
+  if (priority.value === "none") return;
+
+  if (todo.hasOwnProperty("priority")) {
+    todo.priority = priority.value;
+    target.classList.toggle("low", priority.value === "low");
+    target.classList.toggle("medium", priority.value === "medium");
+    target.classList.toggle("high", priority.value === "high");
+    utilities.saveProjectToLocalStorage(projectArray);
+  }
+
+  todo.priority = priority.value;
 });
 
 /* Todo rename functionality */
