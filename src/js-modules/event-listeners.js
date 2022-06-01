@@ -15,7 +15,6 @@ import {
 } from "./dom-elements";
 import * as utilities from "./utilities-functions";
 import { projectArray } from "./arrays";
-import addDays from "date-fns/addDays";
 
 window.addEventListener("load", () => {
   if (!localStorage.length) return;
@@ -234,7 +233,7 @@ todoInput.addEventListener("keypress", (e) => {
 
 // /* Delete todo object and its dom element */
 todoList.addEventListener("click", (e) => {
-  const dateTarget = e.target.closest("button");
+  const targetData = e.target.dataset;
   const target = e.target.closest("li");
   /* check target if its falsy and if it is return */
   if (!target) return;
@@ -252,6 +251,9 @@ todoList.addEventListener("click", (e) => {
   const todoTitle = e.target.parentElement.lastElementChild;
   const priority = document.querySelector(`[data-select-id ="${todoId}"]`);
   const todo = projectArray[projectIndex].todoList[todoIndex];
+  const TODAY = "today";
+  const TOMORROW = "tomorrow";
+  const SPECIFIC = "specific";
 
   if (!projectArray.includes(project)) return;
 
@@ -283,7 +285,6 @@ todoList.addEventListener("click", (e) => {
     utilities.saveProjectToLocalStorage(projectArray);
   }
 
-  console.log(dateTarget);
   // if (priority.value === "none") return;
 
   if (todo.hasOwnProperty("priority")) {
@@ -295,7 +296,14 @@ todoList.addEventListener("click", (e) => {
   }
   todo.priority = priority.value;
 
-  /* Dates section */
+  /* Dates  */
+  if (
+    targetData.date === TODAY ||
+    targetData.date === TOMORROW ||
+    targetData.date === SPECIFIC
+  ) {
+    utilities.setDate.call(todo, targetData.date, todoId);
+  }
 });
 
 /* Todo rename functionality */
