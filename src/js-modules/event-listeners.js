@@ -266,18 +266,24 @@ todoList.addEventListener("click", (e) => {
   }
 
   /* Dates  */
-  if (
-    targetData.date === TODAY ||
-    targetData.date === TOMORROW ||
-    targetData.date === SPECIFIC
-  ) {
-    const todayBtn = document.querySelector(`[data-date-id="${todoId}"]`);
+  if (targetData.date === TODAY || targetData.date === TOMORROW || targetData.date === SPECIFIC) {
+    const todayBtn = document.querySelector(`[data-today-id="${todoId}"]`);
     const tomorrowBtn = document.querySelector(`[data-tomorrow-id="${todoId}"]`);
+    const specificDateBtn = document.querySelector(`[data-specific-id ="${todoId}"]`);
+    const dateReference = document.querySelector(".main__task-list__list-item__date-reference");
 
-    // tomorrowBtn.classList.toggle("activeDate", targetData.date === TOMORROW);
-    // todayBtn.classList.toggle("activeDate", targetData.date === TODAY);
-    console.log("test");
+    /* Set the date depends the button */
     utilities.setDate.call(todo, targetData.date, todoId);
+
+    const { date } = todo;
+
+    /* Set the date on date reference */
+    dateReference.textContent = date;
+
+    /* Class added for buttons to stay stick to action mode after date select */
+    todayBtn.classList.toggle("activeDate", targetData.date === TODAY);
+    tomorrowBtn.classList.toggle("activeDate", targetData.date === TOMORROW);
+    specificDateBtn.classList.toggle("activeDate", targetData.date === SPECIFIC);
   }
 
   /* Priority */
@@ -301,9 +307,7 @@ todoList.addEventListener("keypress", (e) => {
   const target = e.target.closest("input");
   const newTodoName = e.target.value;
   if (!target) return;
-  const projectId = Number(
-    target.parentElement.parentElement.parentElement.dataset.projectid
-  );
+  const projectId = Number(target.parentElement.parentElement.parentElement.dataset.projectid);
   const todoId = Number(target.parentElement.parentElement.parentElement.dataset.todoId);
   const projectIndex = projectArray.findIndex((obj) => obj.id === Number(projectId));
   const project = projectArray[projectIndex];
