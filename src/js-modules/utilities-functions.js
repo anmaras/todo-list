@@ -255,6 +255,18 @@ export function classSetForCheck() {
   }
 }
 
+export function classSetForDateButtons() {
+  if (!this.dateId) return "";
+
+  if (
+    this.dateId === "today" ||
+    this.dateId === "tomorrow" ||
+    this.dateId === "specific"
+  ) {
+    return "activeDate";
+  }
+}
+
 export function setDate(data, id) {
   if (data === "today") {
     this.date = dateFns.format(new Date(), "yyyy-MM-dd");
@@ -265,6 +277,8 @@ export function setDate(data, id) {
   if (data === "specific") {
     this.date = document.querySelector(`[data-id="${id}"]`).value;
   }
+
+  this.dateId = data;
 
   saveProjectToLocalStorage(projectArray);
 }
