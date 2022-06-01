@@ -15,12 +15,18 @@ import {
 } from "./dom-elements";
 import * as utilities from "./utilities-functions";
 import { projectArray } from "./arrays";
+import addDays from "date-fns/addDays";
 
 window.addEventListener("load", () => {
-  utilities.getProject().forEach((item) => {
+  if (!localStorage.length) return;
+
+  const local = utilities.getProject();
+
+  local.forEach((item) => {
     projectArray.push(item);
     renderModule.renderProjectListItem.call(item);
   });
+
   utilities.toggleNotProjectScreen();
 });
 
@@ -47,7 +53,7 @@ input.addEventListener("keypress", (e) => {
     projectArray.push(object);
     /*Render the object at DOM*/
     // renderModule.renderProjectListItem.call(object);
-    utilities.saveProject(projectArray);
+    utilities.saveProjectToLocalStorage(projectArray);
     const projectList = document.querySelector(".project-list");
     const projectItem = document.querySelector(
       `[data-project-id="${object.id}"]`
@@ -122,19 +128,18 @@ projectList.addEventListener("click", function (e) {
     /* Clear the html inside the todoList  */
     todoList.innerHTML = "";
     /* Remove local storage entries */
-    utilities.removeProjectFromStorage(project.id);
+    // utilities.removeProjectFromStorage(project.id);
+    utilities.saveProjectToLocalStorage(projectArray);
 
     /* If the project array is empty */
     if (!projectArray.length) {
       /* Clear its list inner html */
       projectList.innerHTML = "";
-      /* Reset the counter function */
-      // counter.reset();
       /* Clear again the todo list inner html just in case */
       todoList.innerHTML = "";
       /* Turn on the no project state  */
       utilities.toggleNotProjectScreen();
-
+      /* Clear the local storage */
       utilities.clearLocalStorage();
     }
   }
@@ -153,13 +158,18 @@ projectList.addEventListener("keypress", (e) => {
         /* Rename the project name */
         project.name = newText;
         todoTitle.textContent = project.name;
+
+        utilities.saveProjectToLocalStorage(projectArray);
+
+        // utilities.updateProjectFromStorage(project.id, newText);
+
         return project;
       });
   }
 });
 
 /* Render todo while switching projects */
-projectList.addEventListener("click", function (e) {
+projectList.addEventListener("click", (e) => {
   const listTarget = e.target.closest("li");
   if (!listTarget) return;
   const todoListItems = document.querySelectorAll(
@@ -182,20 +192,14 @@ projectList.addEventListener("click", function (e) {
 
   /* For selected project search in its todo array  */
   projectArray[projectIndex].todoList.forEach((todo) => {
-    /* Save the todo in item variable using the data set and todo id */
-    let item = document.querySelector(`[data-todo-id="${todo.todoId}"]`);
-    /* If the item already exist in list in dom return*/
-    // if (todoList.contains(todoListItem)) return;
-    // if (item && todoList.contains(item)) return;
-    /* if the todo it does not exist in dom render it */
     renderModule.renderProjectTodoListItem.call(todo);
   });
+
   todoSortOrder.classList.remove("visibility");
   // document.querySelector(".main__sorting-order svg").setAttribute("data-position", "up");
 });
 
 /* -----------------Add functionality to todo input -----------------------------------------*/
-const todoCounter = utilities.increment();
 
 todoInput.addEventListener("keypress", (e) => {
   const target = e.target.closest("input");
@@ -210,10 +214,13 @@ todoInput.addEventListener("keypress", (e) => {
 
   if (e.key === "Enter" && target.value !== "") {
     /* Create new todo */
-    const todoObject = new Todo(inputText, projectId, todoCounter());
+    const todoObject = new Todo(inputText, projectId, utilities.randomNumber());
 
     /* Push the todo to project array todo list */
     projectArray[objectIndex].todoList.push(todoObject);
+
+    /* Save todo in local storage */
+    utilities.saveProjectToLocalStorage(projectArray);
 
     /* Render the todo */
     renderModule.renderProjectTodoListItem.call(todoObject);
@@ -227,6 +234,7 @@ todoInput.addEventListener("keypress", (e) => {
 
 // /* Delete todo object and its dom element */
 todoList.addEventListener("click", (e) => {
+  const dateTarget = e.target.closest("button");
   const target = e.target.closest("li");
   /* check target if its falsy and if it is return */
   if (!target) return;
@@ -252,10 +260,8 @@ todoList.addEventListener("click", (e) => {
     projectArray[projectIndex].todoList.splice(todoIndex, 1);
     /* delete it from dom */
     todoList.removeChild(target);
-    if (!projectArray[projectIndex].todoList.length) {
-      // todoList.innerHTML = "";
-      todoCounter.reset();
-    }
+
+    utilities.saveProjectToLocalStorage(projectArray);
   }
 
   /* Need to be more specific with todoTitle variable value because 
@@ -269,22 +275,27 @@ todoList.addEventListener("click", (e) => {
   if (isChecked && e.target.type === "checkbox") {
     projectArray[projectIndex].todoList[todoIndex].checkbox = "checked";
     todoTitle.disabled = isChecked;
+    utilities.saveProjectToLocalStorage(projectArray);
   }
   if (!isChecked && e.target.type === "checkbox") {
     projectArray[projectIndex].todoList[todoIndex].checkbox = "";
     todoTitle.disabled = isChecked;
+    utilities.saveProjectToLocalStorage(projectArray);
   }
 
-  if (priority.value === "none") return;
+  console.log(dateTarget);
+  // if (priority.value === "none") return;
 
   if (todo.hasOwnProperty("priority")) {
     todo.priority = priority.value;
     target.classList.toggle("low", priority.value === "low");
     target.classList.toggle("medium", priority.value === "medium");
     target.classList.toggle("high", priority.value === "high");
+    utilities.saveProjectToLocalStorage(projectArray);
   }
-
   todo.priority = priority.value;
+
+  /* Dates section */
 });
 
 /* Todo rename functionality */
@@ -314,6 +325,8 @@ todoList.addEventListener("keypress", (e) => {
         todo.todoName = newTodoName;
         /* Dom todo name change to new todo object name */
         target.value = todo.todoName;
+        utilities.saveProjectToLocalStorage(projectArray);
+
         return todo;
       });
   }
@@ -340,6 +353,7 @@ todoList.addEventListener("keypress", (e) => {
   if (!projectArray.includes(project)) return;
   if (e.key === "Enter") {
     projectArray[projectIndex].todoList[todoIndex].notes = targetTextArea.value;
+    utilities.saveProjectToLocalStorage(projectArray);
   }
 });
 
