@@ -148,6 +148,14 @@
   border-bottom-right-radius: var(--border-radius-value);
 }
 
+.activeDate {
+  background-color: var(--Paradise-Pink);
+}
+
+#main__task-list__list-item__date.activeDate {
+  background-color: var(--Paradise-Pink);
+}
+
 #main__task-list__list-item__date:hover,
 .main__task-list__list-item__date-container > div > button:hover {
   background-color: var(--Ultra-Red);
