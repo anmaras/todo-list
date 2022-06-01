@@ -72,7 +72,9 @@ function renderProjectTodoListItem() {
                    ${utilities.classSetForCheck.call(this)} />
                   </div>
                   <div>
-                    <p class="main__task-list__list-item__date-reference">Date</p>
+                    <p class="main__task-list__list-item__date-reference">${
+                      this.date
+                    }</p>
                     ${chevronUp}
                   </div>
                 </div>
@@ -93,10 +95,14 @@ function renderProjectTodoListItem() {
                 <div class="main__task-list__list-item__date-container">
                   <p class="main__task-list__list-item__date-title">Due Date</p>
                   <div>
-                    <button id="today-btn">Today</button>
-                    <button id="tomorrow-btn">Tomorrow</button>
+                    <button id="today-btn" data-date="today">Today</button>
+                    <button id="tomorrow-btn"data-date="tomorrow">Tomorrow</button>
                     <label for="main__task-list__list-item__date"></label>
-                    <input type="date" id="main__task-list__list-item__date" />
+                    <input type="date" value =${
+                      this.date
+                    } id="main__task-list__list-item__date" data-date="specific" data-id="${
+    this.todoId
+  }"  />
                   </div>
                 </div>
 
