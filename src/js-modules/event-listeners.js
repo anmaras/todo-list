@@ -54,9 +54,7 @@ input.addEventListener("keypress", (e) => {
     // renderModule.renderProjectListItem.call(object);
     utilities.saveProjectToLocalStorage(projectArray);
     const projectList = document.querySelector(".project-list");
-    const projectItem = document.querySelector(
-      `[data-project-id="${object.id}"]`
-    );
+    const projectItem = document.querySelector(`[data-project-id="${object.id}"]`);
 
     // if (projectList.contains(projectItem)) return;
     renderModule.renderProjectListItem.call(object);
@@ -77,19 +75,13 @@ projectList.addEventListener("click", function (e) {
   if (!listTarget) return;
   /* Every time you click on a project find The index of project in array
   using target id and project id */
-  const projectIndex = projectArray.findIndex(
-    (obj) => obj.id === Number(listTarget.id)
-  );
+  const projectIndex = projectArray.findIndex((obj) => obj.id === Number(listTarget.id));
   /* Find the project object in array using the index above */
   const project = projectArray[projectIndex];
   /* If the project does not exist return */
   if (!projectArray.includes(project)) return;
   /* If list project item is in project list container and the target id is not garbage icon */
-  if (
-    listTarget &&
-    projectList.contains(listTarget) &&
-    targetId !== "garbageIcon"
-  ) {
+  if (listTarget && projectList.contains(listTarget) && targetId !== "garbageIcon") {
     /* HighLight the project list item on selection */
     utilities.highlight(listTarget);
     /* Make header visible */
@@ -106,9 +98,7 @@ projectList.addEventListener("click", function (e) {
 projectList.addEventListener("click", function (e) {
   const listTarget = e.target.closest("li");
   if (!listTarget) return;
-  const projectIndex = projectArray.findIndex(
-    (obj) => obj.id === Number(listTarget.id)
-  );
+  const projectIndex = projectArray.findIndex((obj) => obj.id === Number(listTarget.id));
   const project = projectArray[projectIndex];
 
   if (!projectArray.includes(project)) return;
@@ -171,15 +161,9 @@ projectList.addEventListener("keypress", (e) => {
 projectList.addEventListener("click", (e) => {
   const listTarget = e.target.closest("li");
   if (!listTarget) return;
-  const todoListItems = document.querySelectorAll(
-    `[data-projectid="${listTarget.id}"]`
-  );
-  const todoListItem = document.querySelector(
-    `[data-projectid="${listTarget.id}"]`
-  );
-  const projectIndex = projectArray.findIndex(
-    (obj) => obj.id === Number(listTarget.id)
-  );
+  const todoListItems = document.querySelectorAll(`[data-projectid="${listTarget.id}"]`);
+  const todoListItem = document.querySelector(`[data-projectid="${listTarget.id}"]`);
+  const projectIndex = projectArray.findIndex((obj) => obj.id === Number(listTarget.id));
   const project = projectArray[projectIndex];
   if (!projectArray.includes(project)) return;
 
@@ -204,9 +188,7 @@ todoInput.addEventListener("keypress", (e) => {
   const target = e.target.closest("input");
   const inputText = target.value;
   const projectId = Number(e.target.dataset.projectTodoId);
-  const objectIndex = projectArray.findIndex(
-    (obj) => obj.id === Number(projectId)
-  );
+  const objectIndex = projectArray.findIndex((obj) => obj.id === Number(projectId));
   /* CHECK IT FOR LATER IT MAKES THE TODO ID TO START FROM 0
   IN CASE ID MESSED UP THE TODO IDS */
   // const todoId = projectArray[objectIndex].todoList.length;
@@ -240,9 +222,7 @@ todoList.addEventListener("click", (e) => {
   const targetId = e.target.id;
   const todoId = Number(target.dataset.todoId);
   const projectId = Number(target.dataset.projectid);
-  const projectIndex = projectArray.findIndex(
-    (obj) => obj.id === Number(projectId)
-  );
+  const projectIndex = projectArray.findIndex((obj) => obj.id === Number(projectId));
   const todoIndex = projectArray[projectIndex].todoList.findIndex(
     (todo) => todo.todoId === Number(todoId)
   );
@@ -302,6 +282,12 @@ todoList.addEventListener("click", (e) => {
     targetData.date === TOMORROW ||
     targetData.date === SPECIFIC
   ) {
+    const todayBtn = document.querySelector(`[data-date-id="${todoId}"]`);
+    const tomorrowBtn = document.querySelector(`[data-tomorrow-id="${todoId}"]`);
+
+    todayBtn.classList.toggle("activeDate", targetData.date === TODAY);
+    tomorrowBtn.classList.toggle("activeDate", targetData.date === TOMORROW);
+
     utilities.setDate.call(todo, targetData.date, todoId);
   }
 });
@@ -314,12 +300,8 @@ todoList.addEventListener("keypress", (e) => {
   const projectId = Number(
     target.parentElement.parentElement.parentElement.dataset.projectid
   );
-  const todoId = Number(
-    target.parentElement.parentElement.parentElement.dataset.todoId
-  );
-  const projectIndex = projectArray.findIndex(
-    (obj) => obj.id === Number(projectId)
-  );
+  const todoId = Number(target.parentElement.parentElement.parentElement.dataset.todoId);
+  const projectIndex = projectArray.findIndex((obj) => obj.id === Number(projectId));
   const project = projectArray[projectIndex];
 
   if (!projectArray.includes(project)) return;
@@ -347,12 +329,8 @@ todoList.addEventListener("keypress", (e) => {
   const todoNotes = document.querySelector(`[data-textarea-id="${todoId}"]`);
   // const newTodoName = e.target.value;
   // if (!target) return;
-  const projectId = Number(
-    targetTextArea.parentElement.parentElement.dataset.projectid
-  );
-  const projectIndex = projectArray.findIndex(
-    (obj) => obj.id === Number(projectId)
-  );
+  const projectId = Number(targetTextArea.parentElement.parentElement.dataset.projectid);
+  const projectIndex = projectArray.findIndex((obj) => obj.id === Number(projectId));
 
   const todoIndex = projectArray[projectIndex].todoList.findIndex(
     (todo) => todo.todoId === Number(todoId)
@@ -374,9 +352,7 @@ todoSortOptionsContainer.addEventListener("click", (e) => {
   const sortByButton = e.target.closest("div div > p");
   if (!sortByButton) return;
   const projectId = +header.dataset.projectId;
-  const projectIndex = projectArray.findIndex(
-    (obj) => obj.id === Number(projectId)
-  );
+  const projectIndex = projectArray.findIndex((obj) => obj.id === Number(projectId));
   const project = projectArray[projectIndex];
 
   todoSortOptionsContainer.classList.toggle("visible", !sortByButton);
