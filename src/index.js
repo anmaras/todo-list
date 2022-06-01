@@ -11,6 +11,16 @@ import "./css/middle-section/middle-todo-list.css";
 import "./css/middle-section/noproject-style.css";
 import "./css/header-style.css";
 import "jb-date-input";
+import {
+  format,
+  compareAsc,
+  nextWednesday,
+  endOfToday,
+  getHours,
+  isToday,
+  isTomorrow,
+} from "date-fns";
+
 import html from "./admin.html";
 import { projectArray, todoArray } from "./js-modules/arrays";
 
@@ -18,7 +28,16 @@ import * as events from "./js-modules/event-listeners";
 
 import { createNewTodoInstance } from "./js-modules/create-project";
 
-/* document.body.addEventListener("click", (e) => {
-  console.log(projectArray);
+/* function getObjects() {
+  return JSON.parse(localStorage.getItem("projects") || "[]");
+}
+
+console.log(getObjects());
+ */
+
+/* const result = isToday(new Date());
+
+document.body.addEventListener("click", (e) => {
+  console.log(result);
 });
  */
