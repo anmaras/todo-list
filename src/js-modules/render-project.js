@@ -56,7 +56,7 @@ function renderProjectTodoListItem() {
     this
   )}" data-todo-id = ${this.todoId} data-projectId = ${this.projectId} >
 
-                <!-- Header -->
+  <!-- Header -->
                 <div class="main__task-list__list-item__title-container">
                   <div>
                     <label for="main__task-list__list-item__checkbox"></label>
@@ -95,12 +95,16 @@ function renderProjectTodoListItem() {
                 <div class="main__task-list__list-item__date-container">
                   <p class="main__task-list__list-item__date-title">Due Date</p>
                   <div>
-                    <button id="today-btn" data-date="today">Today</button>
-                    <button id="tomorrow-btn"data-date="tomorrow">Tomorrow</button>
+                    <button id="today-btn" data-date="today" data-date-id=${
+                      this.todoId
+                    } >Today</button>
+                    <button id="tomorrow-btn"data-date="tomorrow" data-tomorrow-id = ${
+                      this.todoId
+                    }>Tomorrow</button>
                     <label for="main__task-list__list-item__date"></label>
-                    <input type="date" value =${
-                      this.date
-                    } id="main__task-list__list-item__date" data-date="specific" data-id="${
+                    <input type="date" value ="${utilities.valueForDateDisplay.call(
+                      this
+                    )}" id="main__task-list__list-item__date" data-date="specific" data-id="${
     this.todoId
   }"  />
                   </div>
