@@ -121,17 +121,17 @@ export function compare(property, condition) {
     if (condition) {
       return function (a, b) {
         /* Use object method to turn the priority value to number */
-        return a.changeToNum(a[property]) < b.changeToNum(b[property])
+        return changeToNum(a[property]) < changeToNum(b[property])
           ? -1
-          : a.changeToNum(a[property]) > b.changeToNum(b[property])
+          : changeToNum(a[property]) > changeToNum(b[property])
           ? 1
           : 0;
       };
     } else {
       return function (a, b) {
-        return a.changeToNum(a[property]) > b.changeToNum(b[property])
+        return changeToNum(a[property]) > changeToNum(b[property])
           ? -1
-          : a.changeToNum(a[property]) < b.changeToNum(b[property])
+          : changeToNum(a[property]) < changeToNum(b[property])
           ? 1
           : 0;
       };
@@ -167,7 +167,7 @@ export function getProject() {
 }
 
 /* Save the projects in to the local storage*/
-export function saveProject(projects) {
+export function saveProjectToLocalStorage(projects) {
   localStorage.setItem("projects", JSON.stringify(projects));
 }
 
@@ -188,5 +188,67 @@ export function removeProjectFromStorage(projectId) {
   storedObjects.splice(objectIndex, 1);
 
   /* Set again the new array back to the local storage */
-  saveProject(storedObjects);
+  saveProjectToLocalStorage(storedObjects);
+}
+
+export function updateProjectFromStorage(projectId, input) {
+  /* Get the data from local storage */
+  let storedObjects = JSON.parse(localStorage.getItem("projects"));
+
+  /* Find the index of the object  */
+  let objectIndex = storedObjects.findIndex((item) => item.id === projectId);
+
+  /* Rename the project */
+  storedObjects[objectIndex].name = input;
+
+  /* Set again the new array back to the local storage */
+  saveProjectToLocalStorage(storedObjects);
+}
+
+export function selectTagText() {
+  if (!this.priority) {
+    let text = "Select an option";
+    return text;
+  }
+  if (this.priority) {
+    return this.priority.charAt(0).toUpperCase() + this.priority.slice(1);
+  }
+}
+
+export function changeToNum(input) {
+  let num;
+  if (input === "low") {
+    num = 3;
+    return num;
+  }
+  if (input === "medium") {
+    num = 2;
+    return num;
+  }
+  if (input === "high") {
+    num = 1;
+    return num;
+  }
+  if (!input || input === "no") {
+    num = 4;
+    return num;
+  }
+}
+
+export function classSetForSelect() {
+  if (!this.priority) {
+    return this.priority;
+  }
+  if (this.priority) {
+    return this.priority.toLowerCase();
+  }
+}
+
+export function classSetForCheck() {
+  if (!this.checkbox) {
+    return "";
+  }
+  if (this.checkbox) {
+    return "disabled";
+  }
 }
