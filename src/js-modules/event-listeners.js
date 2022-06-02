@@ -14,20 +14,19 @@ import {
   shortingArrow,
 } from "./dom-elements";
 import * as utilities from "./utilities-functions";
-import { projectArray } from "./arrays";
+import { projectArray, todoArray } from "./arrays";
 const sortSwitch = utilities.conditionSwitcher();
 
 window.addEventListener("load", () => {
   if (!localStorage.length) return;
 
-  const local = utilities.getProject();
-
-  local.forEach((item) => {
+  utilities.getProject().forEach((item) => {
     projectArray.push(item);
     renderModule.renderProjectListItem.call(item);
   });
 
   utilities.toggleNotProjectScreen();
+  utilities.updateAllTasksNumber();
 });
 
 /* Home Section  */
@@ -180,9 +179,6 @@ todoInput.addEventListener("keypress", (e) => {
   const inputText = target.value;
   const projectId = Number(e.target.dataset.projectTodoId);
   const objectIndex = projectArray.findIndex((obj) => obj.id === Number(projectId));
-  /* CHECK IT FOR LATER IT MAKES THE TODO ID TO START FROM 0
-  IN CASE ID MESSED UP THE TODO IDS */
-  // const todoId = projectArray[objectIndex].todoList.length;
 
   if (e.key === "Enter" && target.value !== "") {
     /* Create new todo */
@@ -200,7 +196,7 @@ todoInput.addEventListener("keypress", (e) => {
     /* Clear the todo input */
     target.value = "";
 
-    return;
+    utilities.updateAllTasksNumber();
   }
 });
 
@@ -237,6 +233,8 @@ todoList.addEventListener("click", (e) => {
     todoList.removeChild(target);
 
     utilities.saveProjectToLocalStorage(projectArray);
+
+    utilities.updateAllTasksNumber();
   }
 
   /* Need to be more specific with todoTitle variable value because 
@@ -278,7 +276,10 @@ todoList.addEventListener("click", (e) => {
       const { date } = todo;
       utilities.setDate.call(todo, dateBtnDataSet.date, todoId);
       dateReference.textContent = date;
+      utilities.updateAllTasksNumber();
     });
+
+    utilities.updateAllTasksNumber();
 
     /* Class added for buttons to stay stick to action mode after date select */
     todayBtn.classList.toggle("activeDate", dateBtnDataSet.date === TODAY);
