@@ -220,7 +220,6 @@ todoInput.addEventListener("keypress", (e) => {
 
 // /* Delete todo object and its dom element */
 todoList.addEventListener("click", (e) => {
-  console.log(e.target.id);
   const dateBtnDataSet = e.target.dataset;
   const target = e.target.closest("li");
   /* check target if its falsy and if it is return */
