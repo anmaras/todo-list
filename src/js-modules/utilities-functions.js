@@ -8,7 +8,7 @@ import {
   addTodoTaskInputContainer as newTodoInput,
   todoList,
 } from "./dom-elements";
-import { projectArray } from "./arrays";
+import { projectArray, todoArray } from "./arrays";
 import { Project, Todo } from "./project-class";
 import * as dateFns from "date-fns";
 import { el } from "date-fns/locale";
@@ -344,6 +344,7 @@ export function valueForDateDisplay() {
   return this.date;
 }
 
+/* Toggle how the todo opens */
 export function toggleListItemSize(targetListTodo) {
   const listDropArrow = document.querySelector(`[data-chevron-id="${this.todoId}"]`);
   listDropArrow.classList.toggle("rotate");
@@ -351,4 +352,30 @@ export function toggleListItemSize(targetListTodo) {
   for (let i = 1; i < targetListTodo.childElementCount; i++) {
     targetListTodo.children[i].classList.toggle("hidden");
   }
+}
+
+function getTodoArrayCurrentLength() {
+  let allArray = [];
+  getProject("projects").forEach((project) => {
+    allArray.push(...project.todoList);
+  });
+  const todayArray = allArray.filter((item) => item.dateId === "today");
+  const tomorrowArray = allArray.filter((item) => item.dateId === "tomorrow");
+  const scheduledArray = allArray.filter((item) => item.dateId === "specific");
+
+  return { allArray, todayArray, tomorrowArray, scheduledArray };
+}
+
+export function updateAllTasksNumber() {
+  const todoArrayObject = getTodoArrayCurrentLength();
+
+  const all = document.querySelector(".left-section__home-container__all-tasks");
+  const today = document.querySelector(".left-section__home-container__today");
+  const tomorrow = document.querySelector(".left-section__home-container__tomorrow");
+  const scheduled = document.querySelector(".left-section__home-container__scheduled");
+
+  all.lastElementChild.textContent = todoArrayObject.allArray.length;
+  today.lastElementChild.textContent = todoArrayObject.todayArray.length;
+  tomorrow.lastElementChild.textContent = todoArrayObject.tomorrowArray.length;
+  scheduled.lastElementChild.textContent = todoArrayObject.scheduledArray.length;
 }
