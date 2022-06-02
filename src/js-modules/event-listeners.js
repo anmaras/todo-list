@@ -220,6 +220,7 @@ todoInput.addEventListener("keypress", (e) => {
 
 // /* Delete todo object and its dom element */
 todoList.addEventListener("click", (e) => {
+  console.log(e.target.id);
   const dateBtnDataSet = e.target.dataset;
   const target = e.target.closest("li");
   /* check target if its falsy and if it is return */
@@ -281,16 +282,16 @@ todoList.addEventListener("click", (e) => {
     const todayBtn = document.querySelector(`[data-today-id="${todoId}"]`);
     const tomorrowBtn = document.querySelector(`[data-tomorrow-id="${todoId}"]`);
     const specificDateBtn = document.querySelector(`[data-specific-id ="${todoId}"]`);
-    const dateReference = document.querySelector(`[data-reference-id="${todoId}"]`);
 
     /* Set the date depends the button */
-    utilities.test.call(todo, dateBtnDataSet.date, todoId);
+    utilities.setDate.call(todo, dateBtnDataSet.date, todoId);
 
     /* That way when user select from day picker dayRef and todo object update instant 
     otherwise need dblclick (need to refactor that somehow) */
     todoList.addEventListener("change", () => {
-      utilities.setDate.call(todo, dateBtnDataSet.date, todoId);
+      const dateReference = document.querySelector(`[data-reference-id="${todoId}"]`);
       const { date } = todo;
+      utilities.setDate.call(todo, dateBtnDataSet.date, todoId);
       dateReference.textContent = date;
     });
 
@@ -303,6 +304,11 @@ todoList.addEventListener("click", (e) => {
   /* When the user select today or tomorrow the date display is reset */
   if (dateBtnDataSet.date === TODAY || dateBtnDataSet.date === TOMORROW) {
     calendarDisplay.value = "";
+  }
+
+  /* Toggle list item size */
+  if (e.target.id === "list-arrow") {
+    utilities.toggleListItemSize.call(todo, target);
   }
 
   /* Priority */
