@@ -2,21 +2,7 @@ import { projectListDomElement } from "./dom-elements";
 import * as utilities from "./utilities-functions";
 
 import Icon from "/src/icons/delete-outline.png";
-import chevron from "/src/icons/chevron-up.png";
-
-/* Project Icon */
-const projectIcon = `<svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                    version="1.1"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      d="M20,18H4V8H20M20,6H12L10,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V8C22,6.89 21.1,6 20,6Z"
-                    />
-                  </svg> `;
+import chevron from "/src/icons/chevron-down.png";
 
 /* Render Project Dom Elements Function */
 function renderProjectListItem() {
@@ -26,9 +12,8 @@ function renderProjectListItem() {
   createProjectElement.className = "project-list__item";
 
   const projectListLabelInputMarkUp = `
-                    ${projectIcon}
-                    <input value="${this.name}" id="projectInput"  ></>
-                                <img src=${Icon} id="garbageIcon">`;
+         <input value="${this.name}" id="projectInput">
+            <img src=${Icon} id="garbageIcon">`;
   createProjectElement.insertAdjacentHTML("beforeend", projectListLabelInputMarkUp);
 
   projectListDomElement.append(createProjectElement);
@@ -39,7 +24,7 @@ function renderProjectTodoListItem() {
   const todoList = document.querySelector(".main__task-list__list");
 
   const listItemMarkup = `<li 
-  class="main__task-list__list-item ${utilities.classSetForSelect.call(this)}" 
+  class="main__task-list__list-item ${utilities.classSetForSelect.call(this)} visible" 
   data-todo-id = ${this.todoId} data-projectId = ${this.projectId} >
    <!-- Header -->
    <div class="main__task-list__list-item__title-container">
@@ -63,7 +48,7 @@ function renderProjectTodoListItem() {
       </div>
    </div>
    <!-- Notes -->
-   <div class="main__task-list__list-item__notes-container">
+   <div class="main__task-list__list-item__notes-container hidden">
       <label for="main__task-list__list-item__textarea"
          >Notes</label
          >
@@ -74,7 +59,7 @@ function renderProjectTodoListItem() {
          >${this.notes}</textarea>
    </div>
    <!-- Date -->
-   <div class="main__task-list__list-item__date-container">
+   <div class="main__task-list__list-item__date-container hidden">
       <p class="main__task-list__list-item__date-title">Due Date</p>
       <div>
          <button 
@@ -104,7 +89,7 @@ function renderProjectTodoListItem() {
       </div>
    </div>
    <!-- Priority -->
-   <div class="main__task-list__list-item__priority-container">
+   <div class="main__task-list__list-item__priority-container hidden">
       <label for="main__task-list__list-item__priority"
          >Priority</label
          >
@@ -123,7 +108,7 @@ function renderProjectTodoListItem() {
       </select>
    </div>
    <!-- Delete Btn -->
-   <button id="delete" class="main__task-list__list-item__delete-task__btn">
+   <button id="delete" class="main__task-list__list-item__delete-task__btn hidden">
    Delete
    </button>
 </li>`;
