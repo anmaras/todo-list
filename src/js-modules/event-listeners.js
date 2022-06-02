@@ -41,25 +41,18 @@ home.addEventListener("click", function (e) {
   }
 });
 
-// const counter = utilities.increment();
 /* Project Sections */
 input.addEventListener("keypress", (e) => {
   if (e.key === "Enter" && input.value !== "") {
     const name = e.target.value;
-    // count++;
     /* Create a new instance object from Project class */
     const object = new Project(name, utilities.randomNumber());
     /* Push the new instance into projectArray */
     projectArray.push(object);
     /*Render the object at DOM*/
-    // renderModule.renderProjectListItem.call(object);
     utilities.saveProjectToLocalStorage(projectArray);
-    const projectList = document.querySelector(".project-list");
-    const projectItem = document.querySelector(`[data-project-id="${object.id}"]`);
-
     // if (projectList.contains(projectItem)) return;
     renderModule.renderProjectListItem.call(object);
-
     /* Clear the input value after  */
     utilities.clearInputValue();
     /* Hide the Img and text after create the first project */
@@ -69,7 +62,6 @@ input.addEventListener("keypress", (e) => {
 
 /* Project List */
 projectList.addEventListener("click", function (e) {
-  /* Select the closest li element inside project list */
   const listTarget = e.target.closest("li");
   const targetId = e.target.id;
   /* if that selection is falsy return */
@@ -147,11 +139,10 @@ projectList.addEventListener("keypress", (e) => {
       .map((project) => {
         /* Rename the project name */
         project.name = newText;
+
         todoTitle.textContent = project.name;
 
         utilities.saveProjectToLocalStorage(projectArray);
-
-        // utilities.updateProjectFromStorage(project.id, newText);
 
         return project;
       });
@@ -180,7 +171,6 @@ projectList.addEventListener("click", (e) => {
   });
 
   todoSortOrder.classList.remove("visibility");
-  // document.querySelector(".main__sorting-order svg").setAttribute("data-position", "up");
 });
 
 /* -----------------Add functionality to todo input -----------------------------------------*/
@@ -213,10 +203,6 @@ todoInput.addEventListener("keypress", (e) => {
     return;
   }
 });
-
-// todoList.addEventListener("change", (e) => {
-//   console.log(e.target);
-// });
 
 // /* Delete todo object and its dom element */
 todoList.addEventListener("click", (e) => {
@@ -358,9 +344,6 @@ todoList.addEventListener("keypress", (e) => {
   const targetTextArea = e.target.closest("textarea");
   if (!targetTextArea) return;
   const todoId = targetTextArea.dataset.textareaId;
-  const todoNotes = document.querySelector(`[data-textarea-id="${todoId}"]`);
-  // const newTodoName = e.target.value;
-  // if (!target) return;
   const projectId = Number(targetTextArea.parentElement.parentElement.dataset.projectid);
   const projectIndex = projectArray.findIndex((obj) => obj.id === Number(projectId));
 
