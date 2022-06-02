@@ -2,6 +2,7 @@ import { projectListDomElement } from "./dom-elements";
 import * as utilities from "./utilities-functions";
 
 import Icon from "/src/icons/delete-outline.png";
+import chevron from "/src/icons/chevron-up.png";
 
 /* Project Icon */
 const projectIcon = `<svg
@@ -17,18 +18,6 @@ const projectIcon = `<svg
                     />
                   </svg> `;
 
-const chevronUp = `<svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      xmlns:xlink="http://www.w3.org/1999/xlink"
-                      version="1.1"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z"
-                      />
-                    </svg>`;
 /* Render Project Dom Elements Function */
 function renderProjectListItem() {
   const createProjectElement = document.createElement("li");
@@ -66,9 +55,11 @@ function renderProjectTodoListItem() {
          ${utilities.classSetForCheck.call(this)} />
       </div>
       <div>
-         <p class="main__task-list__list-item__date-reference">
-         ${utilities.dateReference.call(this)}</p>
-         ${chevronUp}
+         <p class="main__task-list__list-item__date-reference"
+         data-reference-id = ${this.todoId}>
+         Due Date ${utilities.dateReference.call(this)}</p>
+        <img src=${chevron} id="list-arrow" data-chevron-id=${this.todoId} alt="chevron icon" />
+
       </div>
    </div>
    <!-- Notes -->
