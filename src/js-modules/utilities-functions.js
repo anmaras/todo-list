@@ -321,7 +321,7 @@ export function setDate(data, id) {
     this.dateId = data;
     this.date = specificDate.value;
   }
-  dateReference.textContent = this.date;
+  dateReference.textContent = `Due Date ${this.date}`;
 
   saveProjectToLocalStorage(projectArray);
 }
