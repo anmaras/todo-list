@@ -158,6 +158,27 @@ export function compare(property, condition) {
     };
   }
 }
+
+export function sortOptionToPropertyName(text) {
+  return text === "Priority"
+    ? "priority"
+    : text === "Alphabetically"
+    ? "todoName"
+    : text === "Due Date"
+    ? "date"
+    : "";
+}
+
+export function conditionSwitcher() {
+  let condition = true;
+
+  function changeCondition() {
+    condition = !condition;
+    return condition;
+  }
+  return changeCondition;
+}
+
 /* Generate a random number */
 export function randomNumber() {
   return Math.floor(Math.random() * 9999);
@@ -284,6 +305,10 @@ export function dateReference() {
 }
 
 export function setDate(data, id) {
+  const specificDate = document.querySelector(`[data-specific-id="${id}"]`);
+  const dateReference = document.querySelector(`[data-reference-id="${id}"]`);
+
+  if (!specificDate) return;
   if (data === "today") {
     this.dateId = data;
     this.date = dateFns.format(new Date(), "yyyy-MM-dd");
@@ -294,10 +319,9 @@ export function setDate(data, id) {
   }
   if (data === "specific") {
     this.dateId = data;
-    this.date = document.querySelector(`[data-specific-id="${id}"]`).value;
+    this.date = specificDate.value;
   }
-
-  // this.dateId = data;
+  dateReference.textContent = this.date;
 
   saveProjectToLocalStorage(projectArray);
 }
@@ -318,4 +342,13 @@ export function valueForDateDisplay() {
   if (todayCheck || tomorrowCheck) return "";
 
   return this.date;
+}
+
+export function toggleListItemSize(targetListTodo) {
+  const listDropArrow = document.querySelector(`[data-chevron-id="${this.todoId}"]`);
+  listDropArrow.classList.toggle("rotate");
+  targetListTodo.classList.toggle("visible");
+  for (let i = 1; i < targetListTodo.childElementCount; i++) {
+    targetListTodo.children[i].classList.toggle("hidden");
+  }
 }
