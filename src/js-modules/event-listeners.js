@@ -15,6 +15,7 @@ import {
 } from "./dom-elements";
 import * as utilities from "./utilities-functions";
 import { projectArray } from "./arrays";
+const sortSwitch = utilities.conditionSwitcher();
 
 window.addEventListener("load", () => {
   if (!localStorage.length) return;
@@ -213,9 +214,13 @@ todoInput.addEventListener("keypress", (e) => {
   }
 });
 
+// todoList.addEventListener("change", (e) => {
+//   console.log(e.target);
+// });
+
 // /* Delete todo object and its dom element */
 todoList.addEventListener("click", (e) => {
-  const targetData = e.target.dataset;
+  const dateBtnDataSet = e.target.dataset;
   const target = e.target.closest("li");
   /* check target if its falsy and if it is return */
   if (!target) return;
@@ -231,9 +236,11 @@ todoList.addEventListener("click", (e) => {
   const todoTitle = e.target.parentElement.lastElementChild;
   const priority = document.querySelector(`[data-select-id ="${todoId}"]`);
   const todo = projectArray[projectIndex].todoList[todoIndex];
+  const calendarDisplay = document.getElementById("main__task-list__list-item__date");
   const TODAY = "today";
   const TOMORROW = "tomorrow";
   const SPECIFIC = "specific";
+  const DEFAULTDATE = "yyyy-MM-dd";
 
   if (!projectArray.includes(project)) return;
 
@@ -266,24 +273,36 @@ todoList.addEventListener("click", (e) => {
   }
 
   /* Dates  */
-  if (targetData.date === TODAY || targetData.date === TOMORROW || targetData.date === SPECIFIC) {
+  if (
+    dateBtnDataSet.date === TODAY ||
+    dateBtnDataSet.date === TOMORROW ||
+    dateBtnDataSet.date === SPECIFIC
+  ) {
     const todayBtn = document.querySelector(`[data-today-id="${todoId}"]`);
     const tomorrowBtn = document.querySelector(`[data-tomorrow-id="${todoId}"]`);
     const specificDateBtn = document.querySelector(`[data-specific-id ="${todoId}"]`);
-    const dateReference = document.querySelector(".main__task-list__list-item__date-reference");
+    const dateReference = document.querySelector(`[data-reference-id="${todoId}"]`);
 
     /* Set the date depends the button */
-    utilities.setDate.call(todo, targetData.date, todoId);
+    utilities.test.call(todo, dateBtnDataSet.date, todoId);
 
-    const { date } = todo;
-
-    /* Set the date on date reference */
-    dateReference.textContent = date;
+    /* That way when user select from day picker dayRef and todo object update instant 
+    otherwise need dblclick (need to refactor that somehow) */
+    todoList.addEventListener("change", () => {
+      utilities.setDate.call(todo, dateBtnDataSet.date, todoId);
+      const { date } = todo;
+      dateReference.textContent = date;
+    });
 
     /* Class added for buttons to stay stick to action mode after date select */
-    todayBtn.classList.toggle("activeDate", targetData.date === TODAY);
-    tomorrowBtn.classList.toggle("activeDate", targetData.date === TOMORROW);
-    specificDateBtn.classList.toggle("activeDate", targetData.date === SPECIFIC);
+    todayBtn.classList.toggle("activeDate", dateBtnDataSet.date === TODAY);
+    tomorrowBtn.classList.toggle("activeDate", dateBtnDataSet.date === TOMORROW);
+    specificDateBtn.classList.toggle("activeDate", dateBtnDataSet.date === SPECIFIC);
+  }
+
+  /* When the user select today or tomorrow the date display is reset */
+  if (dateBtnDataSet.date === TODAY || dateBtnDataSet.date === TOMORROW) {
+    calendarDisplay.value = "";
   }
 
   /* Priority */
@@ -354,7 +373,6 @@ todoList.addEventListener("keypress", (e) => {
 /* -----------------Toggle sorting options display ------------------------------------------*/
 sortButton.addEventListener("click", utilities.toggleSortingOptionVisibility);
 
-let order = true;
 /* Sorting option  */
 todoSortOptionsContainer.addEventListener("click", (e) => {
   const sortByButton = e.target.closest("div div > p");
@@ -362,18 +380,10 @@ todoSortOptionsContainer.addEventListener("click", (e) => {
   const projectId = +header.dataset.projectId;
   const projectIndex = projectArray.findIndex((obj) => obj.id === Number(projectId));
   const project = projectArray[projectIndex];
-
+  const todoProperty = utilities.sortOptionToPropertyName(sortByButton.textContent);
   todoSortOptionsContainer.classList.toggle("visible", !sortByButton);
 
-  if (sortByButton.textContent === "Alphabetically") {
-    order = !order;
-    project.todoList.sort(utilities.compare("todoName", order));
-  }
-
-  if (sortByButton.textContent === "Priority") {
-    order = !order;
-    project.todoList.sort(utilities.compare("priority", order));
-  }
+  project.todoList.sort(utilities.compare(todoProperty, sortSwitch()));
 
   todoList.innerHTML = "";
   project.todoList.forEach((todo) => {
