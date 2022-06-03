@@ -325,9 +325,9 @@ export function toggleListItemSize(targetListTodo) {
   }
 }
 
-function getTodoArrayCurrentLength() {
+export function getTodoByDate() {
   let allArray = [];
-  getProject("projects").forEach((project) => {
+  getProject().forEach((project) => {
     allArray.push(...project.todoList);
   });
   const todayArray = allArray.filter((item) => item.dateId === "today");
@@ -337,8 +337,8 @@ function getTodoArrayCurrentLength() {
   return { allArray, todayArray, tomorrowArray, scheduledArray };
 }
 
-export function updateAllTasksNumber() {
-  const todoArrayObject = getTodoArrayCurrentLength();
+export function updateTodoByDateTotals() {
+  const todoArrayObject = getTodoByDate();
 
   const all = document.querySelector(".left-section__home-container__all-tasks");
   const today = document.querySelector(".left-section__home-container__today");
