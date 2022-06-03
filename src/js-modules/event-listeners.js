@@ -26,18 +26,29 @@ window.addEventListener("load", () => {
   });
 
   utilities.toggleNotProjectScreen();
-  utilities.updateAllTasksNumber();
+  utilities.updateTodoByDateTotals();
 });
 
 /* Home Section  */
 home.addEventListener("click", function (e) {
-  /* The method elem.closest(selector) returns the nearest ancestor 
-  that matches the selector. */
   const target = e.target.closest("div");
-  if (target && home.contains(target)) {
-    /* Highlight selection on click */
-    utilities.highlight(target);
+  const titleText = target.children[1].textContent;
+  const targetData = e.target.closest("div").dataset.array;
+  if (!localStorage.length || !targetData) return;
+
+  utilities.highlight(target);
+
+  const { [targetData]: byDateObjectProperty } = utilities.getTodoByDate();
+
+  todoTitle.textContent = titleText;
+  header.classList.add("visible");
+  todoInput.classList.remove("visible");
+  todoList.replaceChildren();
+
+  function renderTodoByDates(test) {
+    test.forEach((item) => renderModule.renderProjectTodoListItem.call(item));
   }
+  renderTodoByDates(byDateObjectProperty);
 });
 
 /* Project Sections */
@@ -87,6 +98,7 @@ projectList.addEventListener("click", function (e) {
   }
 });
 
+/* Delete project section */
 projectList.addEventListener("click", function (e) {
   const listTarget = e.target.closest("li");
   if (!listTarget) return;
@@ -111,6 +123,8 @@ projectList.addEventListener("click", function (e) {
     /* Remove local storage entries */
     // utilities.removeProjectFromStorage(project.id);
     utilities.saveProjectToLocalStorage(projectArray);
+
+    utilities.updateTodoByDateTotals();
 
     /* If the project array is empty */
     if (!projectArray.length) {
@@ -157,19 +171,16 @@ projectList.addEventListener("click", (e) => {
   const projectIndex = projectArray.findIndex((obj) => obj.id === Number(listTarget.id));
   const project = projectArray[projectIndex];
   if (!projectArray.includes(project)) return;
-
-  /* Replace the todo list content  */
+  todoList.replaceChildren();
 
   if (todoList.contains(todoListItem)) return;
-
-  todoList.replaceChildren(...todoListItems, ...todoListItems);
+  /* Replace the todo list content  */
 
   /* For selected project search in its todo array  */
   projectArray[projectIndex].todoList.forEach((todo) => {
     renderModule.renderProjectTodoListItem.call(todo);
   });
-
-  todoSortOrder.classList.remove("visibility");
+  // todoSortOrder.classList.remove("visibility");
 });
 
 /* -----------------Add functionality to todo input -----------------------------------------*/
@@ -196,7 +207,7 @@ todoInput.addEventListener("keypress", (e) => {
     /* Clear the todo input */
     target.value = "";
 
-    utilities.updateAllTasksNumber();
+    utilities.updateTodoByDateTotals();
   }
 });
 
@@ -234,7 +245,7 @@ todoList.addEventListener("click", (e) => {
 
     utilities.saveProjectToLocalStorage(projectArray);
 
-    utilities.updateAllTasksNumber();
+    utilities.updateTodoByDateTotals();
   }
 
   /* Need to be more specific with todoTitle variable value because 
@@ -276,10 +287,10 @@ todoList.addEventListener("click", (e) => {
       const { date } = todo;
       utilities.setDate.call(todo, dateBtnDataSet.date, todoId);
       dateReference.textContent = date;
-      utilities.updateAllTasksNumber();
+      utilities.updateTodoByDateTotals();
     });
 
-    utilities.updateAllTasksNumber();
+    utilities.updateTodoByDateTotals();
 
     /* Class added for buttons to stay stick to action mode after date select */
     todayBtn.classList.toggle("activeDate", dateBtnDataSet.date === TODAY);
