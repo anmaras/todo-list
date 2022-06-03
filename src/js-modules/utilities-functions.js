@@ -199,35 +199,6 @@ export function clearLocalStorage() {
   localStorage.clear();
 }
 
-/* Delete an object from local storage */
-export function removeProjectFromStorage(projectId) {
-  /* Get the data from local storage */
-  let storedObjects = JSON.parse(localStorage.getItem("projects"));
-
-  /* Find the index of the object  */
-  let objectIndex = storedObjects.findIndex((item) => item.id === projectId);
-
-  /* Remove the object using the id */
-  storedObjects.splice(objectIndex, 1);
-
-  /* Set again the new array back to the local storage */
-  saveProjectToLocalStorage(storedObjects);
-}
-
-export function updateProjectFromStorage(projectId, input) {
-  /* Get the data from local storage */
-  let storedObjects = JSON.parse(localStorage.getItem("projects"));
-
-  /* Find the index of the object  */
-  let objectIndex = storedObjects.findIndex((item) => item.id === projectId);
-
-  /* Rename the project */
-  storedObjects[objectIndex].name = input;
-
-  /* Set again the new array back to the local storage */
-  saveProjectToLocalStorage(storedObjects);
-}
-
 export function selectTagText() {
   if (!this.priority) {
     let text = "Select an option";
