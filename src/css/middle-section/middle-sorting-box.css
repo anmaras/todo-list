@@ -36,6 +36,7 @@
   flex-direction: column;
   gap: 1.5rem;
   border-radius: var(--border-radius-value);
+  z-index: 10;
 }
 .main__header__sort-container__options.visible {
   display: flex;
