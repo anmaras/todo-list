@@ -12,6 +12,7 @@ import { projectArray, todoArray } from "./arrays";
 import { Project, Todo } from "./project-class";
 import * as dateFns from "date-fns";
 import { el } from "date-fns/locale";
+import { renderProjectTodoListItem } from "./render-project";
 
 let selectedLi;
 
@@ -157,6 +158,20 @@ export function compare(property, condition) {
         : 0;
     };
   }
+}
+
+export function test(input, project, property, condition) {
+  /* Object Destructuring  with dynamic export and use as default the project todolist */
+  const { [input]: byDateObjectProperty = project } = getTodoByDate();
+
+  /* Sort the array */
+  byDateObjectProperty.sort(compare(property, condition));
+
+  todoList.innerHTML = "";
+
+  byDateObjectProperty.forEach((todo) => {
+    renderProjectTodoListItem.call(todo);
+  });
 }
 
 export function sortOptionToPropertyName(text) {
