@@ -36,19 +36,21 @@ home.addEventListener("click", function (e) {
   const targetData = e.target.closest("div").dataset.array;
   if (!localStorage.length || !targetData) return;
 
-  utilities.highlight(target);
-
   const { [targetData]: byDateObjectProperty } = utilities.getTodoByDate();
 
-  todoTitle.textContent = titleText;
-  header.classList.add("visible");
-  todoInput.classList.remove("visible");
-  todoList.replaceChildren();
+  if (byDateObjectProperty.length) {
+    utilities.highlight(target);
+    sortButton.setAttribute("data-mode", `${targetData}`);
+    todoTitle.textContent = titleText;
+    header.classList.add("visible");
+    todoInput.classList.remove("visible");
+    todoList.replaceChildren();
 
-  function renderTodoByDates(test) {
-    test.forEach((item) => renderModule.renderProjectTodoListItem.call(item));
+    function renderTodoByDates(todoDateArray) {
+      todoDateArray.forEach((item) => renderModule.renderProjectTodoListItem.call(item));
+    }
+    renderTodoByDates(byDateObjectProperty);
   }
-  renderTodoByDates(byDateObjectProperty);
 });
 
 /* Project Sections */
@@ -171,6 +173,8 @@ projectList.addEventListener("click", (e) => {
   const projectIndex = projectArray.findIndex((obj) => obj.id === Number(listTarget.id));
   const project = projectArray[projectIndex];
   if (!projectArray.includes(project)) return;
+  sortButton.setAttribute("data-mode", false);
+
   todoList.replaceChildren();
 
   if (todoList.contains(todoListItem)) return;
@@ -382,11 +386,27 @@ todoSortOptionsContainer.addEventListener("click", (e) => {
   const project = projectArray[projectIndex];
   const todoProperty = utilities.sortOptionToPropertyName(sortByButton.textContent);
   todoSortOptionsContainer.classList.toggle("visible", !sortByButton);
+  const homeData = sortButton.getAttribute("data-mode");
 
-  project.todoList.sort(utilities.compare(todoProperty, sortSwitch()));
+  console.log(homeData);
 
-  todoList.innerHTML = "";
-  project.todoList.forEach((todo) => {
-    renderModule.renderProjectTodoListItem.call(todo);
-  });
+  // if (sortButton.dataset.mode === "project") {
+  //   project.todoList.sort(utilities.compare(todoProperty, sortSwitch()));
+  //   todoList.innerHTML = "";
+  //   project.todoList.forEach((todo) => {
+  //     renderModule.renderProjectTodoListItem.call(todo);
+  //   });
+  // } else {
+  //   const { [homeData]: byDateObjectProperty } = utilities.getTodoByDate();
+
+  //   byDateObjectProperty.sort(utilities.compare(todoProperty, sortSwitch()));
+  //   todoList.innerHTML = "";
+  //   byDateObjectProperty.forEach((todo) => {
+  //     renderModule.renderProjectTodoListItem.call(todo);
+  //   });
+  // }
+
+  utilities.test(homeData, project.todoList, todoProperty, sortSwitch());
 });
+
+/* Sort will get data set from the click for list happend */
