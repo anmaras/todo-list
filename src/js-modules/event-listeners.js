@@ -237,7 +237,6 @@ todoList.addEventListener("click", (e) => {
   const TODAY = "today";
   const TOMORROW = "tomorrow";
   const SPECIFIC = "specific";
-  const DEFAULTDATE = "yyyy-MM-dd";
 
   if (!projectArray.includes(project)) return;
 
@@ -288,9 +287,10 @@ todoList.addEventListener("click", (e) => {
     otherwise need dblclick (need to refactor that somehow) */
     todoList.addEventListener("change", () => {
       const dateReference = document.querySelector(`[data-reference-id="${todoId}"]`);
+      if (!dateReference) return;
       const { date } = todo;
-      utilities.setDate.call(todo, dateBtnDataSet.date, todoId);
       dateReference.textContent = date;
+      utilities.setDate.call(todo, dateBtnDataSet.date, todoId);
       utilities.updateTodoByDateTotals();
     });
 
@@ -381,32 +381,12 @@ sortButton.addEventListener("click", utilities.toggleSortingOptionVisibility);
 todoSortOptionsContainer.addEventListener("click", (e) => {
   const sortByButton = e.target.closest("div div > p");
   if (!sortByButton) return;
-  const projectId = +header.dataset.projectId;
+  const projectId = +header.dataset.projectId || projectArray[0].id;
   const projectIndex = projectArray.findIndex((obj) => obj.id === Number(projectId));
   const project = projectArray[projectIndex];
   const todoProperty = utilities.sortOptionToPropertyName(sortByButton.textContent);
   todoSortOptionsContainer.classList.toggle("visible", !sortByButton);
   const homeData = sortButton.getAttribute("data-mode");
 
-  console.log(homeData);
-
-  // if (sortButton.dataset.mode === "project") {
-  //   project.todoList.sort(utilities.compare(todoProperty, sortSwitch()));
-  //   todoList.innerHTML = "";
-  //   project.todoList.forEach((todo) => {
-  //     renderModule.renderProjectTodoListItem.call(todo);
-  //   });
-  // } else {
-  //   const { [homeData]: byDateObjectProperty } = utilities.getTodoByDate();
-
-  //   byDateObjectProperty.sort(utilities.compare(todoProperty, sortSwitch()));
-  //   todoList.innerHTML = "";
-  //   byDateObjectProperty.forEach((todo) => {
-  //     renderModule.renderProjectTodoListItem.call(todo);
-  //   });
-  // }
-
-  utilities.test(homeData, project.todoList, todoProperty, sortSwitch());
+  utilities.sortTodo(homeData, project.todoList, todoProperty, sortSwitch());
 });
-
-/* Sort will get data set from the click for list happend */
