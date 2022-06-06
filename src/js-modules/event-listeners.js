@@ -185,7 +185,6 @@ projectList.addEventListener("keypress", (e) => {
 projectList.addEventListener("click", (e) => {
   const listTarget = e.target.closest("li");
   if (!listTarget) return;
-  const todoListItems = document.querySelectorAll(`[data-projectid="${listTarget.id}"]`);
   const todoListItem = document.querySelector(`[data-projectid="${listTarget.id}"]`);
   const projectIndex = projectArray.findIndex((obj) => obj.id === Number(listTarget.id));
   const project = projectArray[projectIndex];
@@ -195,13 +194,11 @@ projectList.addEventListener("click", (e) => {
   todoList.replaceChildren();
 
   if (todoList.contains(todoListItem)) return;
-  /* Replace the todo list content  */
 
   /* For selected project search in its todo array  */
   projectArray[projectIndex].todoList.forEach((todo) => {
     renderModule.renderProjectTodoListItem.call(todo);
   });
-  // todoSortOrder.classList.remove("visibility");
 });
 
 /* -----------------Add functionality to todo input -----------------------------------------*/
@@ -228,11 +225,11 @@ todoInput.addEventListener("keypress", (e) => {
     /* Clear the todo input */
     target.value = "";
 
+    /* Update the home section numbers */
     utilities.updateTodoByDateTotals();
   }
 });
 
-// /* Delete todo object and its dom element */
 todoList.addEventListener("click", (e) => {
   const dateBtnDataSet = e.target.dataset;
   const target = e.target.closest("li");
@@ -257,14 +254,15 @@ todoList.addEventListener("click", (e) => {
 
   if (!projectArray.includes(project)) return;
 
+  /* Delete todo object and its dom element */
   if (targetId === "delete") {
     /* Delete todo from project property array */
     projectArray[projectIndex].todoList.splice(todoIndex, 1);
     /* delete it from dom */
     todoList.removeChild(target);
-
+    /* Update json */
     utilities.saveProjectToLocalStorage(projectArray);
-
+    /* Update home section numbers */
     utilities.updateTodoByDateTotals();
   }
 
@@ -272,6 +270,7 @@ todoList.addEventListener("click", (e) => {
   it check the parent element
   */
   if (e.target.type === "checkbox") {
+    /* Change the class of todo parent to checked if toggle if its not with toggle argument */
     todoTitle.classList.toggle("checked", isChecked);
   }
 
@@ -297,8 +296,8 @@ todoList.addEventListener("click", (e) => {
     const tomorrowBtn = document.querySelector(`[data-tomorrow-id="${todoId}"]`);
     const specificDateBtn = document.querySelector(`[data-specific-id ="${todoId}"]`);
 
-    /* Set the date depends the button */
-    utilities.setDate.call(todo, dateBtnDataSet.date, todoId);
+    /* Set the date in object depends the button */
+    utilities.setObjectInstanceDateProperty.call(todo, dateBtnDataSet.date, todoId);
 
     /* That way when user select from day picker dayRef and todo object update instant 
     otherwise need dblclick (need to refactor that somehow) */
@@ -307,7 +306,7 @@ todoList.addEventListener("click", (e) => {
       if (!dateReference) return;
       const { date } = todo;
       dateReference.textContent = date;
-      utilities.setDate.call(todo, dateBtnDataSet.date, todoId);
+      utilities.setObjectInstanceDateProperty.call(todo, dateBtnDataSet.date, todoId);
       utilities.updateTodoByDateTotals();
     });
 
@@ -319,12 +318,12 @@ todoList.addEventListener("click", (e) => {
     specificDateBtn.classList.toggle("activeDate", dateBtnDataSet.date === SPECIFIC);
   }
 
-  /* When the user select today or tomorrow the date display is reset */
+  /* When the user select today or tomorrow the date at date input display reset */
   if (dateBtnDataSet.date === TODAY || dateBtnDataSet.date === TOMORROW) {
     calendarDisplay.value = "";
   }
 
-  /* Toggle list item size */
+  /* Toggle list item window size*/
   if (e.target.id === "list-arrow") {
     utilities.toggleListItemSize.call(todo, target);
   }
@@ -372,7 +371,7 @@ todoList.addEventListener("keypress", (e) => {
       });
   }
 });
-
+/* TextArea */
 todoList.addEventListener("keypress", (e) => {
   const targetTextArea = e.target.closest("textarea");
   if (!targetTextArea) return;
