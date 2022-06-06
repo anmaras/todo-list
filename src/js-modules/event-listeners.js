@@ -18,14 +18,19 @@ import { projectArray, todoArray } from "./arrays";
 const sortSwitch = utilities.conditionSwitcher();
 
 window.addEventListener("load", () => {
+  /* If local storage is empty do nothing */
   if (!localStorage.length) return;
 
   utilities.getProject().forEach((item) => {
+    /* Push everything to projectArray because its empty */
     projectArray.push(item);
+    /* And render them on load */
     renderModule.renderProjectListItem.call(item);
   });
-
+  /* Close the noproject img  */
   utilities.toggleNotProjectScreen();
+
+  /* Update all the todo numbers at home section */
   utilities.updateTodoByDateTotals();
 });
 
@@ -36,37 +41,41 @@ home.addEventListener("click", function (e) {
   const targetData = e.target.closest("div").dataset.array;
   if (!localStorage.length || !targetData) return;
 
+  /* Extract the data by the array that contains only the todos set by date */
   const { [targetData]: byDateObjectProperty } = utilities.getTodoByDate();
-
+  /* If that array has data */
   if (byDateObjectProperty.length) {
+    /* Highlight the corresponding tab at home section */
     utilities.highlight(target);
+    /* Set the data at sort button value to the specific array that will be used so to sort it*/
     sortButton.setAttribute("data-mode", `${targetData}`);
+    /* Change the header title content to show the name of the home tab name */
     todoTitle.textContent = titleText;
+    /* Make the header visible */
     header.classList.add("visible");
+    /* Disable the new todo input */
     todoInput.classList.remove("visible");
+    /* Clear the todo list  */
     todoList.replaceChildren();
-
-    function renderTodoByDates(todoDateArray) {
-      todoDateArray.forEach((item) => renderModule.renderProjectTodoListItem.call(item));
-    }
-    renderTodoByDates(byDateObjectProperty);
+    /* Render items in the array */
+    byDateObjectProperty.forEach((item) => renderModule.renderProjectTodoListItem.call(item));
   }
 });
 
 /* Project Sections */
 input.addEventListener("keypress", (e) => {
   if (e.key === "Enter" && input.value !== "") {
-    const name = e.target.value;
+    const projectName = e.target.value;
     /* Create a new instance object from Project class */
-    const object = new Project(name, utilities.randomNumber());
+    const object = new Project(projectName, utilities.randomNumber());
     /* Push the new instance into projectArray */
     projectArray.push(object);
-    /*Render the object at DOM*/
+    /* Save it to json */
     utilities.saveProjectToLocalStorage(projectArray);
-    // if (projectList.contains(projectItem)) return;
-    renderModule.renderProjectListItem.call(object);
     /* Clear the input value after  */
     utilities.clearInputValue();
+    /*Render the object at DOM*/
+    renderModule.renderProjectListItem.call(object);
     /* Hide the Img and text after create the first project */
     utilities.toggleNotProjectScreen();
   }
@@ -74,46 +83,54 @@ input.addEventListener("keypress", (e) => {
 
 /* Project List */
 projectList.addEventListener("click", function (e) {
-  const listTarget = e.target.closest("li");
-  const targetId = e.target.id;
+  const projectListItemSelection = e.target.closest("li");
+  const projectListItemId = e.target.id;
   /* if that selection is falsy return */
-  if (!listTarget) return;
+  if (!projectListItemSelection) return;
   /* Every time you click on a project find The index of project in array
   using target id and project id */
-  const projectIndex = projectArray.findIndex((obj) => obj.id === Number(listTarget.id));
+  const projectIndex = projectArray.findIndex(
+    (obj) => obj.id === Number(projectListItemSelection.id)
+  );
   /* Find the project object in array using the index above */
-  const project = projectArray[projectIndex];
-  /* If the project does not exist return */
-  if (!projectArray.includes(project)) return;
-  /* If list project item is in project list container and the target id is not garbage icon */
-  if (listTarget && projectList.contains(listTarget) && targetId !== "garbageIcon") {
-    /* HighLight the project list item on selection */
-    utilities.highlight(listTarget);
+  const specificProject = projectArray[projectIndex];
+  /* If the specificProject does not exist return */
+  if (!projectArray.includes(specificProject)) return;
+  /* If list specificProject item is in specificProject list container and the target id is not garbage icon */
+  if (
+    projectListItemSelection &&
+    projectList.contains(projectListItemSelection) &&
+    projectListItemId !== "garbageIcon"
+  ) {
+    /* HighLight the specificProject list item on selection */
+    utilities.highlight(projectListItemSelection);
     /* Make header visible */
     header.classList.add("visible");
     /* Make todo input container */
     todoInput.classList.add("visible");
-    /* Add the project name at header title */
-    todoTitle.textContent = project.name;
+    /* Add the specificProject name at header title */
+    todoTitle.textContent = specificProject.name;
     /* add custom data set to todo input */
-    utilities.createTodoDataSet.call(project);
+    utilities.createTodoDataSet.call(specificProject);
   }
 });
 
-/* Delete project section */
+/* Delete specificProject section */
 projectList.addEventListener("click", function (e) {
-  const listTarget = e.target.closest("li");
-  if (!listTarget) return;
-  const projectIndex = projectArray.findIndex((obj) => obj.id === Number(listTarget.id));
-  const project = projectArray[projectIndex];
+  const projectListItemSelection = e.target.closest("li");
+  if (!projectListItemSelection) return;
+  const projectIndex = projectArray.findIndex(
+    (obj) => obj.id === Number(projectListItemSelection.id)
+  );
+  const specificProject = projectArray[projectIndex];
 
-  if (!projectArray.includes(project)) return;
+  if (!projectArray.includes(specificProject)) return;
   /* If target id is this icon */
   if (e.target.id === "garbageIcon") {
-    /* remove the project from project array */
+    /* remove the specificProject from project array */
     projectArray.splice(projectIndex, 1);
     /* Remove the rendered item from dom */
-    projectList.removeChild(listTarget);
+    projectList.removeChild(projectListItemSelection);
     /* Remove the visible class from header */
     header.classList.remove("visible");
     /* Remove the visible class from the todo input */
@@ -381,6 +398,8 @@ sortButton.addEventListener("click", utilities.toggleSortingOptionVisibility);
 todoSortOptionsContainer.addEventListener("click", (e) => {
   const sortByButton = e.target.closest("div div > p");
   if (!sortByButton) return;
+  /* check id if its NaN at load, if it is NaN load the id of the first project in the list
+  so it wont return error */
   const projectId = +header.dataset.projectId || projectArray[0].id;
   const projectIndex = projectArray.findIndex((obj) => obj.id === Number(projectId));
   const project = projectArray[projectIndex];
