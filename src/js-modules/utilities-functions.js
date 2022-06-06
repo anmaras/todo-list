@@ -160,14 +160,11 @@ export function compare(property, condition) {
   }
 }
 
-export function test(input, project, property, condition) {
-  /* Object Destructuring  with dynamic export and use as default the project todolist */
+export function sortTodo(input, project, property, condition) {
   const { [input]: byDateObjectProperty = project } = getTodoByDate();
-
-  /* Sort the array */
-  byDateObjectProperty.sort(compare(property, condition));
-
   todoList.innerHTML = "";
+
+  byDateObjectProperty.sort(compare(property, condition));
 
   byDateObjectProperty.forEach((todo) => {
     renderProjectTodoListItem.call(todo);
