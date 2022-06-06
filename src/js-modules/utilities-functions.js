@@ -287,7 +287,7 @@ export function dateReference() {
   return this.date;
 }
 
-export function setDate(data, id) {
+export function setObjectInstanceDateProperty(data, id) {
   const specificDate = document.querySelector(`[data-specific-id="${id}"]`);
   const dateReference = document.querySelector(`[data-reference-id="${id}"]`);
 
