@@ -15,52 +15,13 @@ import {
 } from "./dom-elements";
 import * as utilities from "./utilities-functions";
 import { projectArray, todoArray } from "./arrays";
+import { loadUpdateRenderLocalStorage } from "./events/windowLoad";
+import { homeSectionRenderHandler } from "./events/homeSection";
 const sortSwitch = utilities.conditionSwitcher();
 
-window.addEventListener("load", () => {
-  /* If local storage is empty do nothing */
-  if (!localStorage.length) return;
+window.addEventListener("load", loadUpdateRenderLocalStorage);
 
-  utilities.getProject().forEach((item) => {
-    /* Push everything to projectArray because its empty */
-    projectArray.push(item);
-    /* And render them on load */
-    renderModule.renderProjectListItem.call(item);
-  });
-  /* Close the noproject img  */
-  utilities.toggleNotProjectScreen();
-
-  /* Update all the todo numbers at home section */
-  utilities.updateTodoByDateTotals();
-});
-
-/* Home Section  */
-home.addEventListener("click", function (e) {
-  const target = e.target.closest("div");
-  const titleText = target.children[1].textContent;
-  const targetData = e.target.closest("div").dataset.array;
-  if (!localStorage.length || !targetData) return;
-
-  /* Extract the data by the array that contains only the todos set by date */
-  const { [targetData]: byDateObjectProperty } = utilities.getTodoByDate();
-  /* If that array has data */
-  if (byDateObjectProperty.length) {
-    /* Highlight the corresponding tab at home section */
-    utilities.highlight(target);
-    /* Set the data at sort button value to the specific array that will be used so to sort it*/
-    sortButton.setAttribute("data-mode", `${targetData}`);
-    /* Change the header title content to show the name of the home tab name */
-    todoTitle.textContent = titleText;
-    /* Make the header visible */
-    header.classList.add("visible");
-    /* Disable the new todo input */
-    todoInput.classList.remove("visible");
-    /* Clear the todo list  */
-    todoList.replaceChildren();
-    /* Render items in the array */
-    byDateObjectProperty.forEach((item) => renderModule.renderProjectTodoListItem.call(item));
-  }
-});
+home.addEventListener("click", homeSectionRenderHandler);
 
 /* Project Sections */
 input.addEventListener("keypress", (e) => {
