@@ -102,20 +102,20 @@ projectList.addEventListener("click", function (e) {
     projectList.contains(projectListItemSelection) &&
     projectListItemId !== "garbageIcon"
   ) {
-    /* HighLight the specificProject list item on selection */
+    /* HighLight the specific Project list item on selection */
     utilities.highlight(projectListItemSelection);
     /* Make header visible */
     header.classList.add("visible");
     /* Make todo input container */
     todoInput.classList.add("visible");
-    /* Add the specificProject name at header title */
+    /* Add the specific Project name at header title */
     todoTitle.textContent = specificProject.name;
     /* add custom data set to todo input */
     utilities.createTodoDataSet.call(specificProject);
   }
 });
 
-/* Delete specificProject section */
+/* Delete specific Project section */
 projectList.addEventListener("click", function (e) {
   const projectListItemSelection = e.target.closest("li");
   if (!projectListItemSelection) return;
@@ -127,7 +127,7 @@ projectList.addEventListener("click", function (e) {
   if (!projectArray.includes(specificProject)) return;
   /* If target id is this icon */
   if (e.target.id === "garbageIcon") {
-    /* remove the specificProject from project array */
+    /* remove the specific Project from project array */
     projectArray.splice(projectIndex, 1);
     /* Remove the rendered item from dom */
     projectList.removeChild(projectListItemSelection);
