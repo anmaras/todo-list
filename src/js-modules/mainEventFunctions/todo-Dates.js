@@ -40,9 +40,6 @@ function setObjectInstanceDateProperty(data, id) {
   const specificDate = document.querySelector(`[data-specific-id="${id}"]`);
   const dateReference = document.querySelector(`[data-reference-id="${id}"]`);
 
-  console.log(specificDate);
-  console.log(dateReference);
-
   // if (!specificDate) return;
   if (data === "today") {
     this.dateId = data;

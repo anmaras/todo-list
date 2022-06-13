@@ -7,6 +7,8 @@ import { todoWindowToggleSize } from "./todo-window-toggle";
 import { todoCheckBoxFunctionality } from "./todo-checkbox";
 import { getTodoDates } from "./todo-Dates";
 import { getTodoPriority } from "./todo-priority";
+import { getTodoTextArea } from "./todo-textArea";
+import { todoRename } from "./todo-rename";
 
 export function todoSectionHandler(e) {
   const target = e.target.closest("li");
@@ -38,4 +40,43 @@ export function todoSectionHandler(e) {
   getTodoDates(dateBtnDataSet, todoId, todo, calendarDisplay);
 
   getTodoPriority(todo, target, priority);
+}
+
+export function todoRenameHandler(e) {
+  const target = e.target.closest("input");
+  if (!target) return;
+
+  const newTodoName = e.target.value;
+  const projectId = Number(
+    target.parentElement.parentElement.parentElement.dataset.projectid
+  );
+  const todoId = Number(
+    target.parentElement.parentElement.parentElement.dataset.todoId
+  );
+  const projectIndex = utilities.getIndex(projectArray, projectId);
+  const todoArray = projectArray[projectIndex].todoList;
+
+  todoRename(e, todoArray, target, newTodoName, todoId);
+}
+
+export function todoTextAreaHandler(e) {
+  const targetTextArea = e.target.closest("textarea");
+  if (!targetTextArea) return;
+  const todoId = targetTextArea.dataset.textareaId;
+  const projectId = Number(
+    targetTextArea.parentElement.parentElement.dataset.projectid
+  );
+  const projectIndex = projectArray.findIndex(
+    (obj) => obj.id === Number(projectId)
+  );
+
+  const todoIndex = projectArray[projectIndex].todoList.findIndex(
+    (todo) => todo.todoId === Number(todoId)
+  );
+  const project = projectArray[projectIndex];
+  if (!projectArray.includes(project)) return;
+
+  const todoArray = projectArray[projectIndex].todoList;
+
+  getTodoTextArea(e, todoArray, targetTextArea, todoIndex);
 }
