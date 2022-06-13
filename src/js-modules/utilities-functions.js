@@ -111,7 +111,6 @@ export function compare(property, condition) {
   if (property === "priority") {
     if (condition) {
       return function (a, b) {
-        /* Use object method to turn the priority value to number */
         return changeToNum(a[property]) < changeToNum(b[property])
           ? -1
           : changeToNum(a[property]) > changeToNum(b[property])
@@ -275,28 +274,6 @@ export function dateReference() {
   return this.date;
 }
 
-export function setObjectInstanceDateProperty(data, id) {
-  const specificDate = document.querySelector(`[data-specific-id="${id}"]`);
-  const dateReference = document.querySelector(`[data-reference-id="${id}"]`);
-
-  if (!specificDate) return;
-  if (data === "today") {
-    this.dateId = data;
-    this.date = dateFns.format(new Date(), "yyyy-MM-dd");
-  }
-  if (data === "tomorrow") {
-    this.dateId = data;
-    this.date = dateFns.format(dateFns.startOfTomorrow(), "yyyy-MM-dd");
-  }
-  if (data === "specific") {
-    this.dateId = data;
-    this.date = specificDate.value;
-  }
-  dateReference.textContent = `Due Date ${this.date}`;
-
-  saveProjectToLocalStorage(projectArray);
-}
-
 /* Rendered date input value */
 export function valueForDateDisplay() {
   /* make a new date object from todo date */
@@ -313,18 +290,6 @@ export function valueForDateDisplay() {
   if (todayCheck || tomorrowCheck) return "";
 
   return this.date;
-}
-
-/* Toggle how the todo opens */
-export function toggleListItemSize(targetListTodo) {
-  const listDropArrow = document.querySelector(
-    `[data-chevron-id="${this.todoId}"]`
-  );
-  listDropArrow.classList.toggle("rotate");
-  targetListTodo.classList.toggle("visible");
-  for (let i = 1; i < targetListTodo.childElementCount; i++) {
-    targetListTodo.children[i].classList.toggle("hidden");
-  }
 }
 
 export function getTodoByDate() {
@@ -362,5 +327,9 @@ export function updateTodoByDateTotals() {
 
 export function getIndex(array, data) {
   const index = array.findIndex((object) => object.id === +data);
+  return index;
+}
+export function getTodoListIndex(array, data) {
+  const index = array.findIndex((object) => object.todoId === +data);
   return index;
 }

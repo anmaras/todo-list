@@ -20,6 +20,8 @@ import { homeSectionRenderHandler } from "./mainEventFunctions/home-Section";
 import { createProject } from "./mainEventFunctions/project-Create";
 import { projectSectionSelectionHandler } from "./mainEventFunctions/project-Item-Functionality";
 import { renameProjectListItem } from "./mainEventFunctions/project-Rename";
+import { createTodoHandler } from "./mainEventFunctions/todo-create";
+import { todoSectionHandler } from "./mainEventFunctions/todo-item-functionality";
 
 const sortSwitch = utilities.conditionSwitcher();
 
@@ -39,172 +41,146 @@ projectList.addEventListener("click", projectSectionSelectionHandler);
 /* Rename Project Object and its dom elements */
 projectList.addEventListener("keypress", renameProjectListItem);
 
-todoInput.addEventListener("keypress", (e) => {
-  const target = e.target.closest("input");
-  const inputText = target.value;
-  const projectId = Number(e.target.dataset.projectTodoId);
-  const objectIndex = projectArray.findIndex(
-    (obj) => obj.id === Number(projectId)
-  );
+todoInput.addEventListener("keypress", createTodoHandler);
 
-  if (e.key === "Enter" && target.value !== "") {
-    /* Create new todo */
-    const todoObject = new Todo(inputText, projectId, utilities.randomNumber());
+todoList.addEventListener("click", todoSectionHandler);
 
-    /* Push the todo to project array todo list */
-    projectArray[objectIndex].todoList.push(todoObject);
+// todoList.addEventListener("click", (e) => {
+//   const target = e.target.closest("li");
+//   if (!target) return;
+//   const dateBtnDataSet = e.target.dataset;
+//   const targetId = e.target.id;
+//   const todoId = Number(target.dataset.todoId);
+//   const projectId = Number(target.dataset.projectid);
+//   const projectIndex = projectArray.findIndex(
+//     (obj) => obj.id === Number(projectId)
+//   );
+//   const todoIndex = projectArray[projectIndex].todoList.findIndex(
+//     (todo) => todo.todoId === Number(todoId)
+//   );
+//   const project = projectArray[projectIndex];
+//   const isChecked = e.target.checked;
+//   const todoTitle = e.target.parentElement.lastElementChild;
+//   const priority = document.querySelector(`[data-select-id ="${todoId}"]`);
+//   const todo = projectArray[projectIndex].todoList[todoIndex];
+//   const calendarDisplay = document.getElementById(
+//     "main__task-list__list-item__date"
+//   );
+//   const TODAY = "today";
+//   const TOMORROW = "tomorrow";
+//   const SPECIFIC = "specific";
 
-    /* Save todo in local storage */
-    utilities.saveProjectToLocalStorage(projectArray);
+//   if (!projectArray.includes(project)) return;
 
-    /* Render the todo */
-    renderModule.renderProjectTodoListItem.call(todoObject);
+//   /* Delete todo object and its dom element */
+//   if (targetId === "delete") {
+//     /* Delete todo from project property array */
+//     projectArray[projectIndex].todoList.splice(todoIndex, 1);
+//     /* delete it from dom */
+//     todoList.removeChild(target);
+//     /* Update json */
+//     utilities.saveProjectToLocalStorage(projectArray);
+//     /* Update home section numbers */
+//     utilities.updateTodoByDateTotals();
+//   }
 
-    /* Clear the todo input */
-    target.value = "";
+//   /* Need to be more specific with todoTitle variable value because
+//   it check the parent element
+//   */
+//   if (e.target.type === "checkbox") {
+//     /* Change the class of todo parent to checked if toggle if its not with toggle argument */
+//     todoTitle.classList.toggle("checked", isChecked);
+//   }
 
-    /* Update the home section numbers */
-    utilities.updateTodoByDateTotals();
-  }
-});
+//   //   /* Checkbox condition check for refactor it later  using todos project checkbox property*/
+//   if (isChecked && e.target.type === "checkbox") {
+//     projectArray[projectIndex].todoList[todoIndex].checkbox = "checked";
+//     todoTitle.disabled = isChecked;
+//     utilities.saveProjectToLocalStorage(projectArray);
+//   }
+//   if (!isChecked && e.target.type === "checkbox") {
+//     projectArray[projectIndex].todoList[todoIndex].checkbox = "";
+//     todoTitle.disabled = isChecked;
+//     utilities.saveProjectToLocalStorage(projectArray);
+//   }
 
-todoList.addEventListener("click", (e) => {
-  const dateBtnDataSet = e.target.dataset;
-  const target = e.target.closest("li");
-  /* check target if its falsy and if it is return */
-  if (!target) return;
-  const targetId = e.target.id;
-  const todoId = Number(target.dataset.todoId);
-  const projectId = Number(target.dataset.projectid);
-  const projectIndex = projectArray.findIndex(
-    (obj) => obj.id === Number(projectId)
-  );
-  const todoIndex = projectArray[projectIndex].todoList.findIndex(
-    (todo) => todo.todoId === Number(todoId)
-  );
-  const project = projectArray[projectIndex];
-  const isChecked = e.target.checked;
-  const todoTitle = e.target.parentElement.lastElementChild;
-  const priority = document.querySelector(`[data-select-id ="${todoId}"]`);
-  const todo = projectArray[projectIndex].todoList[todoIndex];
-  const calendarDisplay = document.getElementById(
-    "main__task-list__list-item__date"
-  );
-  const TODAY = "today";
-  const TOMORROW = "tomorrow";
-  const SPECIFIC = "specific";
+//   /* Dates  */
+//   if (
+//     dateBtnDataSet.date === TODAY ||
+//     dateBtnDataSet.date === TOMORROW ||
+//     dateBtnDataSet.date === SPECIFIC
+//   ) {
+//     const todayBtn = document.querySelector(`[data-today-id="${todoId}"]`);
+//     const tomorrowBtn = document.querySelector(
+//       `[data-tomorrow-id="${todoId}"]`
+//     );
+//     const specificDateBtn = document.querySelector(
+//       `[data-specific-id ="${todoId}"]`
+//     );
 
-  if (!projectArray.includes(project)) return;
+//     /* Set the date in object depends the button */
+//     utilities.dateReference.call(
+//       todo,
+//       dateBtnDataSet.date,
+//       todoId
+//     );
 
-  /* Delete todo object and its dom element */
-  if (targetId === "delete") {
-    /* Delete todo from project property array */
-    projectArray[projectIndex].todoList.splice(todoIndex, 1);
-    /* delete it from dom */
-    todoList.removeChild(target);
-    /* Update json */
-    utilities.saveProjectToLocalStorage(projectArray);
-    /* Update home section numbers */
-    utilities.updateTodoByDateTotals();
-  }
+//     /* That way when user select from day picker dayRef and todo object update instant
+//     otherwise need dblclick (need to refactor that somehow) */
+//     todoList.addEventListener("change", () => {
+//       const dateReference = document.querySelector(
+//         `[data-reference-id="${todoId}"]`
+//       );
+//       if (!dateReference) return;
+//       const { date } = todo;
+//       dateReference.textContent = date;
+//       utilities.setObjectInstanceDateProperty.call(
+//         todo,
+//         dateBtnDataSet.date,
+//         todoId
+//       );
+//       utilities.updateTodoByDateTotals();
+//     });
 
-  /* Need to be more specific with todoTitle variable value because 
-  it check the parent element
-  */
-  if (e.target.type === "checkbox") {
-    /* Change the class of todo parent to checked if toggle if its not with toggle argument */
-    todoTitle.classList.toggle("checked", isChecked);
-  }
+//     utilities.updateTodoByDateTotals();
 
-  //   /* Checkbox condition check for refactor it later  using todos project checkbox property*/
-  if (isChecked && e.target.type === "checkbox") {
-    projectArray[projectIndex].todoList[todoIndex].checkbox = "checked";
-    todoTitle.disabled = isChecked;
-    utilities.saveProjectToLocalStorage(projectArray);
-  }
-  if (!isChecked && e.target.type === "checkbox") {
-    projectArray[projectIndex].todoList[todoIndex].checkbox = "";
-    todoTitle.disabled = isChecked;
-    utilities.saveProjectToLocalStorage(projectArray);
-  }
+//     /* Class added for buttons to stay stick to action mode after date select */
+//     todayBtn.classList.toggle("activeDate", dateBtnDataSet.date === TODAY);
+//     tomorrowBtn.classList.toggle(
+//       "activeDate",
+//       dateBtnDataSet.date === TOMORROW
+//     );
+//     specificDateBtn.classList.toggle(
+//       "activeDate",
+//       dateBtnDataSet.date === SPECIFIC
+//     );
+//   }
 
-  /* Dates  */
-  if (
-    dateBtnDataSet.date === TODAY ||
-    dateBtnDataSet.date === TOMORROW ||
-    dateBtnDataSet.date === SPECIFIC
-  ) {
-    const todayBtn = document.querySelector(`[data-today-id="${todoId}"]`);
-    const tomorrowBtn = document.querySelector(
-      `[data-tomorrow-id="${todoId}"]`
-    );
-    const specificDateBtn = document.querySelector(
-      `[data-specific-id ="${todoId}"]`
-    );
+//   /* When the user select today or tomorrow the date at date input display reset */
+//   if (dateBtnDataSet.date === TODAY || dateBtnDataSet.date === TOMORROW) {
+//     calendarDisplay.value = "";
+//   }
 
-    /* Set the date in object depends the button */
-    utilities.setObjectInstanceDateProperty.call(
-      todo,
-      dateBtnDataSet.date,
-      todoId
-    );
+//   /* Toggle list item window size*/
+//   if (e.target.id === "list-arrow") {
+//     utilities.toggleListItemSize.call(todo, target);
+//   }
 
-    /* That way when user select from day picker dayRef and todo object update instant 
-    otherwise need dblclick (need to refactor that somehow) */
-    todoList.addEventListener("change", () => {
-      const dateReference = document.querySelector(
-        `[data-reference-id="${todoId}"]`
-      );
-      if (!dateReference) return;
-      const { date } = todo;
-      dateReference.textContent = date;
-      utilities.setObjectInstanceDateProperty.call(
-        todo,
-        dateBtnDataSet.date,
-        todoId
-      );
-      utilities.updateTodoByDateTotals();
-    });
+//   /* Priority */
 
-    utilities.updateTodoByDateTotals();
+//   /* If there is no check for that value it reset the todo priority */
+//   if (priority.value === "none") return;
 
-    /* Class added for buttons to stay stick to action mode after date select */
-    todayBtn.classList.toggle("activeDate", dateBtnDataSet.date === TODAY);
-    tomorrowBtn.classList.toggle(
-      "activeDate",
-      dateBtnDataSet.date === TOMORROW
-    );
-    specificDateBtn.classList.toggle(
-      "activeDate",
-      dateBtnDataSet.date === SPECIFIC
-    );
-  }
+//   if (todo.hasOwnProperty("priority")) {
+//     todo.priority = priority.value;
+//     target.classList.toggle("low", priority.value === "low");
+//     target.classList.toggle("medium", priority.value === "medium");
+//     target.classList.toggle("high", priority.value === "high");
+//     utilities.saveProjectToLocalStorage(projectArray);
+//   }
 
-  /* When the user select today or tomorrow the date at date input display reset */
-  if (dateBtnDataSet.date === TODAY || dateBtnDataSet.date === TOMORROW) {
-    calendarDisplay.value = "";
-  }
-
-  /* Toggle list item window size*/
-  if (e.target.id === "list-arrow") {
-    utilities.toggleListItemSize.call(todo, target);
-  }
-
-  /* Priority */
-
-  /* If there is no check for that value it reset the todo priority */
-  if (priority.value === "none") return;
-
-  if (todo.hasOwnProperty("priority")) {
-    todo.priority = priority.value;
-    target.classList.toggle("low", priority.value === "low");
-    target.classList.toggle("medium", priority.value === "medium");
-    target.classList.toggle("high", priority.value === "high");
-    utilities.saveProjectToLocalStorage(projectArray);
-  }
-
-  todo.priority = priority.value;
-});
+//   todo.priority = priority.value;
+// });
 
 /* Todo rename functionality */
 todoList.addEventListener("keypress", (e) => {
