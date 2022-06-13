@@ -15,160 +15,37 @@ import {
 } from "./dom-elements";
 import * as utilities from "./utilities-functions";
 import { projectArray, todoArray } from "./arrays";
-import { loadUpdateRenderLocalStorage } from "./events/windowLoad";
-import { homeSectionRenderHandler } from "./events/homeSection";
+import { loadUpdateRenderLocalStorage } from "./mainEventFunctions/window-Load";
+import { homeSectionRenderHandler } from "./mainEventFunctions/home-Section";
+import { createProject } from "./mainEventFunctions/project-Create";
+import { projectSectionSelectionHandler } from "./mainEventFunctions/project-Item-Functionality";
+import { renameProjectListItem } from "./mainEventFunctions/project-Rename";
+
 const sortSwitch = utilities.conditionSwitcher();
 
 window.addEventListener("load", loadUpdateRenderLocalStorage);
 
 home.addEventListener("click", homeSectionRenderHandler);
 
-/* Project Sections */
+/* Create Project  */
 input.addEventListener("keypress", (e) => {
   if (e.key === "Enter" && input.value !== "") {
-    const projectName = e.target.value;
-    /* Create a new instance object from Project class */
-    const object = new Project(projectName, utilities.randomNumber());
-    /* Push the new instance into projectArray */
-    projectArray.push(object);
-    /* Save it to json */
-    utilities.saveProjectToLocalStorage(projectArray);
-    /* Clear the input value after  */
-    utilities.clearInputValue();
-    /*Render the object at DOM*/
-    renderModule.renderProjectListItem.call(object);
-    /* Hide the Img and text after create the first project */
-    utilities.toggleNotProjectScreen();
+    createProject(e);
   }
 });
-
-/* Project List */
-projectList.addEventListener("click", function (e) {
-  const projectListItemSelection = e.target.closest("li");
-  const projectListItemId = e.target.id;
-  /* if that selection is falsy return */
-  if (!projectListItemSelection) return;
-  /* Every time you click on a project find The index of project in array
-  using target id and project id */
-  const projectIndex = projectArray.findIndex(
-    (obj) => obj.id === Number(projectListItemSelection.id)
-  );
-  /* Find the project object in array using the index above */
-  const specificProject = projectArray[projectIndex];
-  /* If the specificProject does not exist return */
-  if (!projectArray.includes(specificProject)) return;
-  /* If list specificProject item is in specificProject list container and the target id is not garbage icon */
-  if (
-    projectListItemSelection &&
-    projectList.contains(projectListItemSelection) &&
-    projectListItemId !== "garbageIcon"
-  ) {
-    /* HighLight the specific Project list item on selection */
-    utilities.highlight(projectListItemSelection);
-    /* Make header visible */
-    header.classList.add("visible");
-    /* Make todo input container */
-    todoInput.classList.add("visible");
-    /* Add the specific Project name at header title */
-    todoTitle.textContent = specificProject.name;
-    /* add custom data set to todo input */
-    utilities.createTodoDataSet.call(specificProject);
-  }
-});
-
-/* Delete specific Project section */
-projectList.addEventListener("click", function (e) {
-  const projectListItemSelection = e.target.closest("li");
-  if (!projectListItemSelection) return;
-  const projectIndex = projectArray.findIndex(
-    (obj) => obj.id === Number(projectListItemSelection.id)
-  );
-  const specificProject = projectArray[projectIndex];
-
-  if (!projectArray.includes(specificProject)) return;
-  /* If target id is this icon */
-  if (e.target.id === "garbageIcon") {
-    /* remove the specific Project from project array */
-    projectArray.splice(projectIndex, 1);
-    /* Remove the rendered item from dom */
-    projectList.removeChild(projectListItemSelection);
-    /* Remove the visible class from header */
-    header.classList.remove("visible");
-    /* Remove the visible class from the todo input */
-    todoInput.classList.remove("visible");
-    /* Change the main title content to empty */
-    todoTitle.textContent = "";
-    /* Clear the html inside the todoList  */
-    todoList.innerHTML = "";
-    /* Remove local storage entries */
-    // utilities.removeProjectFromStorage(project.id);
-    utilities.saveProjectToLocalStorage(projectArray);
-
-    utilities.updateTodoByDateTotals();
-
-    /* If the project array is empty */
-    if (!projectArray.length) {
-      /* Clear its list inner html */
-      projectList.innerHTML = "";
-      /* Clear again the todo list inner html just in case */
-      todoList.innerHTML = "";
-      /* Turn on the no project state  */
-      utilities.toggleNotProjectScreen();
-      /* Clear the local storage */
-      utilities.clearLocalStorage();
-    }
-  }
-});
+/* Project Section List */
+projectList.addEventListener("click", projectSectionSelectionHandler);
 
 /* Rename Project Object and its dom elements */
-projectList.addEventListener("keypress", (e) => {
-  const newText = e.target.value;
-  const projectId = e.target.parentElement.dataset.projectId;
-
-  if (e.key === "Enter" && newText) {
-    /* filter the array using the parent id */
-    projectArray
-      .filter((project) => project.id === Number(projectId))
-      .map((project) => {
-        /* Rename the project name */
-        project.name = newText;
-
-        todoTitle.textContent = project.name;
-
-        utilities.saveProjectToLocalStorage(projectArray);
-
-        return project;
-      });
-  }
-});
-
-/* Render todo while switching projects */
-projectList.addEventListener("click", (e) => {
-  const listTarget = e.target.closest("li");
-  if (!listTarget) return;
-  const todoListItem = document.querySelector(`[data-projectid="${listTarget.id}"]`);
-  const projectIndex = projectArray.findIndex((obj) => obj.id === Number(listTarget.id));
-  const project = projectArray[projectIndex];
-  if (!projectArray.includes(project)) return;
-  sortButton.setAttribute("data-mode", false);
-
-  todoList.replaceChildren();
-
-  if (todoList.contains(todoListItem)) return;
-
-  /* For selected project search in its todo array  */
-  projectArray[projectIndex].todoList.forEach((todo) => {
-    renderModule.renderProjectTodoListItem.call(todo);
-  });
-});
-
-/* -----------------Add functionality to todo input -----------------------------------------*/
+projectList.addEventListener("keypress", renameProjectListItem);
 
 todoInput.addEventListener("keypress", (e) => {
   const target = e.target.closest("input");
   const inputText = target.value;
   const projectId = Number(e.target.dataset.projectTodoId);
-  const objectIndex = projectArray.findIndex((obj) => obj.id === Number(projectId));
+  const objectIndex = projectArray.findIndex(
+    (obj) => obj.id === Number(projectId)
+  );
 
   if (e.key === "Enter" && target.value !== "") {
     /* Create new todo */
@@ -199,7 +76,9 @@ todoList.addEventListener("click", (e) => {
   const targetId = e.target.id;
   const todoId = Number(target.dataset.todoId);
   const projectId = Number(target.dataset.projectid);
-  const projectIndex = projectArray.findIndex((obj) => obj.id === Number(projectId));
+  const projectIndex = projectArray.findIndex(
+    (obj) => obj.id === Number(projectId)
+  );
   const todoIndex = projectArray[projectIndex].todoList.findIndex(
     (todo) => todo.todoId === Number(todoId)
   );
@@ -208,7 +87,9 @@ todoList.addEventListener("click", (e) => {
   const todoTitle = e.target.parentElement.lastElementChild;
   const priority = document.querySelector(`[data-select-id ="${todoId}"]`);
   const todo = projectArray[projectIndex].todoList[todoIndex];
-  const calendarDisplay = document.getElementById("main__task-list__list-item__date");
+  const calendarDisplay = document.getElementById(
+    "main__task-list__list-item__date"
+  );
   const TODAY = "today";
   const TOMORROW = "tomorrow";
   const SPECIFIC = "specific";
@@ -254,20 +135,34 @@ todoList.addEventListener("click", (e) => {
     dateBtnDataSet.date === SPECIFIC
   ) {
     const todayBtn = document.querySelector(`[data-today-id="${todoId}"]`);
-    const tomorrowBtn = document.querySelector(`[data-tomorrow-id="${todoId}"]`);
-    const specificDateBtn = document.querySelector(`[data-specific-id ="${todoId}"]`);
+    const tomorrowBtn = document.querySelector(
+      `[data-tomorrow-id="${todoId}"]`
+    );
+    const specificDateBtn = document.querySelector(
+      `[data-specific-id ="${todoId}"]`
+    );
 
     /* Set the date in object depends the button */
-    utilities.setObjectInstanceDateProperty.call(todo, dateBtnDataSet.date, todoId);
+    utilities.setObjectInstanceDateProperty.call(
+      todo,
+      dateBtnDataSet.date,
+      todoId
+    );
 
     /* That way when user select from day picker dayRef and todo object update instant 
     otherwise need dblclick (need to refactor that somehow) */
     todoList.addEventListener("change", () => {
-      const dateReference = document.querySelector(`[data-reference-id="${todoId}"]`);
+      const dateReference = document.querySelector(
+        `[data-reference-id="${todoId}"]`
+      );
       if (!dateReference) return;
       const { date } = todo;
       dateReference.textContent = date;
-      utilities.setObjectInstanceDateProperty.call(todo, dateBtnDataSet.date, todoId);
+      utilities.setObjectInstanceDateProperty.call(
+        todo,
+        dateBtnDataSet.date,
+        todoId
+      );
       utilities.updateTodoByDateTotals();
     });
 
@@ -275,8 +170,14 @@ todoList.addEventListener("click", (e) => {
 
     /* Class added for buttons to stay stick to action mode after date select */
     todayBtn.classList.toggle("activeDate", dateBtnDataSet.date === TODAY);
-    tomorrowBtn.classList.toggle("activeDate", dateBtnDataSet.date === TOMORROW);
-    specificDateBtn.classList.toggle("activeDate", dateBtnDataSet.date === SPECIFIC);
+    tomorrowBtn.classList.toggle(
+      "activeDate",
+      dateBtnDataSet.date === TOMORROW
+    );
+    specificDateBtn.classList.toggle(
+      "activeDate",
+      dateBtnDataSet.date === SPECIFIC
+    );
   }
 
   /* When the user select today or tomorrow the date at date input display reset */
@@ -310,9 +211,15 @@ todoList.addEventListener("keypress", (e) => {
   const target = e.target.closest("input");
   const newTodoName = e.target.value;
   if (!target) return;
-  const projectId = Number(target.parentElement.parentElement.parentElement.dataset.projectid);
-  const todoId = Number(target.parentElement.parentElement.parentElement.dataset.todoId);
-  const projectIndex = projectArray.findIndex((obj) => obj.id === Number(projectId));
+  const projectId = Number(
+    target.parentElement.parentElement.parentElement.dataset.projectid
+  );
+  const todoId = Number(
+    target.parentElement.parentElement.parentElement.dataset.todoId
+  );
+  const projectIndex = projectArray.findIndex(
+    (obj) => obj.id === Number(projectId)
+  );
   const project = projectArray[projectIndex];
 
   if (!projectArray.includes(project)) return;
@@ -337,8 +244,12 @@ todoList.addEventListener("keypress", (e) => {
   const targetTextArea = e.target.closest("textarea");
   if (!targetTextArea) return;
   const todoId = targetTextArea.dataset.textareaId;
-  const projectId = Number(targetTextArea.parentElement.parentElement.dataset.projectid);
-  const projectIndex = projectArray.findIndex((obj) => obj.id === Number(projectId));
+  const projectId = Number(
+    targetTextArea.parentElement.parentElement.dataset.projectid
+  );
+  const projectIndex = projectArray.findIndex(
+    (obj) => obj.id === Number(projectId)
+  );
 
   const todoIndex = projectArray[projectIndex].todoList.findIndex(
     (todo) => todo.todoId === Number(todoId)
@@ -361,9 +272,13 @@ todoSortOptionsContainer.addEventListener("click", (e) => {
   /* check id if its NaN at load, if it is NaN load the id of the first project in the list
   so it wont return error */
   const projectId = +header.dataset.projectId || projectArray[0].id;
-  const projectIndex = projectArray.findIndex((obj) => obj.id === Number(projectId));
+  const projectIndex = projectArray.findIndex(
+    (obj) => obj.id === Number(projectId)
+  );
   const project = projectArray[projectIndex];
-  const todoProperty = utilities.sortOptionToPropertyName(sortByButton.textContent);
+  const todoProperty = utilities.sortOptionToPropertyName(
+    sortByButton.textContent
+  );
   todoSortOptionsContainer.classList.toggle("visible", !sortByButton);
   const homeData = sortButton.getAttribute("data-mode");
 

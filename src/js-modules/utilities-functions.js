@@ -8,10 +8,9 @@ import {
   addTodoTaskInputContainer as newTodoInput,
   todoList,
 } from "./dom-elements";
-import { projectArray, todoArray } from "./arrays";
-import { Project, Todo } from "./project-class";
+import { projectArray } from "./arrays";
+import { Project } from "./project-class";
 import * as dateFns from "date-fns";
-import { el } from "date-fns/locale";
 import { renderProjectTodoListItem } from "./render-project";
 
 let selectedLi;
@@ -55,12 +54,8 @@ export function deleteDomTodoItem() {
 }
 
 /* Remove the object from the array */
-export function deleteProjectFromArray(input) {
-  projectArray.splice(input, 1);
-}
-
-export function deleteTodoFromArray(index) {
-  this.todoList.splice(index, 1);
+export function deleteFromArray(array, index) {
+  array.splice(index, 1);
 }
 
 /* Rename the array Object and DOM Element names*/
@@ -82,7 +77,7 @@ export function increment() {
 
 /* Toggle notProjectScreen class */
 export function toggleNotProjectScreen() {
-  if (projectArray.length) {
+  if (projectArray.length || localStorage.length) {
     notProjectYetContainer.classList.add("hidden");
   } else {
     notProjectYetContainer.classList.remove("hidden");
@@ -92,13 +87,6 @@ export function toggleNotProjectScreen() {
 /* Change the name of todo title */
 export function createTodoName() {
   return (todoHeaderTitle.textContent = this.name);
-}
-
-/* Create Data-set for todo input */
-export function createTodoDataSet() {
-  todoHeaderContainer.setAttribute("data-project-id", this.id);
-  const todoInput = newTodoInput.lastElementChild;
-  todoInput.setAttribute("data-project-Todo-ID", this.id);
 }
 
 /* Toggle the visibility for middle section title and todo input element */
@@ -329,7 +317,9 @@ export function valueForDateDisplay() {
 
 /* Toggle how the todo opens */
 export function toggleListItemSize(targetListTodo) {
-  const listDropArrow = document.querySelector(`[data-chevron-id="${this.todoId}"]`);
+  const listDropArrow = document.querySelector(
+    `[data-chevron-id="${this.todoId}"]`
+  );
   listDropArrow.classList.toggle("rotate");
   targetListTodo.classList.toggle("visible");
   for (let i = 1; i < targetListTodo.childElementCount; i++) {
@@ -352,13 +342,25 @@ export function getTodoByDate() {
 export function updateTodoByDateTotals() {
   const todoArrayObject = getTodoByDate();
 
-  const all = document.querySelector(".left-section__home-container__all-tasks");
+  const all = document.querySelector(
+    ".left-section__home-container__all-tasks"
+  );
   const today = document.querySelector(".left-section__home-container__today");
-  const tomorrow = document.querySelector(".left-section__home-container__tomorrow");
-  const scheduled = document.querySelector(".left-section__home-container__scheduled");
+  const tomorrow = document.querySelector(
+    ".left-section__home-container__tomorrow"
+  );
+  const scheduled = document.querySelector(
+    ".left-section__home-container__scheduled"
+  );
 
   all.lastElementChild.textContent = todoArrayObject.allArray.length;
   today.lastElementChild.textContent = todoArrayObject.todayArray.length;
   tomorrow.lastElementChild.textContent = todoArrayObject.tomorrowArray.length;
-  scheduled.lastElementChild.textContent = todoArrayObject.scheduledArray.length;
+  scheduled.lastElementChild.textContent =
+    todoArrayObject.scheduledArray.length;
+}
+
+export function getIndex(array, data) {
+  const index = array.findIndex((object) => object.id === +data);
+  return index;
 }

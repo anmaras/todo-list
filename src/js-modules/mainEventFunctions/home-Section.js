@@ -29,6 +29,7 @@ export function homeSectionRenderHandler(e) {
   const { [targetData]: byDateObjectProperty } = utilities.getTodoByDate();
   /* If that array has data */
   if (byDateObjectProperty.length) {
+    /* Render the todo */
     renderHomeSectionTodo(targetData, titleText, byDateObjectProperty, target);
   }
 }

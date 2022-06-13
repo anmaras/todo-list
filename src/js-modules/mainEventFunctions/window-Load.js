@@ -12,9 +12,9 @@ export function loadUpdateRenderLocalStorage() {
     /* And render them on load */
     renderModule.renderProjectListItem.call(item);
   });
+
   /* Close the noproject img  */
   utilities.toggleNotProjectScreen();
-
   /* Update all the todo numbers at home section */
   utilities.updateTodoByDateTotals();
 }
