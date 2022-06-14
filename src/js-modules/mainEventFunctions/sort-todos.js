@@ -30,7 +30,6 @@ function compare(property, condition) {
   /* Sort for letters and numbers */
   if (condition) {
     return function (a, b) {
-      if (!a[property] || !b[property]) return;
       return a[property].toLowerCase() < b[property].toLowerCase()
         ? -1
         : a[property].toLowerCase() > b[property].toLowerCase()
@@ -39,7 +38,6 @@ function compare(property, condition) {
     };
   } else {
     return function (a, b) {
-      if (!a[property] || !b[property]) return;
       return a[property].toLowerCase() > b[property].toLowerCase()
         ? -1
         : a[property].toLowerCase() < b[property].toLowerCase()
