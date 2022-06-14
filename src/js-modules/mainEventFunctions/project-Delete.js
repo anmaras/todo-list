@@ -25,7 +25,7 @@ export function deleteProjectListItem(projectSelection, list, index) {
 
   if (!projectArray.length) {
     todoList.replaceChildren();
-    utilities.toggleNotProjectScreen();
     utilities.clearLocalStorage();
+    utilities.toggleNotProjectScreen();
   }
 }

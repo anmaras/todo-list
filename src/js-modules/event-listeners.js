@@ -1,5 +1,3 @@
-import * as renderModule from "./render-project";
-import { Project, Todo } from "./project-class";
 import {
   projectInputDomElement as input,
   projectListDomElement as projectList,
@@ -10,11 +8,8 @@ import {
   sortButton,
   todoList,
   todoSortOptionsContainer,
-  todoSortOrder,
-  shortingArrow,
 } from "./dom-elements";
 import * as utilities from "./utilities-functions";
-import { projectArray, todoArray } from "./arrays";
 import { loadUpdateRenderLocalStorage } from "./mainEventFunctions/window-Load";
 import { homeSectionRenderHandler } from "./mainEventFunctions/home-Section";
 import { createProject } from "./mainEventFunctions/project-Create";
@@ -26,9 +21,7 @@ import {
   todoRenameHandler,
   todoTextAreaHandler,
 } from "./mainEventFunctions/todo-item-functionality";
-import { getTodoTextArea } from "./mainEventFunctions/todo-textArea";
-
-const sortSwitch = utilities.conditionSwitcher();
+import { sortTodoHandler } from "./mainEventFunctions/sort-todos";
 
 window.addEventListener("load", loadUpdateRenderLocalStorage);
 
@@ -58,21 +51,4 @@ todoList.addEventListener("keypress", todoTextAreaHandler);
 sortButton.addEventListener("click", utilities.toggleSortingOptionVisibility);
 
 /* Sorting option  */
-todoSortOptionsContainer.addEventListener("click", (e) => {
-  const sortByButton = e.target.closest("div div > p");
-  if (!sortByButton) return;
-  /* check id if its NaN at load, if it is NaN load the id of the first project in the list
-  so it wont return error */
-  const projectId = +header.dataset.projectId || projectArray[0].id;
-  const projectIndex = projectArray.findIndex(
-    (obj) => obj.id === Number(projectId)
-  );
-  const project = projectArray[projectIndex];
-  const todoProperty = utilities.sortOptionToPropertyName(
-    sortByButton.textContent
-  );
-  todoSortOptionsContainer.classList.toggle("visible", !sortByButton);
-  const homeData = sortButton.getAttribute("data-mode");
-
-  utilities.sortTodo(homeData, project.todoList, todoProperty, sortSwitch());
-});
+todoSortOptionsContainer.addEventListener("click", sortTodoHandler);

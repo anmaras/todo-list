@@ -105,69 +105,6 @@ export function toggleSortingOptionVisibility() {
   todoSortOptionsContainer.classList.toggle("visible");
 }
 
-/* Sorting function */
-export function compare(property, condition) {
-  /* if it is for priority sorting */
-  if (property === "priority") {
-    if (condition) {
-      return function (a, b) {
-        return changeToNum(a[property]) < changeToNum(b[property])
-          ? -1
-          : changeToNum(a[property]) > changeToNum(b[property])
-          ? 1
-          : 0;
-      };
-    } else {
-      return function (a, b) {
-        return changeToNum(a[property]) > changeToNum(b[property])
-          ? -1
-          : changeToNum(a[property]) < changeToNum(b[property])
-          ? 1
-          : 0;
-      };
-    }
-  }
-  /* Sort for letters and numbers */
-  if (condition) {
-    return function (a, b) {
-      return a[property].toLowerCase() < b[property].toLowerCase()
-        ? -1
-        : a[property].toLowerCase() > b[property].toLowerCase()
-        ? 1
-        : 0;
-    };
-  } else {
-    return function (a, b) {
-      return a[property].toLowerCase() > b[property].toLowerCase()
-        ? -1
-        : a[property].toLowerCase() < b[property].toLowerCase()
-        ? 1
-        : 0;
-    };
-  }
-}
-
-export function sortTodo(input, project, property, condition) {
-  const { [input]: byDateObjectProperty = project } = getTodoByDate();
-  todoList.innerHTML = "";
-
-  byDateObjectProperty.sort(compare(property, condition));
-
-  byDateObjectProperty.forEach((todo) => {
-    renderProjectTodoListItem.call(todo);
-  });
-}
-
-export function sortOptionToPropertyName(text) {
-  return text === "Priority"
-    ? "priority"
-    : text === "Alphabetically"
-    ? "todoName"
-    : text === "Due Date"
-    ? "date"
-    : "";
-}
-
 export function conditionSwitcher() {
   let condition = true;
 
@@ -205,26 +142,6 @@ export function selectTagText() {
   }
   if (this.priority) {
     return this.priority.charAt(0).toUpperCase() + this.priority.slice(1);
-  }
-}
-
-export function changeToNum(input) {
-  let num;
-  if (input === "low") {
-    num = 3;
-    return num;
-  }
-  if (input === "medium") {
-    num = 2;
-    return num;
-  }
-  if (input === "high") {
-    num = 1;
-    return num;
-  }
-  if (!input || input === "no") {
-    num = 4;
-    return num;
   }
 }
 

@@ -12,5 +12,3 @@ import "./css/middle-section/noproject-style.css";
 import "./css/header-style.css";
 import "jb-date-input";
 import * as events from "./js-modules/event-listeners";
-// import * as windowEvent from "/src/js-modules/events/windowLoad.js";
-// import * as homeSection from "/src/js-modules/events/homeSection.js";
