@@ -2,6 +2,8 @@
 
 A simple task management application that helps to manage personal productivity.
 
+## [Live Demo](https://anmaras.github.io/todo-list/)
+
 ![Alt text](/img/screenshot%20resize.png "Optional Title")
 
 ## Build with
@@ -46,5 +48,3 @@ A simple task management application that helps to manage personal productivity.
 - Learning to add external libraries like date-fns using npm that helped me set up my date section functionality.
 - A chance to use different kind of array methods like filter, findIndex, map, sort and methods like element.closest() or node.contains()
 - Learning to add and use data-set properties so i could save custom attributes.
-
-<!-- ## [Live Demo](https://anmaras.github.io/restaurant-page/) -->
