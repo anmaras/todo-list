@@ -10,5 +10,4 @@ import "./css/middle-section/middle-sorting-box.css";
 import "./css/middle-section/middle-todo-list.css";
 import "./css/middle-section/noproject-style.css";
 import "./css/header-style.css";
-import "jb-date-input";
 import * as events from "./js-modules/event-listeners";
