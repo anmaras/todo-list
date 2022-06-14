@@ -7,19 +7,13 @@ const TOMORROW = "tomorrow";
 const SPECIFIC = "specific";
 
 export function getTodoDates(dateBtnDataSet, todoId, todo, calendarDisplay) {
-  if (
-    dateBtnDataSet.date === TODAY ||
-    dateBtnDataSet.date === TOMORROW ||
-    dateBtnDataSet.date === SPECIFIC
-  ) {
+  if (dateBtnDataSet.date === TODAY || dateBtnDataSet.date === TOMORROW || dateBtnDataSet.date === SPECIFIC) {
     setObjectInstanceDateProperty.call(todo, dateBtnDataSet.date, todoId);
 
     /* That way when user select from day picker dayRef and todo object update instant
        otherwise need dblclick (need to refactor that somehow) */
     domElement.todoList.addEventListener("change", () => {
-      const dateReference = document.querySelector(
-        `[data-reference-id="${todoId}"]`
-      );
+      const dateReference = document.querySelector(`[data-reference-id="${todoId}"]`);
       // if (!dateReference) return;
       const { date } = todo;
       dateReference.textContent = date;
@@ -60,25 +54,14 @@ function setObjectInstanceDateProperty(data, id) {
 }
 
 /* Class added for buttons to stay stick to action mode after date select */
-function dateButtonActionFocus(
-  todoId,
-  today,
-  tomorrow,
-  specific,
-  dateBtnDataSet
-) {
+function dateButtonActionFocus(todoId, today, tomorrow, specific, dateBtnDataSet) {
   const todayBtn = document.querySelector(`[data-today-id="${todoId}"]`);
   const tomorrowBtn = document.querySelector(`[data-tomorrow-id="${todoId}"]`);
-  const specificDateBtn = document.querySelector(
-    `[data-specific-id ="${todoId}"]`
-  );
+  const specificDateBtn = document.querySelector(`[data-specific-id ="${todoId}"]`);
   todayBtn.classList.toggle("activeDate", dateBtnDataSet.date === today);
 
   tomorrowBtn.classList.toggle("activeDate", dateBtnDataSet.date === tomorrow);
-  specificDateBtn.classList.toggle(
-    "activeDate",
-    dateBtnDataSet.date === specific
-  );
+  specificDateBtn.classList.toggle("activeDate", dateBtnDataSet.date === specific);
 }
 
 /* When the user select today or tomorrow the date at date input display reset */

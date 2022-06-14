@@ -32,47 +32,9 @@ export function highlight(li) {
   selectedLi.classList.add("active");
 }
 
-/* Create a new project instance and push it to projectArray */
-export function createProjectInstanceAndPush(projectName) {
-  return new Project(projectName);
-}
-
-/* Find the index of the object in array using its name string */
-export function objectArrayIndex(input) {
-  return projectArray.findIndex((object) => object.id === input);
-}
-
-/* Remove project DOM item  */
-export function deleteDomProjectListItem(list, listItem) {
-  list.removeChild(listItem);
-}
-
-export function deleteDomTodoItem() {
-  if (!projectArray.includes(this)) {
-    todoList.innerHTML = "";
-  }
-}
-
 /* Remove the object from the array */
 export function deleteFromArray(array, index) {
   array.splice(index, 1);
-}
-
-/* Rename the array Object and DOM Element names*/
-export function renameProject(newName) {
-  this.name = newName;
-  // todoHeaderTitle.textContent = this.name;
-}
-
-/* Increment Function */
-export function increment() {
-  let count = 0;
-  function counter() {
-    count += 1;
-    return count;
-  }
-  counter.reset = () => (count = 0);
-  return counter;
 }
 
 /* Toggle notProjectScreen class */
@@ -82,11 +44,6 @@ export function toggleNotProjectScreen() {
   } else {
     notProjectYetContainer.classList.remove("hidden");
   }
-}
-
-/* Change the name of todo title */
-export function createTodoName() {
-  return (todoHeaderTitle.textContent = this.name);
 }
 
 /* Toggle the visibility for middle section title and todo input element */
@@ -209,6 +166,7 @@ export function valueForDateDisplay() {
   return this.date;
 }
 
+/* function to create an object with grouped todos by date */
 export function getTodoByDate() {
   let allArray = [];
   getProject().forEach((project) => {
@@ -221,31 +179,28 @@ export function getTodoByDate() {
   return { allArray, todayArray, tomorrowArray, scheduledArray };
 }
 
+/* Function for update the home container todo numbers */
 export function updateTodoByDateTotals() {
   const todoArrayObject = getTodoByDate();
 
-  const all = document.querySelector(
-    ".left-section__home-container__all-tasks"
-  );
+  const all = document.querySelector(".left-section__home-container__all-tasks");
   const today = document.querySelector(".left-section__home-container__today");
-  const tomorrow = document.querySelector(
-    ".left-section__home-container__tomorrow"
-  );
-  const scheduled = document.querySelector(
-    ".left-section__home-container__scheduled"
-  );
+  const tomorrow = document.querySelector(".left-section__home-container__tomorrow");
+  const scheduled = document.querySelector(".left-section__home-container__scheduled");
 
   all.lastElementChild.textContent = todoArrayObject.allArray.length;
   today.lastElementChild.textContent = todoArrayObject.todayArray.length;
   tomorrow.lastElementChild.textContent = todoArrayObject.tomorrowArray.length;
-  scheduled.lastElementChild.textContent =
-    todoArrayObject.scheduledArray.length;
+  scheduled.lastElementChild.textContent = todoArrayObject.scheduledArray.length;
 }
 
+/* Function to find the index of an array */
 export function getIndex(array, data) {
   const index = array.findIndex((object) => object.id === +data);
   return index;
 }
+
+/* Function to find the index of an todoArray */
 export function getTodoListIndex(array, data) {
   const index = array.findIndex((object) => object.todoId === +data);
   return index;

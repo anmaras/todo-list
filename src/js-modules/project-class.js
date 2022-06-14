@@ -1,6 +1,3 @@
-import { projectArray } from "./arrays";
-import { todoHeaderTitle } from "./dom-elements";
-
 class Project {
   constructor(name, id) {
     this.name = name;

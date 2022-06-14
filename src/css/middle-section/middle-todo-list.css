@@ -42,6 +42,9 @@
 .main__task-list__list-item.high {
   border-left: 8px solid var(--Orange-red-crayola);
 }
+.main__task-list__list-item.none {
+  border-left: 8px solid var(--battleship-gray);
+}
 
 /* ------------------------------------------------------------ */
 

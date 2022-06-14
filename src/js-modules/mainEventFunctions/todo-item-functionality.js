@@ -26,9 +26,7 @@ export function todoSectionHandler(e) {
   const todoTitle = e.target.parentElement.lastElementChild;
   const priority = document.querySelector(`[data-select-id ="${todoId}"]`);
   const todo = todoArray[todoIndex];
-  const calendarDisplay = document.getElementById(
-    "main__task-list__list-item__date"
-  );
+  const calendarDisplay = document.getElementById("main__task-list__list-item__date");
   // if (!projectArray.includes(project)) return;
 
   todoWindowToggleSize(targetId, target, todoId);
@@ -47,12 +45,8 @@ export function todoRenameHandler(e) {
   if (!target) return;
 
   const newTodoName = e.target.value;
-  const projectId = Number(
-    target.parentElement.parentElement.parentElement.dataset.projectid
-  );
-  const todoId = Number(
-    target.parentElement.parentElement.parentElement.dataset.todoId
-  );
+  const projectId = Number(target.parentElement.parentElement.parentElement.dataset.projectid);
+  const todoId = Number(target.parentElement.parentElement.parentElement.dataset.todoId);
   const projectIndex = utilities.getIndex(projectArray, projectId);
   const todoArray = projectArray[projectIndex].todoList;
 
@@ -63,16 +57,10 @@ export function todoTextAreaHandler(e) {
   const targetTextArea = e.target.closest("textarea");
   if (!targetTextArea) return;
   const todoId = targetTextArea.dataset.textareaId;
-  const projectId = Number(
-    targetTextArea.parentElement.parentElement.dataset.projectid
-  );
-  const projectIndex = projectArray.findIndex(
-    (obj) => obj.id === Number(projectId)
-  );
+  const projectId = Number(targetTextArea.parentElement.parentElement.dataset.projectid);
+  const projectIndex = projectArray.findIndex((obj) => obj.id === Number(projectId));
 
-  const todoIndex = projectArray[projectIndex].todoList.findIndex(
-    (todo) => todo.todoId === Number(todoId)
-  );
+  const todoIndex = projectArray[projectIndex].todoList.findIndex((todo) => todo.todoId === Number(todoId));
   const project = projectArray[projectIndex];
   if (!projectArray.includes(project)) return;
 

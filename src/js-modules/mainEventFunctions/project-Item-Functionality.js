@@ -20,9 +20,7 @@ export function projectSectionSelectionHandler(e) {
   const projectDomItem = e.target.closest("li");
   if (!projectDomItem) return;
   const projectList = projectDomItem.parentElement;
-  const projectListItemId =
-    e.target.parentElement.dataset.projectId ||
-    projectDomItem.dataset.projectId;
+  const projectListItemId = e.target.parentElement.dataset.projectId || projectDomItem.dataset.projectId;
   const projectIndex = utilities.getIndex(projectArray, projectListItemId);
   const specificProject = projectArray[projectIndex];
 

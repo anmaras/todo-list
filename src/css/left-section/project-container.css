@@ -18,9 +18,9 @@
   border-radius: var(--border-radius-value);
   display: grid;
   grid-auto-flow: column;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: auto max-content;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.5rem;
 }
 
 #projectInput {
@@ -35,8 +35,7 @@
 }
 
 #garbageIcon {
-  filter: invert(53%) sepia(16%) saturate(326%) hue-rotate(199deg)
-    brightness(90%) contrast(88%);
+  filter: invert(53%) sepia(16%) saturate(326%) hue-rotate(199deg) brightness(90%) contrast(88%);
 }
 
 #garbageIcon:hover {
@@ -61,6 +60,5 @@
 }
 
 .left-section__projects__container ul > li:hover #garbageIcon {
-  filter: invert(38%) sepia(72%) saturate(1087%) hue-rotate(208deg)
-    brightness(93%) contrast(97%);
+  filter: invert(38%) sepia(72%) saturate(1087%) hue-rotate(208deg) brightness(93%) contrast(97%);
 }

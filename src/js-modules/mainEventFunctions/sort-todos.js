@@ -5,27 +5,6 @@ import * as renderModule from "/src/js-modules/render-project.js";
 
 const sortSwitch = utilities.conditionSwitcher();
 
-export function sortTodoHandler(e) {
-  const sortByButton = e.target.closest("div div > p");
-  if (!sortByButton) return;
-  /* check id if its NaN at load, if it is NaN load the id of the first project in the list
-  so it wont return error */
-  const projectId =
-    +domElement.todoHeaderContainer.dataset.projectId || projectArray[0].id;
-  const projectIndex = utilities.getIndex(projectArray, projectId);
-  const todoArray = projectArray[projectIndex].todoList;
-
-  // const project = projectArray[projectIndex];
-  const todoProperty = sortOptionToPropertyName(sortByButton.textContent);
-  domElement.todoSortOptionsContainer.classList.toggle(
-    "visible",
-    !sortByButton
-  );
-  const homeData = domElement.sortButton.getAttribute("data-mode");
-
-  sortTodo(homeData, todoArray, todoProperty, sortSwitch());
-}
-
 /* Sorting function */
 function compare(property, condition) {
   /* if it is for priority sorting */
@@ -51,6 +30,7 @@ function compare(property, condition) {
   /* Sort for letters and numbers */
   if (condition) {
     return function (a, b) {
+      if (!a[property] || !b[property]) return;
       return a[property].toLowerCase() < b[property].toLowerCase()
         ? -1
         : a[property].toLowerCase() > b[property].toLowerCase()
@@ -59,6 +39,7 @@ function compare(property, condition) {
     };
   } else {
     return function (a, b) {
+      if (!a[property] || !b[property]) return;
       return a[property].toLowerCase() > b[property].toLowerCase()
         ? -1
         : a[property].toLowerCase() < b[property].toLowerCase()
@@ -70,25 +51,23 @@ function compare(property, condition) {
 
 function sortTodo(input, project, property, condition) {
   const { [input]: byDateObjectProperty = project } = utilities.getTodoByDate();
+
+  return byDateObjectProperty.sort(compare(property, condition));
+}
+
+function renderSortedArray(sortedArray) {
   domElement.todoList.innerHTML = "";
-
-  byDateObjectProperty.sort(compare(property, condition));
-
-  byDateObjectProperty.forEach((todo) => {
+  sortedArray.forEach((todo) => {
     renderModule.renderProjectTodoListItem.call(todo);
   });
 }
 
+/* function that change the names of sorting options to match the object property names */
 function sortOptionToPropertyName(text) {
-  return text === "Priority"
-    ? "priority"
-    : text === "Alphabetically"
-    ? "todoName"
-    : text === "Due Date"
-    ? "date"
-    : "";
+  return text === "Priority" ? "priority" : text === "Alphabetically" ? "todoName" : text === "Due Date" ? "date" : "";
 }
 
+/* Change priority options to numbers it get sorted by numbers  */
 function changeToNum(input) {
   let num;
   if (input === "low") {
@@ -107,4 +86,25 @@ function changeToNum(input) {
     num = 4;
     return num;
   }
+}
+
+function sortOptionContainerVisibility(button) {
+  domElement.todoSortOptionsContainer.classList.toggle("visible", !button);
+}
+
+export function sortTodoHandler(e) {
+  const sortByButton = e.target.closest("div div > p");
+  if (!sortByButton) return;
+  /* check id if its NaN at load, if it is NaN load the id of the first project in the list
+  so it wont return error */
+  const projectId = +domElement.todoHeaderContainer.dataset.projectId || projectArray[0].id;
+  const projectIndex = utilities.getIndex(projectArray, projectId);
+  const todoArray = projectArray[projectIndex].todoList;
+  const todoProperty = sortOptionToPropertyName(sortByButton.textContent);
+  const homeData = domElement.sortButton.getAttribute("data-mode");
+  const sortedArray = sortTodo(homeData, todoArray, todoProperty, sortSwitch());
+
+  sortOptionContainerVisibility(sortByButton);
+
+  renderSortedArray(sortedArray);
 }

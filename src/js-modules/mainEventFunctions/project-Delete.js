@@ -1,30 +1,35 @@
 import * as utilities from "/src/js-modules/utilities-functions.js";
 import { projectArray } from "/src/js-modules/arrays.js";
-import {
-  addTodoTaskInputContainer as todoInput,
-  todoHeaderTitle as todoTitle,
-  todoHeaderContainer as header,
-  todoList,
-} from "/src/js-modules/dom-elements.js";
+import * as domElement from "/src/js-modules/dom-elements.js";
+
+function hideDomeElements() {
+  domElement.todoHeaderContainer.classList.remove("visible");
+  domElement.addTodoTaskInputContainer.classList.remove("visible");
+}
+
+function clearHeaderTitleText() {
+  domElement.todoHeaderTitle.textContent = "";
+}
+
+function deleteFromArrayAndDom(projectSelection, list, index) {
+  utilities.deleteFromArray(projectArray, index);
+  list.removeChild(projectSelection);
+  domElement.todoList.replaceChildren();
+}
 
 export function deleteProjectListItem(projectSelection, list, index) {
-  header.classList.remove("visible");
-  todoInput.classList.remove("visible");
+  hideDomeElements();
 
-  todoTitle.textContent = "";
+  clearHeaderTitleText();
 
-  utilities.deleteFromArray(projectArray, index);
-
-  list.removeChild(projectSelection);
-
-  todoList.replaceChildren();
+  deleteFromArrayAndDom(projectSelection, list, index);
 
   utilities.saveProjectToLocalStorage(projectArray);
 
   utilities.updateTodoByDateTotals();
 
   if (!projectArray.length) {
-    todoList.replaceChildren();
+    domElement.todoList.replaceChildren();
     utilities.clearLocalStorage();
     utilities.toggleNotProjectScreen();
   }

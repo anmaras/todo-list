@@ -13,5 +13,5 @@ export function getTodoPriority(todo, target, priority) {
     utilities.saveProjectToLocalStorage(projectArray);
   }
 
-  todo.priority = priority.value;
+  // todo.priority = priority.value;
 }

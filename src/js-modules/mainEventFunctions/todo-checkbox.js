@@ -1,13 +1,7 @@
 import { projectArray } from "/src/js-modules/arrays.js";
 import * as utilities from "/src/js-modules/utilities-functions.js";
 
-export function todoCheckBoxFunctionality(
-  e,
-  todoTitle,
-  isChecked,
-  todoArray,
-  todoIndex
-) {
+export function todoCheckBoxFunctionality(e, todoTitle, isChecked, todoArray, todoIndex) {
   if (e.target.type === "checkbox") {
     todoTitle.classList.toggle("checked", isChecked);
   }
