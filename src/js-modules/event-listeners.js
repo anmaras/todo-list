@@ -9,7 +9,7 @@ import {
 } from "./dom-elements";
 import * as utilities from "./utilities-functions";
 import { localStorageHandler } from "./mainEventFunctions/window-Load";
-import { homeSectionHandler } from "./mainEventFunctions/home-Section";
+import * as homeFunc from "./mainEventFunctions/home-Section";
 import { newProjectHandler } from "./mainEventFunctions/project-Create";
 import { projectSectionSelectionHandler } from "./mainEventFunctions/project-Item-Functionality";
 import { renameProjectListItem } from "./mainEventFunctions/project-Rename";
@@ -22,7 +22,28 @@ import {
 import { sortTodoHandler } from "./mainEventFunctions/sort-todos";
 
 window.addEventListener("load", localStorageHandler);
-home.addEventListener("click", homeSectionHandler);
+// home.addEventListener("click", homeSectionHandler);
+home.addEventListener("click", (e) => {
+  const { target, titleText, targetData, byDateObjectProperty } = homeFunc.createDataObject(e);
+  // if (!localStorage.length || !targetData) return;
+
+  if (byDateObjectProperty.length) {
+    homeFunc.highlightHomeTabs(target);
+
+    homeFunc.setAttributeToSortButton(targetData);
+
+    homeFunc.changeTodoContainerTitle(titleText);
+
+    homeFunc.makeHeaderVisible();
+
+    homeFunc.makeTodoInputHidden();
+
+    homeFunc.deleteTodoDomList();
+
+    homeFunc.renderTasksByDate(byDateObjectProperty);
+  }
+});
+
 input.addEventListener("keypress", newProjectHandler);
 projectList.addEventListener("click", projectSectionSelectionHandler);
 projectList.addEventListener("keypress", renameProjectListItem);
